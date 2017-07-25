@@ -8,20 +8,90 @@
 
 /* Begin PBXBuildFile section */
 		C11E86521F26677300C3A3C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E86511F26677300C3A3C0 /* AppDelegate.swift */; };
-		C11E86541F26677300C3A3C0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E86531F26677300C3A3C0 /* ViewController.swift */; };
 		C11E86571F26677300C3A3C0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C11E86551F26677300C3A3C0 /* Main.storyboard */; };
 		C11E86591F26677300C3A3C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C11E86581F26677300C3A3C0 /* Assets.xcassets */; };
 		C11E865C1F26677300C3A3C0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C11E865A1F26677300C3A3C0 /* LaunchScreen.storyboard */; };
+		C11E86821F2668F700C3A3C0 /* connectionCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E86631F2668F700C3A3C0 /* connectionCheck.swift */; };
+		C11E86831F2668F700C3A3C0 /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E86641F2668F700C3A3C0 /* CustomCollectionViewCell.swift */; };
+		C11E86841F2668F700C3A3C0 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E86651F2668F700C3A3C0 /* CustomTabBarController.swift */; };
+		C11E86851F2668F700C3A3C0 /* CustomUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E86661F2668F700C3A3C0 /* CustomUIColor.swift */; };
+		C11E86861F2668F700C3A3C0 /* geofencingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E86671F2668F700C3A3C0 /* geofencingController.swift */; };
+		C11E86871F2668F700C3A3C0 /* Head.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E86681F2668F700C3A3C0 /* Head.swift */; };
+		C11E86881F2668F700C3A3C0 /* ImageViewextension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E86691F2668F700C3A3C0 /* ImageViewextension.swift */; };
+		C11E86891F2668F700C3A3C0 /* infoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E866A1F2668F700C3A3C0 /* infoController.swift */; };
+		C11E868A1F2668F700C3A3C0 /* inputProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E866B1F2668F700C3A3C0 /* inputProfileViewController.swift */; };
+		C11E868B1F2668F700C3A3C0 /* loginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E866C1F2668F700C3A3C0 /* loginViewController.swift */; };
+		C11E868C1F2668F700C3A3C0 /* mainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E866D1F2668F700C3A3C0 /* mainViewController.swift */; };
+		C11E868D1F2668F700C3A3C0 /* mapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E866E1F2668F700C3A3C0 /* mapViewController.swift */; };
+		C11E868F1F2668F700C3A3C0 /* notificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E86701F2668F700C3A3C0 /* notificationController.swift */; };
+		C11E86901F2668F700C3A3C0 /* Placemark.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E86711F2668F700C3A3C0 /* Placemark.swift */; };
+		C11E86911F2668F700C3A3C0 /* rootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E86721F2668F700C3A3C0 /* rootViewController.swift */; };
+		C11E86921F2668F700C3A3C0 /* SafeJsonObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E86731F2668F700C3A3C0 /* SafeJsonObject.swift */; };
+		C11E86931F2668F700C3A3C0 /* searchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E86741F2668F700C3A3C0 /* searchBar.swift */; };
+		C11E86941F2668F700C3A3C0 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E86751F2668F700C3A3C0 /* Session.swift */; };
+		C11E86961F2668F700C3A3C0 /* sessionManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E86771F2668F700C3A3C0 /* sessionManagement.swift */; };
+		C11E86971F2668F700C3A3C0 /* sessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E86781F2668F700C3A3C0 /* sessionViewController.swift */; };
+		C11E86981F2668F700C3A3C0 /* signupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E86791F2668F700C3A3C0 /* signupViewController.swift */; };
+		C11E869A1F2668F700C3A3C0 /* TrailCoords.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E867B1F2668F700C3A3C0 /* TrailCoords.swift */; };
+		C11E869B1F2668F700C3A3C0 /* trailHeadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E867C1F2668F700C3A3C0 /* trailHeadCell.swift */; };
+		C11E869D1F2668F700C3A3C0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E867E1F2668F700C3A3C0 /* User.swift */; };
+		C11E869E1F2668F700C3A3C0 /* userProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E867F1F2668F700C3A3C0 /* userProfileViewController.swift */; };
+		C11E869F1F2668F700C3A3C0 /* viewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E86801F2668F700C3A3C0 /* viewControllerExtension.swift */; };
+		C11E86A01F2668F700C3A3C0 /* viewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E86811F2668F700C3A3C0 /* viewExtension.swift */; };
+		C11E86A71F26690D00C3A3C0 /* GCPoints.geojson in Resources */ = {isa = PBXBuildFile; fileRef = C11E86A11F26690D00C3A3C0 /* GCPoints.geojson */; };
+		C11E86A81F26690D00C3A3C0 /* head.geojson in Resources */ = {isa = PBXBuildFile; fileRef = C11E86A21F26690D00C3A3C0 /* head.geojson */; };
+		C11E86A91F26690D00C3A3C0 /* point.geojson in Resources */ = {isa = PBXBuildFile; fileRef = C11E86A31F26690D00C3A3C0 /* point.geojson */; };
+		C11E86AA1F26690D00C3A3C0 /* trails.geojson in Resources */ = {isa = PBXBuildFile; fileRef = C11E86A41F26690D00C3A3C0 /* trails.geojson */; };
+		C11E86AB1F26690D00C3A3C0 /* trailsData.geojson in Resources */ = {isa = PBXBuildFile; fileRef = C11E86A51F26690D00C3A3C0 /* trailsData.geojson */; };
+		C11E86AC1F26690D00C3A3C0 /* Walks.geojson in Resources */ = {isa = PBXBuildFile; fileRef = C11E86A61F26690D00C3A3C0 /* Walks.geojson */; };
+		C11E86AE1F266CCB00C3A3C0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C11E86AD1F266CCB00C3A3C0 /* GoogleService-Info.plist */; };
+		D4FD11002CF9BAE764A1FD39 /* Pods_Camina.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39A9C38CD199F89F828C22EF /* Pods_Camina.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01663C0E33B4067C6B9FF704 /* Pods-Camina.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Camina.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Camina/Pods-Camina.debug.xcconfig"; sourceTree = "<group>"; };
+		39A9C38CD199F89F828C22EF /* Pods_Camina.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Camina.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A429E94462A43D97EE1B047 /* Pods-Camina.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Camina.release.xcconfig"; path = "Pods/Target Support Files/Pods-Camina/Pods-Camina.release.xcconfig"; sourceTree = "<group>"; };
 		C11E864E1F26677300C3A3C0 /* Camina.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Camina.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C11E86511F26677300C3A3C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C11E86531F26677300C3A3C0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C11E86561F26677300C3A3C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C11E86581F26677300C3A3C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C11E865B1F26677300C3A3C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C11E865D1F26677300C3A3C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C11E86631F2668F700C3A3C0 /* connectionCheck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = connectionCheck.swift; sourceTree = "<group>"; };
+		C11E86641F2668F700C3A3C0 /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
+		C11E86651F2668F700C3A3C0 /* CustomTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
+		C11E86661F2668F700C3A3C0 /* CustomUIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomUIColor.swift; sourceTree = "<group>"; };
+		C11E86671F2668F700C3A3C0 /* geofencingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = geofencingController.swift; sourceTree = "<group>"; };
+		C11E86681F2668F700C3A3C0 /* Head.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Head.swift; sourceTree = "<group>"; };
+		C11E86691F2668F700C3A3C0 /* ImageViewextension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewextension.swift; sourceTree = "<group>"; };
+		C11E866A1F2668F700C3A3C0 /* infoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = infoController.swift; sourceTree = "<group>"; };
+		C11E866B1F2668F700C3A3C0 /* inputProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = inputProfileViewController.swift; sourceTree = "<group>"; };
+		C11E866C1F2668F700C3A3C0 /* loginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = loginViewController.swift; sourceTree = "<group>"; };
+		C11E866D1F2668F700C3A3C0 /* mainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainViewController.swift; sourceTree = "<group>"; };
+		C11E866E1F2668F700C3A3C0 /* mapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mapViewController.swift; sourceTree = "<group>"; };
+		C11E86701F2668F700C3A3C0 /* notificationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = notificationController.swift; sourceTree = "<group>"; };
+		C11E86711F2668F700C3A3C0 /* Placemark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Placemark.swift; sourceTree = "<group>"; };
+		C11E86721F2668F700C3A3C0 /* rootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = rootViewController.swift; sourceTree = "<group>"; };
+		C11E86731F2668F700C3A3C0 /* SafeJsonObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafeJsonObject.swift; sourceTree = "<group>"; };
+		C11E86741F2668F700C3A3C0 /* searchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = searchBar.swift; sourceTree = "<group>"; };
+		C11E86751F2668F700C3A3C0 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		C11E86771F2668F700C3A3C0 /* sessionManagement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sessionManagement.swift; sourceTree = "<group>"; };
+		C11E86781F2668F700C3A3C0 /* sessionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sessionViewController.swift; sourceTree = "<group>"; };
+		C11E86791F2668F700C3A3C0 /* signupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = signupViewController.swift; sourceTree = "<group>"; };
+		C11E867B1F2668F700C3A3C0 /* TrailCoords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrailCoords.swift; sourceTree = "<group>"; };
+		C11E867C1F2668F700C3A3C0 /* trailHeadCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = trailHeadCell.swift; sourceTree = "<group>"; };
+		C11E867E1F2668F700C3A3C0 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		C11E867F1F2668F700C3A3C0 /* userProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = userProfileViewController.swift; sourceTree = "<group>"; };
+		C11E86801F2668F700C3A3C0 /* viewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = viewControllerExtension.swift; sourceTree = "<group>"; };
+		C11E86811F2668F700C3A3C0 /* viewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = viewExtension.swift; sourceTree = "<group>"; };
+		C11E86A11F26690D00C3A3C0 /* GCPoints.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GCPoints.geojson; sourceTree = "<group>"; };
+		C11E86A21F26690D00C3A3C0 /* head.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = head.geojson; sourceTree = "<group>"; };
+		C11E86A31F26690D00C3A3C0 /* point.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = point.geojson; sourceTree = "<group>"; };
+		C11E86A41F26690D00C3A3C0 /* trails.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = trails.geojson; sourceTree = "<group>"; };
+		C11E86A51F26690D00C3A3C0 /* trailsData.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = trailsData.geojson; sourceTree = "<group>"; };
+		C11E86A61F26690D00C3A3C0 /* Walks.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Walks.geojson; sourceTree = "<group>"; };
+		C11E86AD1F266CCB00C3A3C0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +99,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4FD11002CF9BAE764A1FD39 /* Pods_Camina.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		764A567500C072A491D73D7E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				01663C0E33B4067C6B9FF704 /* Pods-Camina.debug.xcconfig */,
+				8A429E94462A43D97EE1B047 /* Pods-Camina.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		BB730EDD3AA9FD6B9A637540 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				39A9C38CD199F89F828C22EF /* Pods_Camina.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		C11E86451F26677300C3A3C0 = {
 			isa = PBXGroup;
 			children = (
 				C11E86501F26677300C3A3C0 /* Camina */,
 				C11E864F1F26677300C3A3C0 /* Products */,
+				764A567500C072A491D73D7E /* Pods */,
+				BB730EDD3AA9FD6B9A637540 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -55,13 +145,70 @@
 			isa = PBXGroup;
 			children = (
 				C11E86511F26677300C3A3C0 /* AppDelegate.swift */,
-				C11E86531F26677300C3A3C0 /* ViewController.swift */,
+				C11E86B01F2674D300C3A3C0 /* Helper */,
+				C11E86B11F26755900C3A3C0 /* Model */,
+				C11E86B21F26758A00C3A3C0 /* ViewController */,
+				C11E86671F2668F700C3A3C0 /* geofencingController.swift */,
+				C11E86771F2668F700C3A3C0 /* sessionManagement.swift */,
+				C11E867C1F2668F700C3A3C0 /* trailHeadCell.swift */,
+				C11E86641F2668F700C3A3C0 /* CustomCollectionViewCell.swift */,
 				C11E86551F26677300C3A3C0 /* Main.storyboard */,
 				C11E86581F26677300C3A3C0 /* Assets.xcassets */,
 				C11E865A1F26677300C3A3C0 /* LaunchScreen.storyboard */,
 				C11E865D1F26677300C3A3C0 /* Info.plist */,
+				C11E86A11F26690D00C3A3C0 /* GCPoints.geojson */,
+				C11E86A21F26690D00C3A3C0 /* head.geojson */,
+				C11E86AD1F266CCB00C3A3C0 /* GoogleService-Info.plist */,
+				C11E86A31F26690D00C3A3C0 /* point.geojson */,
+				C11E86A41F26690D00C3A3C0 /* trails.geojson */,
+				C11E86A51F26690D00C3A3C0 /* trailsData.geojson */,
+				C11E86A61F26690D00C3A3C0 /* Walks.geojson */,
 			);
 			path = Camina;
+			sourceTree = "<group>";
+		};
+		C11E86B01F2674D300C3A3C0 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				C11E86631F2668F700C3A3C0 /* connectionCheck.swift */,
+				C11E86661F2668F700C3A3C0 /* CustomUIColor.swift */,
+				C11E86691F2668F700C3A3C0 /* ImageViewextension.swift */,
+				C11E86701F2668F700C3A3C0 /* notificationController.swift */,
+				C11E86741F2668F700C3A3C0 /* searchBar.swift */,
+				C11E86801F2668F700C3A3C0 /* viewControllerExtension.swift */,
+				C11E86811F2668F700C3A3C0 /* viewExtension.swift */,
+			);
+			name = Helper;
+			sourceTree = "<group>";
+		};
+		C11E86B11F26755900C3A3C0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C11E86681F2668F700C3A3C0 /* Head.swift */,
+				C11E86711F2668F700C3A3C0 /* Placemark.swift */,
+				C11E86731F2668F700C3A3C0 /* SafeJsonObject.swift */,
+				C11E86751F2668F700C3A3C0 /* Session.swift */,
+				C11E867B1F2668F700C3A3C0 /* TrailCoords.swift */,
+				C11E867E1F2668F700C3A3C0 /* User.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		C11E86B21F26758A00C3A3C0 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C11E86651F2668F700C3A3C0 /* CustomTabBarController.swift */,
+				C11E866A1F2668F700C3A3C0 /* infoController.swift */,
+				C11E866B1F2668F700C3A3C0 /* inputProfileViewController.swift */,
+				C11E866C1F2668F700C3A3C0 /* loginViewController.swift */,
+				C11E866D1F2668F700C3A3C0 /* mainViewController.swift */,
+				C11E866E1F2668F700C3A3C0 /* mapViewController.swift */,
+				C11E86721F2668F700C3A3C0 /* rootViewController.swift */,
+				C11E86781F2668F700C3A3C0 /* sessionViewController.swift */,
+				C11E86791F2668F700C3A3C0 /* signupViewController.swift */,
+				C11E867F1F2668F700C3A3C0 /* userProfileViewController.swift */,
+			);
+			name = ViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +218,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C11E86601F26677300C3A3C0 /* Build configuration list for PBXNativeTarget "Camina" */;
 			buildPhases = (
+				79095C685D2C102076F18380 /* [CP] Check Pods Manifest.lock */,
 				C11E864A1F26677300C3A3C0 /* Sources */,
 				C11E864B1F26677300C3A3C0 /* Frameworks */,
 				C11E864C1F26677300C3A3C0 /* Resources */,
+				E04D5424A5A722F3C4A4871F /* [CP] Embed Pods Frameworks */,
+				D42AF365A768E13AB756C33C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -125,20 +275,101 @@
 			buildActionMask = 2147483647;
 			files = (
 				C11E865C1F26677300C3A3C0 /* LaunchScreen.storyboard in Resources */,
+				C11E86A81F26690D00C3A3C0 /* head.geojson in Resources */,
+				C11E86AC1F26690D00C3A3C0 /* Walks.geojson in Resources */,
 				C11E86591F26677300C3A3C0 /* Assets.xcassets in Resources */,
+				C11E86A71F26690D00C3A3C0 /* GCPoints.geojson in Resources */,
+				C11E86A91F26690D00C3A3C0 /* point.geojson in Resources */,
 				C11E86571F26677300C3A3C0 /* Main.storyboard in Resources */,
+				C11E86AE1F266CCB00C3A3C0 /* GoogleService-Info.plist in Resources */,
+				C11E86AB1F26690D00C3A3C0 /* trailsData.geojson in Resources */,
+				C11E86AA1F26690D00C3A3C0 /* trails.geojson in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		79095C685D2C102076F18380 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D42AF365A768E13AB756C33C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Camina/Pods-Camina-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E04D5424A5A722F3C4A4871F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Camina/Pods-Camina-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C11E864A1F26677300C3A3C0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C11E86541F26677300C3A3C0 /* ViewController.swift in Sources */,
+				C11E86941F2668F700C3A3C0 /* Session.swift in Sources */,
+				C11E86871F2668F700C3A3C0 /* Head.swift in Sources */,
+				C11E868B1F2668F700C3A3C0 /* loginViewController.swift in Sources */,
+				C11E86861F2668F700C3A3C0 /* geofencingController.swift in Sources */,
+				C11E86891F2668F700C3A3C0 /* infoController.swift in Sources */,
+				C11E86851F2668F700C3A3C0 /* CustomUIColor.swift in Sources */,
+				C11E86A01F2668F700C3A3C0 /* viewExtension.swift in Sources */,
+				C11E86961F2668F700C3A3C0 /* sessionManagement.swift in Sources */,
+				C11E869D1F2668F700C3A3C0 /* User.swift in Sources */,
+				C11E868A1F2668F700C3A3C0 /* inputProfileViewController.swift in Sources */,
+				C11E86821F2668F700C3A3C0 /* connectionCheck.swift in Sources */,
+				C11E86981F2668F700C3A3C0 /* signupViewController.swift in Sources */,
+				C11E86831F2668F700C3A3C0 /* CustomCollectionViewCell.swift in Sources */,
+				C11E868D1F2668F700C3A3C0 /* mapViewController.swift in Sources */,
+				C11E86901F2668F700C3A3C0 /* Placemark.swift in Sources */,
+				C11E86841F2668F700C3A3C0 /* CustomTabBarController.swift in Sources */,
+				C11E86881F2668F700C3A3C0 /* ImageViewextension.swift in Sources */,
+				C11E86931F2668F700C3A3C0 /* searchBar.swift in Sources */,
+				C11E869E1F2668F700C3A3C0 /* userProfileViewController.swift in Sources */,
+				C11E86911F2668F700C3A3C0 /* rootViewController.swift in Sources */,
+				C11E86971F2668F700C3A3C0 /* sessionViewController.swift in Sources */,
 				C11E86521F26677300C3A3C0 /* AppDelegate.swift in Sources */,
+				C11E869A1F2668F700C3A3C0 /* TrailCoords.swift in Sources */,
+				C11E869B1F2668F700C3A3C0 /* trailHeadCell.swift in Sources */,
+				C11E868F1F2668F700C3A3C0 /* notificationController.swift in Sources */,
+				C11E868C1F2668F700C3A3C0 /* mainViewController.swift in Sources */,
+				C11E86921F2668F700C3A3C0 /* SafeJsonObject.swift in Sources */,
+				C11E869F1F2668F700C3A3C0 /* viewControllerExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,6 +490,7 @@
 		};
 		C11E86611F26677300C3A3C0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 01663C0E33B4067C6B9FF704 /* Pods-Camina.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = J34B2LJ3L7;
@@ -272,6 +504,7 @@
 		};
 		C11E86621F26677300C3A3C0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8A429E94462A43D97EE1B047 /* Pods-Camina.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = J34B2LJ3L7;
@@ -302,6 +535,7 @@
 				C11E86621F26677300C3A3C0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
