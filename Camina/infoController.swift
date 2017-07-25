@@ -64,7 +64,7 @@ class infoController: UICollectionViewController, UICollectionViewDelegateFlowLa
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         
-        return CGSize(width: view.frame.width, height: 1000)
+        return CGSize(width: view.frame.width, height: 500)
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -76,7 +76,7 @@ class infoController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        let height = 14 + 150 + 8 + 2 + 4 + 4 + 1 + 20 + 15
+        let height = 14 + 150 + 8 + 2 + 20 + 20
         return CGSize(width: view.frame.width, height: CGFloat(height))
     }
     
