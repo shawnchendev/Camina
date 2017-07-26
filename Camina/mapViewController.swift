@@ -8,8 +8,99 @@
 
 import UIKit
 import Mapbox
+import CoreMotion
 
 class mapViewController: UIViewController, MGLMapViewDelegate {
+    let statsView : UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(hex: "3ACFD5")
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    let trailName : UILabel = {
+        let label = UILabel()
+        label.text = "text"
+        label.textColor = .white
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 20)
+        return label
+    }()
+    
+    let distanceLabel : UILabel = {
+        let label = UILabel()
+        label.text = "Distance: "
+        label.textColor = .white
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 15)
+        return label
+    }()
+    
+    let timeLabel : UILabel = {
+        let label = UILabel()
+        label.text = "Time: "
+        label.textColor = .white
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 15)
+        return label
+    }()
+    
+    let stepsLabel : UILabel = {
+        let label = UILabel()
+        label.text = "Total Steps: "
+        label.textColor = .white
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 15)
+        return label
+    }()
+    
+    
+    let travelDistance : UILabel = {
+        let label = UILabel()
+        label.text = "1000m"
+        label.textColor = .white
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 15)
+        return label
+    }()
+    
+    let travelTime : UILabel = {
+        let label = UILabel()
+        label.text = "0:00:00"
+        label.textColor = .white
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 15)
+        return label
+    }()
+    
+    let totalSteps : UILabel = {
+        let label = UILabel()
+        label.text = "0 steps"
+        label.textColor = .white
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 15)
+        return label
+    }()
+
+    
+    var activeSession = false
+    
+    //session vars
+    var time: String?
+    var date : Date?
+    var steps : Int = 0
+    var distance: Double = 0
+    var pastCheckPoint : String?
+    var trailID : String?
+
+    //the pedometer
+    var pedometer = CMPedometer()
+    
+    // timers
+    var timer = Timer()
+    var timerInterval = 1.0
+    var timeElapsed:TimeInterval = 1.0
+
     
     var mapView: MGLMapView!
     
@@ -37,6 +128,17 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
         drawTrailPathLine()
         drawTrailHeadPoint()
         drawPlacemarkPoint()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if activeSession {
+            setupStatView()
+            
+        }
+        
+     
     }
     
     func flyTomyLocation(){
@@ -70,7 +172,7 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
                         })
                     }else{
                         let multipolyline = shapeCollectionFeature.shapes[i] as? MGLMultiPolylineFeature
-                        print(multipolyline?.attributes["Name"] as! String)
+                        //print(multipolyline?.attributes["Name"] as! String)
                         for i in 0...((multipolyline?.polylines.count)! - 1){
                             DispatchQueue.main.async(execute: {
                                 // Unowned reference to self to prevent retain cycle
@@ -117,12 +219,12 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
         DispatchQueue.global(qos: .background).async(execute: {
             let jsonPath = Bundle.main.path(forResource: "point", ofType: "geojson")
             let url = URL(fileURLWithPath: jsonPath!)
-            print(url)
+            //print(url)
             do{
                 let data = try Data(contentsOf: url)
-                print(data)
+                //print(data)
                 let placemarkpointCollectionFeature = try MGLShape(data: data, encoding: String.Encoding.utf8.rawValue) as! MGLShapeCollectionFeature
-                print(placemarkpointCollectionFeature.shapes.count)
+                //print(placemarkpointCollectionFeature.shapes.count)
                 for i in 0...(placemarkpointCollectionFeature.shapes.count) - 1{
                     if let point = placemarkpointCollectionFeature.shapes[i]as? MGLPointFeature{
                         point.title = point.attribute(forKey: "NAME" ) as? String
@@ -184,5 +286,72 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
         return true
     }
     
+    func startSession(notification: NSNotification){
+        if !activeSession {
+            setupStatView()
+            activeSession = true
+            setupSession()
+            
+        }
     
+    }
+    
+    func stopSession(notification: NSNotification){
+        if activeSession {
+            activeSession = false
+            statsView.removeFromSuperview()
+            finishSession()
+        }
+   
+    }
+
+    func setupStatView(){
+        view.addSubview(statsView)
+        statsView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        statsView.topAnchor.constraint(equalTo: self.view.topAnchor, constant:20).isActive = true
+        statsView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
+        statsView.heightAnchor.constraint(equalToConstant:120).isActive = true
+        
+        //trailName.text = trailProperties?.Name
+        
+        statsView.addSubview(trailName)
+        statsView.addSubview(distanceLabel)
+        statsView.addSubview(travelDistance)
+        statsView.addSubview(timeLabel)
+        statsView.addSubview(travelTime)
+        statsView.addSubview(stepsLabel)
+        statsView.addSubview(totalSteps)
+        
+        trailName.topAnchor.constraint(equalTo: statsView.topAnchor, constant: 8).isActive = true
+        trailName.leftAnchor.constraint(equalTo: statsView.leftAnchor, constant: 8).isActive = true
+        trailName.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        
+        distanceLabel.topAnchor.constraint(equalTo: trailName.bottomAnchor, constant: 14).isActive = true
+        distanceLabel.leftAnchor.constraint(equalTo: statsView.leftAnchor, constant: 16).isActive = true
+        distanceLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        timeLabel.topAnchor.constraint(equalTo: distanceLabel.bottomAnchor, constant: 4).isActive = true
+        timeLabel.leftAnchor.constraint(equalTo: statsView.leftAnchor, constant: 16).isActive = true
+        timeLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        stepsLabel.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: 4).isActive = true
+        stepsLabel.leftAnchor.constraint(equalTo: statsView.leftAnchor, constant: 16).isActive = true
+        stepsLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        travelDistance.leftAnchor.constraint(equalTo: stepsLabel.rightAnchor, constant: 20).isActive = true
+        travelDistance.topAnchor.constraint(equalTo: trailName.bottomAnchor, constant: 14).isActive = true
+        travelDistance.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        
+        travelTime.leftAnchor.constraint(equalTo: stepsLabel.rightAnchor, constant: 20).isActive = true
+        travelTime.topAnchor.constraint(equalTo: travelDistance.bottomAnchor, constant: 4).isActive = true
+        travelTime.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        totalSteps.leftAnchor.constraint(equalTo: stepsLabel.rightAnchor, constant: 20).isActive = true
+        totalSteps.topAnchor.constraint(equalTo: travelTime.bottomAnchor, constant: 4).isActive = true
+        totalSteps.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        
+    }
+
 }

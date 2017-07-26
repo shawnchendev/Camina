@@ -65,25 +65,11 @@ class mainViewController: UITableViewController, UISearchResultsUpdating, UISear
     var activeSession = false
     
     
-    //session vars
-    var time: String?
-    var date : Date?
-    var steps : Int?
-    var distance: Double?
-    var pastCheckPoint : String?
-    var trailID : String?
-    
+       
     var closestID : String?
     var closestLocation: CLLocation?
     
-    //the pedometer
-    var pedometer = CMPedometer()
-    
-    // timers
-    var timer = Timer()
-    var timerInterval = 1.0
-    var timeElapsed:TimeInterval = 1.0
-    
+        
     var tempArray : [Session] = []
 
     
@@ -104,16 +90,17 @@ class mainViewController: UITableViewController, UISearchResultsUpdating, UISear
         fetchPlacemarks()
         setupGeofencing()
         setupGeofencing()
+        getData()
     }
     
     override func viewWillAppear(_ animated: Bool){
         super.viewWillAppear(animated)
         setupSearchView()
         setupNavBarItem()
-        for location in locationManager.monitoredRegions {
+        //for location in locationManager.monitoredRegions {
             //locationManager.stopMonitoring(for: location)
-            print(location)
-        }
+            //print(location)
+        //}
     }
     
     
@@ -257,11 +244,10 @@ class mainViewController: UITableViewController, UISearchResultsUpdating, UISear
         
         //2
         let fetchRequest: NSFetchRequest<Session> = Session.fetchRequest()
-        
+
         //3
         do {
             tempArray = try managedContext.fetch(fetchRequest)
-            print(tempArray.count)
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }

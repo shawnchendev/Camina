@@ -62,28 +62,34 @@ extension mainViewController: CLLocationManagerDelegate {
         let location = locationManager.location
         for aLocation in allLocations {
             if location!.distance(from: aLocation) < shortestDistance {
-                shortestDistance = location!.distance(from: aLocation)
+                var tempDistance = location!.distance(from: aLocation)
+                if tempDistance < shortestDistance {
+                    shortestDistance = tempDistance
+                }
                 locationName = allPlacemarks[allLocations.index(of: aLocation)!].identifier
                 closestLocation = aLocation
-                if shortestDistance < 10 {
-                    let head = getHead(name: locationName)
-                    if head.properties?.Name != nil && !activeSession {
-                        setupSession(head: head)
-                        setupTrailHeadNotification(head: head)
-                        setupActivePlacemarks(head: head)
-                        //print(head.properties?.Name)
-                    }
-                    
-                    
-                }
             }
         }
+        
+        if shortestDistance < 100 {
+            let head = getHead(name: locationName)
+            if head.properties?.Name != nil && !activeSession {
+                activeSession = true
+                //setupSession(head: head)
+                setupTrailHeadNotification(head: head)
+                setupActivePlacemarks(head: head)
+                //print(head.properties?.Name)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Start session"), object: nil)
+            }
+            
+            
+        }
+
         
     }
     
     // expands all of the placemarks of a given trail head
     func setupActivePlacemarks( head:Head){
-        print("here")
         for placemark in placemarks {
             if placemark.properties?.ParkID == head.properties?.ParkID {
                 tempPlacemarks.append(placemark)
@@ -94,13 +100,7 @@ extension mainViewController: CLLocationManagerDelegate {
             let region = CLCircularRegion(center: coordinate, radius: 50, identifier: (activePlacemark.properties?.NAME)!)
             locationManager.startMonitoring(for: region)
             activePlacemarks.append(region)
-            print(region.identifier)
         }
-        
-//        let coordinate = CLLocationCoordinate2D(latitude: head.properties?.Exit![1] as! CLLocationDegrees, longitude: head.properties?.Exit![0] as! CLLocationDegrees)
-//        let region = CLCircularRegion(center: coordinate, radius: 50, identifier: "exit")
-//        locationManager.startMonitoring(for: region)
-//        activePlacemarks.append(region)
         
     }
     
@@ -116,59 +116,23 @@ extension mainViewController: CLLocationManagerDelegate {
        
     //function that triggers whenever the user enters a monitored area, monitored range is roughly the same as when the area is created
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-        print("enter placemark")
-        if region.identifier == "exit"{
-            return
+        //print("enter placemark")
+
+        var placemark = Placemark()
+        for i in 0...placemarks.count-1 {
+            if region.identifier == placemarks[i].properties?.NAME!{
+                placemark = placemarks[i]
+            }
         }
-//        var isHead = false
-//        var trailHead = Head()
-//        //decide wheter or not is a placemark or head
-//        for i in 0...trailHeads.count-1 {
-//            if region.identifier == trailHeads[i].properties?.Name!{
-//                trailHead = trailHeads[i]
-//                isHead = true
-//            }
-//        }
-        
-//        //if a trail, is it the beginning of a session?
-//        if isHead {
-//            if region.identifier != lastID {
-//                //check if its already in an active session
-//                if !activeSession {
-//                    if(CMPedometer.isStepCountingAvailable()){
-//                        print("session started")
-//                        setupSession(head: trailHead)
-//                    }
-//                }
-//                lastID = region.identifier
-//                
-//                setupActivePlacemarks(head: trailHead)
-//                setupTrailHeadNotification(head: trailHead)
-//                
-//            }
-//        } else {
-            var placemark = Placemark()
-            for i in 0...placemarks.count-1 {
-                if region.identifier == placemarks[i].properties?.NAME!{
-                    placemark = placemarks[i]
-                }
-            }
-            if region.identifier != lastID {
-                lastID = region.identifier
-                pastCheckPoint = region.identifier
-                setupPlacemarkNotification(placemark: placemark)
-            }
-        //}
+        if region.identifier != lastID {
+            lastID = region.identifier
+            //pastCheckPoint = region.identifier
+            setupPlacemarkNotification(placemark: placemark)
+        }
         
     }
     
-    //function that triggers whenever the user exits a monitored area, range is roughly twice of the radius length of the area
     func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
-        if (region.identifier == "exit") && activeSession {
-            finishSession()
-            //stop monitoring the placemarks
-            stopActivePlacemarks()
-        }
         
     }
     
@@ -183,7 +147,6 @@ extension mainViewController: CLLocationManagerDelegate {
     
     //function that triggers whenever the user location changes to check proximity to existing areas
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
         let userLocation = locationManager.location
         if closestLocation == nil {
             checkProximity()
@@ -191,16 +154,16 @@ extension mainViewController: CLLocationManagerDelegate {
         let newDistance = userLocation!.distance(from: closestLocation!)
         if newDistance > shortestDistance {
             checkProximity()
-          
+        }
+        if newDistance < 50 {
+            checkProximity()
         }
         
-        if shortestDistance > 50 && activeSession {
-            finishSession()
+        if shortestDistance > 100 && activeSession {
+            //finishSession()
+            activeSession = false
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Stop session"), object: nil)
             stopActivePlacemarks()
-        }
-        
-        if activeSession {
-            print(time)
         }
        
      

@@ -23,7 +23,7 @@ class infoController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         self.navigationItem.title = "Trail Details"
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Go", style: .plain, target: self, action: #selector(goToSession))
+        //self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Go", style: .plain, target: self, action: #selector(goToSession))
         collectionView?.alwaysBounceVertical = true
         
         collectionView?.backgroundColor = UIColor.white
@@ -80,11 +80,11 @@ class infoController: UICollectionViewController, UICollectionViewDelegateFlowLa
         return CGSize(width: view.frame.width, height: CGFloat(height))
     }
     
-    func goToSession(){
-        let sv = sessionView()
-        sv.trailProperties = trailProperties
-        self.present(sv, animated: true, completion: nil)
-    }
+    //func goToSession(){
+    //    let sv = sessionView()
+    //    sv.trailProperties = trailProperties
+    //    self.present(sv, animated: true, completion: nil)
+    //}
 }
 
 
