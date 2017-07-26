@@ -78,19 +78,14 @@ extension mapViewController {
     func displayPedometerData(){
         timeElapsed += 1.0
         time = timeIntervalFormat(interval: timeElapsed)
-        //Number of steps
-        //if let numberOfSteps = self.steps{
-            totalSteps.text = String(format:"Steps: %i",steps)
-        //} else {
-          //  totalSteps.text = "N/A"
-        //}
+
+        totalSteps.text = String(format:"Steps: %i",steps)
+ 
         travelTime.text = time
-        //distance
-        //if let distance = self.distance{
-            travelDistance.text = String(format:"Distance: %02.02f meters,\n %02.02f mi",distance,miles(meters: distance))
-        //} else {
-         //   travelDistance.text = "Distance: N/A"
-       // }
+
+        travelDistance.text = String(format:"Distance: %02.02f meters,\n %02.02f mi",distance,miles(meters: distance))
+        
+        trailName.text = " \(String(describing: trailID!)) - \(String(describing: pastCheckPoint!)) "
         
         //        //average pace
         //        if let averagePace = self.averagePace{
@@ -168,10 +163,11 @@ extension mapViewController {
         // 3
         session.date = date
         session.distance = distance as NSNumber
-        //session.pastCheckPoint = pastCheckPoint
+        //session.pastCheckpoint = pastCheckPoint
         session.steps = steps as NSNumber
         session.time = time
-        //session.trailID = trailID
+        session.trailID = trailID
+    
         
         // 4
         do {

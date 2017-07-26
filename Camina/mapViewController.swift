@@ -83,15 +83,14 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
     }()
 
     
-    var activeSession = false
     
     //session vars
     var time: String?
     var date : Date?
     var steps : Int = 0
     var distance: Double = 0
-    var pastCheckPoint : String?
-    var trailID : String?
+    var pastCheckPoint : String? = ""
+    var trailID : String? = ""
 
     //the pedometer
     var pedometer = CMPedometer()
@@ -100,6 +99,38 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
     var timer = Timer()
     var timerInterval = 1.0
     var timeElapsed:TimeInterval = 1.0
+    
+    let locationManager = CLLocationManager()
+    
+    let searchController = UISearchController(searchResultsController: nil)
+    var trailHeads = [Head]()
+    var filterTrailHeads = [Head]()
+    
+    var placemarks = [Placemark]()
+    var tempPlacemarks = [Placemark]()
+    var activePlacemarks = [CLRegion]()
+    var activeTrailheads = [CLRegion]()
+    var allPlacemarks = [CLRegion]()
+    var allLocations = [CLLocation]()
+    
+    var shortestDistance : Double!
+    var locationName : String!
+    
+    //vars used for the notification system
+    var readText = ""
+    var lastIndex = -2
+    var lastID = ""
+    var activeSession = false
+    
+    
+    
+    var closestID : String?
+    var closestLocation: CLLocation?
+    
+    
+    var tempArray : [Session] = []
+    
+
 
     
     var mapView: MGLMapView!
@@ -120,6 +151,11 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.distanceFilter = 15
+        locationManager.startUpdatingLocation()
         setupMap()
         view.addSubview(self.mapView)
         view.addSubview(showMyLocationButton)
@@ -128,6 +164,12 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
         drawTrailPathLine()
         drawTrailHeadPoint()
         drawPlacemarkPoint()
+        
+        fetchTrailHead()
+        fetchPlacemarks()
+        setupGeofencing()
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -286,7 +328,7 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
         return true
     }
     
-    func startSession(notification: NSNotification){
+    func startSession(){
         if !activeSession {
             setupStatView()
             activeSession = true
@@ -296,7 +338,7 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
     
     }
     
-    func stopSession(notification: NSNotification){
+    func stopSession(){
         if activeSession {
             activeSession = false
             statsView.removeFromSuperview()

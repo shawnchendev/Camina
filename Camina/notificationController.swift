@@ -10,7 +10,7 @@ import Foundation
 import UserNotifications
 import AVFoundation
 
-extension mainViewController: UNUserNotificationCenterDelegate {
+extension mapViewController: UNUserNotificationCenterDelegate {
     public func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         //some other way of handling notifications
         completionHandler([.alert, .sound])

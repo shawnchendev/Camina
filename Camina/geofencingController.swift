@@ -10,7 +10,17 @@ import CoreLocation
 import UserNotifications
 import CoreMotion
 
-extension mainViewController: CLLocationManagerDelegate {
+extension mapViewController: CLLocationManagerDelegate {
+    
+    
+    func getHead ( name: String) -> Head {
+        for aHead in trailHeads {
+            if aHead.properties?.ParkID == name {
+                return aHead
+            }
+        }
+        return Head()
+    }
     
     //starts monitoring for the trail heads
     func setupGeofencing(){
@@ -62,7 +72,7 @@ extension mainViewController: CLLocationManagerDelegate {
         let location = locationManager.location
         for aLocation in allLocations {
             if location!.distance(from: aLocation) < shortestDistance {
-                var tempDistance = location!.distance(from: aLocation)
+                let tempDistance = location!.distance(from: aLocation)
                 if tempDistance < shortestDistance {
                     shortestDistance = tempDistance
                 }
@@ -71,15 +81,17 @@ extension mainViewController: CLLocationManagerDelegate {
             }
         }
         
+        
         if shortestDistance < 100 {
             let head = getHead(name: locationName)
             if head.properties?.Name != nil && !activeSession {
-                activeSession = true
                 //setupSession(head: head)
+                trailID = head.properties?.Name
                 setupTrailHeadNotification(head: head)
                 setupActivePlacemarks(head: head)
                 //print(head.properties?.Name)
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Start session"), object: nil)
+                //NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Start session"), object: nil)
+                startSession()
             }
             
             
@@ -116,8 +128,6 @@ extension mainViewController: CLLocationManagerDelegate {
        
     //function that triggers whenever the user enters a monitored area, monitored range is roughly the same as when the area is created
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-        //print("enter placemark")
-
         var placemark = Placemark()
         for i in 0...placemarks.count-1 {
             if region.identifier == placemarks[i].properties?.NAME!{
@@ -126,7 +136,7 @@ extension mainViewController: CLLocationManagerDelegate {
         }
         if region.identifier != lastID {
             lastID = region.identifier
-            //pastCheckPoint = region.identifier
+            pastCheckPoint = region.identifier
             setupPlacemarkNotification(placemark: placemark)
         }
         
@@ -161,11 +171,13 @@ extension mainViewController: CLLocationManagerDelegate {
         
         if shortestDistance > 100 && activeSession {
             //finishSession()
-            activeSession = false
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Stop session"), object: nil)
+            //NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Stop session"), object: nil)
+            stopSession()
             stopActivePlacemarks()
         }
        
      
     }
+    
+    
 }

@@ -80,16 +80,12 @@ class mainViewController: UITableViewController, UISearchResultsUpdating, UISear
         //            perform(#selector(presentRootView), with: nil, afterDelay: 0)
         //        }
         
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.distanceFilter = 15
+  
         tableView.register(trailHeadsCell.self, forCellReuseIdentifier: cellId)
         print(currentReachabilityStatus)
         
         fetchTrailHead()
         fetchPlacemarks()
-        setupGeofencing()
-        setupGeofencing()
         getData()
     }
     
@@ -131,14 +127,7 @@ class mainViewController: UITableViewController, UISearchResultsUpdating, UISear
     }
     
     
-    func getHead ( name: String) -> Head {
-        for aHead in trailHeads {
-            if aHead.properties?.ParkID == name {
-                return aHead
-            }
-        }
-        return Head()
-    }
+
 
     func fetchTrailHead(){
         if let path = Bundle.main.path(forResource: "head", ofType: "geojson") {

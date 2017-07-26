@@ -8,8 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		9249E2391F27BDC50061B7ED /* camina.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9249E2371F27BDC50061B7ED /* camina.xcdatamodeld */; };
-		9249E2401F27BF1B0061B7ED /* Session+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9249E23E1F27BF1B0061B7ED /* Session+CoreDataClass.swift */; };
-		9249E2411F27BF1B0061B7ED /* Session+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9249E23F1F27BF1B0061B7ED /* Session+CoreDataProperties.swift */; };
+		9249E2451F28F6460061B7ED /* fetchingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9249E2441F28F6460061B7ED /* fetchingController.swift */; };
+		9249E2481F2902530061B7ED /* Session+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9249E2461F2902530061B7ED /* Session+CoreDataClass.swift */; };
+		9249E2491F2902530061B7ED /* Session+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9249E2471F2902530061B7ED /* Session+CoreDataProperties.swift */; };
 		C11E86521F26677300C3A3C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E86511F26677300C3A3C0 /* AppDelegate.swift */; };
 		C11E86571F26677300C3A3C0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C11E86551F26677300C3A3C0 /* Main.storyboard */; };
 		C11E86591F26677300C3A3C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C11E86581F26677300C3A3C0 /* Assets.xcassets */; };
@@ -55,8 +56,9 @@
 		39A9C38CD199F89F828C22EF /* Pods_Camina.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Camina.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A429E94462A43D97EE1B047 /* Pods-Camina.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Camina.release.xcconfig"; path = "Pods/Target Support Files/Pods-Camina/Pods-Camina.release.xcconfig"; sourceTree = "<group>"; };
 		9249E2381F27BDC50061B7ED /* camina.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = camina.xcdatamodel; sourceTree = "<group>"; };
-		9249E23E1F27BF1B0061B7ED /* Session+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Session+CoreDataClass.swift"; path = "../Session+CoreDataClass.swift"; sourceTree = "<group>"; };
-		9249E23F1F27BF1B0061B7ED /* Session+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Session+CoreDataProperties.swift"; path = "../Session+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		9249E2441F28F6460061B7ED /* fetchingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = fetchingController.swift; sourceTree = "<group>"; };
+		9249E2461F2902530061B7ED /* Session+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Session+CoreDataClass.swift"; sourceTree = "<group>"; };
+		9249E2471F2902530061B7ED /* Session+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Session+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C11E864E1F26677300C3A3C0 /* Camina.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Camina.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C11E86511F26677300C3A3C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C11E86561F26677300C3A3C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				C11E86771F2668F700C3A3C0 /* sessionManagement.swift */,
 				C11E86701F2668F700C3A3C0 /* notificationController.swift */,
 				C11E86741F2668F700C3A3C0 /* searchBar.swift */,
+				9249E2441F28F6460061B7ED /* fetchingController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -171,14 +174,14 @@
 		C11E86501F26677300C3A3C0 /* Camina */ = {
 			isa = PBXGroup;
 			children = (
+				C11E86511F26677300C3A3C0 /* AppDelegate.swift */,
 				9249E2431F28C3D10061B7ED /* Controller */,
 				9249E2421F28C3CD0061B7ED /* View */,
-				C11E86511F26677300C3A3C0 /* AppDelegate.swift */,
-				9249E2371F27BDC50061B7ED /* camina.xcdatamodeld */,
 				C11E86B01F2674D300C3A3C0 /* Helper */,
 				C11E86B11F26755900C3A3C0 /* Model */,
 				C11E86B21F26758A00C3A3C0 /* ViewController */,
 				C11E86551F26677300C3A3C0 /* Main.storyboard */,
+				9249E2371F27BDC50061B7ED /* camina.xcdatamodeld */,
 				C11E86581F26677300C3A3C0 /* Assets.xcassets */,
 				C11E865A1F26677300C3A3C0 /* LaunchScreen.storyboard */,
 				C11E865D1F26677300C3A3C0 /* Info.plist */,
@@ -205,8 +208,8 @@
 		C11E86B11F26755900C3A3C0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				9249E23E1F27BF1B0061B7ED /* Session+CoreDataClass.swift */,
-				9249E23F1F27BF1B0061B7ED /* Session+CoreDataProperties.swift */,
+				9249E2461F2902530061B7ED /* Session+CoreDataClass.swift */,
+				9249E2471F2902530061B7ED /* Session+CoreDataProperties.swift */,
 				C11E86681F2668F700C3A3C0 /* Head.swift */,
 				C11E86711F2668F700C3A3C0 /* Placemark.swift */,
 				C11E86731F2668F700C3A3C0 /* SafeJsonObject.swift */,
@@ -377,7 +380,7 @@
 				C11E86A01F2668F700C3A3C0 /* viewExtension.swift in Sources */,
 				C11E86961F2668F700C3A3C0 /* sessionManagement.swift in Sources */,
 				C11E869D1F2668F700C3A3C0 /* User.swift in Sources */,
-				9249E2401F27BF1B0061B7ED /* Session+CoreDataClass.swift in Sources */,
+				9249E2481F2902530061B7ED /* Session+CoreDataClass.swift in Sources */,
 				C11E868A1F2668F700C3A3C0 /* inputProfileViewController.swift in Sources */,
 				C11E86821F2668F700C3A3C0 /* connectionCheck.swift in Sources */,
 				C11E86981F2668F700C3A3C0 /* signupViewController.swift in Sources */,
@@ -386,10 +389,11 @@
 				C11E868D1F2668F700C3A3C0 /* mapViewController.swift in Sources */,
 				C11E86901F2668F700C3A3C0 /* Placemark.swift in Sources */,
 				C11E86841F2668F700C3A3C0 /* CustomTabBarController.swift in Sources */,
+				9249E2491F2902530061B7ED /* Session+CoreDataProperties.swift in Sources */,
 				C11E86881F2668F700C3A3C0 /* ImageViewextension.swift in Sources */,
-				9249E2411F27BF1B0061B7ED /* Session+CoreDataProperties.swift in Sources */,
 				C11E86931F2668F700C3A3C0 /* searchBar.swift in Sources */,
 				C11E869E1F2668F700C3A3C0 /* userProfileViewController.swift in Sources */,
+				9249E2451F28F6460061B7ED /* fetchingController.swift in Sources */,
 				C11E86911F2668F700C3A3C0 /* rootViewController.swift in Sources */,
 				C11E86971F2668F700C3A3C0 /* sessionViewController.swift in Sources */,
 				C11E86521F26677300C3A3C0 /* AppDelegate.swift in Sources */,
