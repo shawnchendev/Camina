@@ -100,7 +100,7 @@ class sessionView: UIViewController, CLLocationManagerDelegate  {
         
         //locationManager.startUpdatingLocation()
         
-        locationManager.startUpdatingHeading()
+        //locationManager.startUpdatingHeading()
         
         view.backgroundColor = .white
         setupMapView()

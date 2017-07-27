@@ -7,7 +7,7 @@
 //
 import CoreData
 
-class SafeJsonObject: NSManagedObject {
+class SafeJsonObject: NSObject {
     
     override func setValue(_ value: Any?, forKey key: String) {
         let selectorString = "set\(key.uppercased().characters.first!)\(String(key.characters.dropFirst())):"

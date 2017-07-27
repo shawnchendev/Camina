@@ -11,16 +11,16 @@ import CoreMotion
 import CoreData
 import UIKit
 
-extension mainViewController {
+extension mapViewController {
     
     //session functions
-    func setupSession( head: Head){
+    func setupSession(){
         startTimer()
         startPedometer()
         
         date = Date()
-        trailID = head.properties?.ParkID
-        pastCheckPoint = head.properties?.ParkID
+        //trailID = head.properties?.ParkID
+        //pastCheckPoint = head.properties?.ParkID
         activeSession = true
         
     }
@@ -32,7 +32,7 @@ extension mainViewController {
         activeSession = false
         //save the data
         save()
-        stopActivePlacemarks()
+        //stopActivePlacemarks()
         
     }
     
@@ -69,7 +69,7 @@ extension mainViewController {
                 //                    self.pace = Double(currentPace)
                 //                }
             } else {
-                self.steps = nil
+                //self.steps = nil
             }
         })
         
@@ -78,17 +78,14 @@ extension mainViewController {
     func displayPedometerData(){
         timeElapsed += 1.0
         time = timeIntervalFormat(interval: timeElapsed)
-        //Number of steps
-        //if let numberOfSteps = self.steps{
-        //stepsLabel.text = String(format:"Steps: %i",numberOfSteps)
-        //}
+
+        totalSteps.text = String(format:"Steps: %i",steps)
+ 
+        travelTime.text = time
+
+        travelDistance.text = String(format:"%02.02f meters",distance)
         
-        //distance
-        //if let distance = self.distance{
-        //distanceLabel.text = String(format:"Distance: %02.02f meters,\n %02.02f mi",distance,miles(meters: distance))
-        //} else {
-        //distanceLabel.text = "Distance: N/A"
-        //}
+        trailName.text = " \(String(describing: trailID!)) - \(String(describing: pastCheckPoint!)) "
         
         //        //average pace
         //        if let averagePace = self.averagePace{
@@ -146,29 +143,31 @@ extension mainViewController {
     
     func save() {
         
+        if activeSession{
+            return
+        }
         
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
                 return
         }
         
         // 1
-        let managedContext =
-            appDelegate.persistentContainer.viewContext
+        let managedContext = appDelegate.persistentContainer.viewContext
         
         // 2
-        let entity = NSEntityDescription.entity(forEntityName: "Session",
-                                                in: managedContext)!
+        let entity = NSEntityDescription.entity(forEntityName: "Session", in: managedContext)!
         
         let session = Session(entity: entity,
                               insertInto: managedContext)
         
         // 3
         session.date = date
-        session.distance = distance! as NSNumber
-        session.pastCheckPoint = pastCheckPoint
-        session.steps = steps! as NSNumber
+        session.distance = distance as NSNumber
+        //session.pastCheckpoint = pastCheckPoint
+        session.steps = steps as NSNumber
         session.time = time
         session.trailID = trailID
+    
         
         // 4
         do {

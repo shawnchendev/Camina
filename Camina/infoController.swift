@@ -26,7 +26,7 @@ class infoController: UICollectionViewController, UICollectionViewDelegateFlowLa
         view.backgroundColor = UIColor(hex:"ECF0F1")
         self.navigationItem.title = "Trail Details"
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Go", style: .plain, target: self, action: #selector(goToSession))
+        //self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Go", style: .plain, target: self, action: #selector(goToSession))
         collectionView?.alwaysBounceVertical = true
         
         collectionView?.backgroundColor = UIColor.white

@@ -21,6 +21,8 @@ class CustomTabBarController: UITabBarController {
         navigationController.navigationBar.tintColor = UIColor(hex: "00B16A")
         
         let mapController = mapViewController()
+        NotificationCenter.default.addObserver(mapController, selector: #selector(mapController.startSession), name: NSNotification.Name(rawValue: "Start session"), object: nil)
+        NotificationCenter.default.addObserver(mapController, selector: #selector(mapController.stopSession), name: NSNotification.Name(rawValue: "Stop session"), object: nil)
         mapController.title = "Map"
         mapController.tabBarItem.image = UIImage(named: "mapNofill")
         mapController.tabBarItem.selectedImage = UIImage(named: "mapFill")
