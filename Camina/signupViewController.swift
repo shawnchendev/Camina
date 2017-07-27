@@ -163,7 +163,9 @@ class signupViewController: UIViewController {
                     print(error.localizedDescription)
                     return
                 }
+        
                 authProviders = providers!
+                print(authProviders)
             })
             
             Auth.auth().signIn(with: credential) { (user, error) in

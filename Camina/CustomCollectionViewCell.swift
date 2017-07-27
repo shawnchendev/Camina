@@ -12,7 +12,9 @@ class CustomCollectionViewCell: BaseCell, UICollectionViewDataSource, UICollecti
     
     
     var trailProperties : Properties? = nil
+    var trailLandmark = [Placemark]()
     
+    var dheight = CGFloat()
     
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -34,45 +36,52 @@ class CustomCollectionViewCell: BaseCell, UICollectionViewDataSource, UICollecti
         return sc
     }()
     
+    let spacingView : UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(hex: "ECF0F1")
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.masksToBounds = false
+        view.layer.cornerRadius = 2.0
+        return view
+    }()
+    
     let dividerLineView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(white: 0.4, alpha: 0.4)
         return view
     }()
     
-    fileprivate let cellId = "cellId"
+    fileprivate let detailCellId = "detailCellId"
+    fileprivate let landmarkCellId = "landmarkCellId"
     
-    
+
+
     
     override func setupViews() {
         super.setupViews()
-        
         collectionView.dataSource = self
         collectionView.delegate = self
         
         segmentedControl.addTarget(self, action: #selector(handleValueChange), for: .valueChanged)
-        
+        addSubview(spacingView)
         addSubview(segmentedControl)
         addSubview(collectionView)
-        
+        addConstraintsWithFormat("H:|[v0]|", views: spacingView)
+
         addConstraintsWithFormat("H:|-8-[v0]-8-|", views: segmentedControl)
         
         addConstraintsWithFormat("H:|[v0]|", views: collectionView)
         
-        addConstraintsWithFormat("V:|[v0(30)]-[v1]|", views: segmentedControl, collectionView)
+        addConstraintsWithFormat("V:|[v0(10)]-[v1(30)]-[v2]|", views: spacingView, segmentedControl, collectionView)
         
-        collectionView.register(trailDetailDescriptionCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView.register(trailDetailDescriptionCell.self, forCellWithReuseIdentifier: detailCellId)
     }
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        //        menuBar.horizontalBarLeftAnchorConstraint?.constant = scrollView.contentOffset.x / 4
-    }
-    
+
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         
         let index = targetContentOffset.pointee.x / frame.width
         
         let indexPath = IndexPath(item: Int(index), section: 0)
-        //        menuBar.collectionView.selectItem(at: indexPath, animated: true, scrollPosition: UICollectionViewScrollPosition())
         UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.layoutIfNeeded()
         }, completion: nil)
@@ -84,13 +93,22 @@ class CustomCollectionViewCell: BaseCell, UICollectionViewDataSource, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! trailDetailDescriptionCell
-        cell.textView.attributedText = descriptionAttributedText()
-        return cell
         
+        let detailCell = collectionView.dequeueReusableCell(withReuseIdentifier: detailCellId, for: indexPath) as! trailDetailDescriptionCell
+        detailCell.textView.attributedText = descriptionAttributedText()
+        return detailCell
+            
+            
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if indexPath.item == 0{
+            let dummySize = CGSize(width: frame.width, height: 1000)
+            let options = NSStringDrawingOptions.usesFontLeading.union(NSStringDrawingOptions.usesLineFragmentOrigin)
+            let rect = descriptionAttributedText().boundingRect(with: dummySize, options: options, context: nil)
+            return CGSize(width: frame.width, height: rect.height + 30)
+        }
+        
         return CGSize(width: frame.width, height: frame.height - 10)
     }
     
@@ -127,40 +145,31 @@ class CustomCollectionViewCell: BaseCell, UICollectionViewDataSource, UICollecti
     }
 }
 
-class trailDetailDescriptionCell: BaseCell {
-    
-    let textView: UITextView = {
-        let tv = UITextView()
-        tv.text = "SAMPLE DESCRIPTION"
-        return tv
-    }()
-    
-    override func setupViews() {
-        super.setupViews()
-        
-        addSubview(textView)
-        
-        addConstraintsWithFormat("H:|-8-[v0]-8-|", views: textView)
-        
-        addConstraintsWithFormat("V:|-4-[v0]|", views: textView)
-    }
-    
-}
+//
+//    class trailDetailDescriptionCell: BaseCell {
+//        
+//        let textView: UITextView = {
+//            let tv = UITextView()
+//            tv.text = "SAMPLE DESCRIPTION"
+//            return tv
+//        }()
+//        
+//        override func setupViews() {
+//            super.setupViews()
+//            
+//            addSubview(textView)
+//            
+//            addConstraintsWithFormat("H:|-8-[v0]-8-|", views: textView)
+//            
+//            addConstraintsWithFormat("V:|-10-[v0]|", views: textView)
+//        }
+//        
+//    }
 
 
-class BaseCell: UICollectionViewCell {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupViews()
-    }
-    
-    func setupViews() {
-        
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
+
+
+
+
 
 

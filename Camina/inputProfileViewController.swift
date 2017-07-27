@@ -309,7 +309,6 @@ extension inputProfileViewController: UIImagePickerControllerDelegate, UINavigat
                 if let profileImageUrl = metadata?.downloadURL()?.absoluteString {
                     
                     let values = ["name": name, "email": self.email, "profileImageUrl": profileImageUrl,  "age":age, "gender":gender]
-                    print(values)
                     self.registerUserIntoDatabaseWithUID(self.userUuid, values: values as [String : AnyObject])
                 }
             })
@@ -327,7 +326,7 @@ extension inputProfileViewController: UIImagePickerControllerDelegate, UINavigat
                 print(err)
                 return
             }
-        self.presentMainView()
+        self.dismiss(animated: true, completion: nil)
     })
     }
     

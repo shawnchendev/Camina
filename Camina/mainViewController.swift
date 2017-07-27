@@ -139,10 +139,6 @@ class mainViewController: UITableViewController, UISearchResultsUpdating, UISear
                         let trailhead = Head()
                         trailhead.setValuesForKeys(trailheadDictionary)
                         self.trailHeads.append(trailhead)
-//                        let coordinate = CLLocationCoordinate2D(latitude: trailhead.properties?.Lat as! CLLocationDegrees, longitude: trailhead.properties?.Long as! CLLocationDegrees)
-//                        let region = CLCircularRegion(center: coordinate, radius: 50, identifier: (trailhead.properties?.Name)!)
-//                        locationManager.startMonitoring(for: region)
-//                        activeTrailheads.append(region)
                     }
                 }
                 DispatchQueue.main.async {
@@ -213,6 +209,7 @@ class mainViewController: UITableViewController, UISearchResultsUpdating, UISear
         let infoView = infoController(collectionViewLayout: layout)
         self.hidesBottomBarWhenPushed = true;
         infoView.trailProperties = trailHeads[indexPath.row].properties
+        infoView.trailLandMark = placemarks
         self.navigationController?.pushViewController(infoView, animated: true)
         self.hidesBottomBarWhenPushed = false;
         
