@@ -9,6 +9,7 @@
 import UIKit
 import Mapbox
 import CoreMotion
+import Firebase
 
 class mapViewController: UIViewController, MGLMapViewDelegate {
     let statsView : UIView = {
@@ -122,6 +123,12 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
     var lastID = ""
     var activeSession = false
     
+    //variables required for drawing in the map
+    var polylineSource: MGLShapeSource?
+    var currentIndex = 1
+    var allCoordinates: [CLLocationCoordinate2D]! = []
+    
+    var tempCoordArray: NSArray! = []
     
     
     var closestID : String?
@@ -131,6 +138,8 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
     var tempArray : [Session] = []
     
 
+    //firebase vars
+    var ref: DatabaseReference?
 
     
     var mapView: MGLMapView!
@@ -180,6 +189,48 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
         }
         
      
+    }
+    
+    // Wait until the map is loaded before adding to the map.
+    func mapView(_ mapView: MGLMapView, didFinishLoading style: MGLStyle) {
+        addLayer(to: style)
+    }
+    
+    func updateLocationLine() {
+        
+        
+        if allCoordinates.count > 0 {
+            // Update our MGLShapeSource with the current locations.
+            updatePolylineWithCoordinates(coordinates: allCoordinates)
+        }
+        
+    }
+    
+    func addLayer(to style: MGLStyle) {
+        // Add an empty MGLShapeSource, we’ll keep a reference to this and add points to this later.
+        let source = MGLShapeSource(identifier: "polyline", shape: nil, options: nil)
+        style.addSource(source)
+        polylineSource = source
+        
+        // Add a layer to style our polyline.
+        let layer = MGLLineStyleLayer(identifier: "polyline", source: source)
+        layer.lineJoin = MGLStyleValue(rawValue: NSValue(mglLineJoin: .round))
+        layer.lineCap = MGLStyleValue(rawValue: NSValue(mglLineCap: .round))
+        layer.lineColor = MGLStyleValue(rawValue: UIColor.red)
+        layer.lineWidth = MGLStyleFunction(interpolationMode: .exponential,
+                                           cameraStops: [14: MGLConstantStyleValue<NSNumber>(rawValue: 5),
+                                                         18: MGLConstantStyleValue<NSNumber>(rawValue: 20)],
+                                           options: [.defaultValue : MGLConstantStyleValue<NSNumber>(rawValue: 1.5)])
+        style.addLayer(layer)
+    }
+    
+    func updatePolylineWithCoordinates(coordinates: [CLLocationCoordinate2D]) {
+        var mutableCoordinates = coordinates
+        
+        let polyline = MGLPolylineFeature(coordinates: &mutableCoordinates, count: UInt(mutableCoordinates.count))
+        
+        // Updating the MGLShapeSource’s shape will have the map redraw our polyline with the current coordinates.
+        polylineSource?.shape = polyline
     }
     
     func flyTomyLocation(){

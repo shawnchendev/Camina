@@ -10,6 +10,7 @@ import Foundation
 import CoreMotion
 import CoreData
 import UIKit
+import Firebase
 
 extension mapViewController {
     
@@ -33,6 +34,12 @@ extension mapViewController {
         //save the data
         save()
         //stopActivePlacemarks()
+        //time = ""
+        //distance = 0
+        //steps = 0
+        //pastCheckPoint = ""
+        //trailID = ""
+        //allCoordinates = []
         
     }
     
@@ -46,6 +53,7 @@ extension mapViewController {
     func stopTimer(){
         timer.invalidate()
         displayPedometerData()
+        timeElapsed = 0
     }
     
     func timerAction(timer:Timer){
@@ -142,6 +150,33 @@ extension mapViewController {
     }
     
     func save() {
+        if allCoordinates.count > 0 {
+            for coord in allCoordinates {
+                tempCoordArray.adding([coord.latitude, coord.longitude])
+            }
+        }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEE, dd MMM yyyy"
+        let dateObj = dateFormatter.string(from: date!)
+        var userUID : String?
+        if Auth.auth().currentUser != nil{
+            userUID = Auth.auth().currentUser?.uid
+            
+            let post : [String: AnyObject] = [ "UserID": userUID as AnyObject, "date" : dateObj as String as AnyObject, "distance" : distance as AnyObject, "pastCheckpoint" : pastCheckPoint as AnyObject, "steps" : steps as AnyObject, "time" : time as AnyObject, "trailID" : trailID as AnyObject, "path" : tempCoordArray]
+            //firebase code
+            ref = Database.database().reference()
+            
+            ref?.child("Session").childByAutoId().setValue(post)
+         
+        }
+        
+        let post : [String: AnyObject] = ["date" : dateObj as String as AnyObject, "distance" : distance as AnyObject, "pastCheckpoint" : pastCheckPoint as AnyObject, "steps" : steps as AnyObject, "time" : time as AnyObject, "trailID" : trailID as AnyObject, "path" : tempCoordArray]
+        //firebase code
+        ref = Database.database().reference()
+        
+        ref?.child("Session").childByAutoId().setValue(post)
+        
+ 
         
         if activeSession{
             return
@@ -163,10 +198,12 @@ extension mapViewController {
         // 3
         session.date = date
         session.distance = distance as NSNumber
-        //session.pastCheckpoint = pastCheckPoint
+        session.pastCheckpoint = pastCheckPoint
         session.steps = steps as NSNumber
         session.time = time
         session.trailID = trailID
+   
+        session.path = tempCoordArray as NSArray
     
         
         // 4

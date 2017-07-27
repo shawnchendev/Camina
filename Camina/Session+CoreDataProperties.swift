@@ -21,7 +21,7 @@ extension Session {
     @NSManaged public var date: Date?
     @NSManaged public var steps: NSNumber?
     @NSManaged public var distance: NSNumber?
-    @NSManaged public var path: [CLLocationCoordinate2D]?
+    @NSManaged public var path: NSArray?
     @NSManaged public var trailID: String?
     @NSManaged public var pastCheckpoint: String?
 
