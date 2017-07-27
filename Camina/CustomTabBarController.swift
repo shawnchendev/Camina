@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import Firebase
 
 class CustomTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        checkIfUserIsLoggedIn()
         
         let mainController = mainViewController()
         let navigationController = UINavigationController(rootViewController: mainController)
@@ -48,5 +50,33 @@ class CustomTabBarController: UITabBarController {
         tabBar.clipsToBounds = true
         
     }
+    
+    func handleLogOut(_ sender: Any) {
+        do {
+            try Auth.auth().signOut()
+        } catch let logoutError{
+            print(logoutError)
+        }
+        
+        self.presentRootView()
+    }
+    
+    
+    func checkIfUserIsLoggedIn() {
+        if Auth.auth().currentUser?.uid == nil {
+            perform(#selector(handleLogOut), with: nil, afterDelay: 0)
+        } else {
+            let uid = Auth.auth().currentUser?.uid
+            Database.database().reference().child("users").child(uid!).observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                if let dictionary = snapshot.value as? [String: AnyObject] {
+                    print(dictionary)
+                }
+                
+            }, withCancel: nil)
+        }
+    }
+    
+
 }
 

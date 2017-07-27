@@ -29,7 +29,7 @@ class infoController: UICollectionViewController, UICollectionViewDelegateFlowLa
         //self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Go", style: .plain, target: self, action: #selector(goToSession))
         collectionView?.alwaysBounceVertical = true
         
-        collectionView?.backgroundColor = UIColor.white
+        collectionView?.backgroundColor = UIColor(hex:"ECF0F1")
         
         collectionView?.register(TrailDetailHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerId)
         

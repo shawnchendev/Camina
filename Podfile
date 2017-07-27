@@ -16,9 +16,12 @@ target 'Camina' do
    pod 'FBSDKCoreKit'
    pod 'FBSDKShareKit'
    pod 'FBSDKLoginKit'
+   
+   pod 'Google/SignIn'
 
-    pod 'GoogleSignIn'
-    
+
+    pod 'FloatRatingView', '~> 2.0.0'
+
     pod 'Mapbox-iOS-SDK', '~> 3.6’
 
 end

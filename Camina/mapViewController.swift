@@ -177,7 +177,6 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
         
         if activeSession {
             setupStatView()
-            
         }
         
      
@@ -261,12 +260,9 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
         DispatchQueue.global(qos: .background).async(execute: {
             let jsonPath = Bundle.main.path(forResource: "point", ofType: "geojson")
             let url = URL(fileURLWithPath: jsonPath!)
-            //print(url)
             do{
                 let data = try Data(contentsOf: url)
-                //print(data)
                 let placemarkpointCollectionFeature = try MGLShape(data: data, encoding: String.Encoding.utf8.rawValue) as! MGLShapeCollectionFeature
-                //print(placemarkpointCollectionFeature.shapes.count)
                 for i in 0...(placemarkpointCollectionFeature.shapes.count) - 1{
                     if let point = placemarkpointCollectionFeature.shapes[i]as? MGLPointFeature{
                         point.title = point.attribute(forKey: "NAME" ) as? String
@@ -296,8 +292,9 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
     func setupMap(){
         mapView = MGLMapView(frame: view.bounds)
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        mapView.setCenter(CLLocationCoordinate2D(latitude: 47.576769 , longitude: -52.731517), zoomLevel: 12, animated: false)
         mapView.showsUserLocation = true
+        mapView.setCenter(CLLocationCoordinate2D(latitude: 47.576769 , longitude: -52.731517), zoomLevel: 12, animated: false)
+
     }
     
     func mapView(_ mapView: MGLMapView, alphaForShapeAnnotation annotation: MGLShape) -> CGFloat {

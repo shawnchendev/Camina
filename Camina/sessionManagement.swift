@@ -79,11 +79,11 @@ extension mapViewController {
         timeElapsed += 1.0
         time = timeIntervalFormat(interval: timeElapsed)
 
-        totalSteps.text = String(format:"Steps: %i",steps)
+        totalSteps.text = String(format:"%i",steps)
  
         travelTime.text = time
 
-        travelDistance.text = String(format:"%02.02f meters",distance)
+        travelDistance.text = String(format:"%02.02f m",distance)
         
         trailName.text = " \(String(describing: trailID!)) - \(String(describing: pastCheckPoint!)) "
         

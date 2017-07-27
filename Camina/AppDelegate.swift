@@ -9,7 +9,6 @@
 import UIKit
 import Firebase
 import FBSDKCoreKit
-import GoogleSignIn
 import UserNotifications
 import CoreData
 
@@ -22,12 +21,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
     
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        setupFirstView()
-        setNotification()
+
         //facebook sign-in configure
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         //firebase database configure
         FirebaseApp.configure()
+        
+        setupFirstView()
+        setNotification()
         
 
         
@@ -35,7 +36,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
     }
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-        GIDSignIn.sharedInstance().handle(url,sourceApplication: sourceApplication,annotation: annotation)
         return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
     }
     

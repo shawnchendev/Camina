@@ -9,9 +9,23 @@
 import UIKit
 import Firebase
 import FBSDKLoginKit
-import GoogleSignIn
-
-class rootViewController: UIViewController {
+import FloatRatingView
+class rootViewController: UIViewController, FloatRatingViewDelegate{
+    
+    var floatRatingView: FloatRatingView = {
+        let frv = FloatRatingView()
+        frv.emptyImage = UIImage(named: "StarEmpty")
+        frv.fullImage = UIImage(named: "StarFull")
+        // Optional params
+        frv.contentMode = UIViewContentMode.scaleAspectFit
+        frv.maxRating = 5
+        frv.minRating = 1
+        frv.rating = 2.5
+        frv.editable = false
+        frv.halfRatings = true
+        frv.translatesAutoresizingMaskIntoConstraints = false
+        return frv
+    }()
     
     var backgroundImage : UIImageView = {
         let imageView = UIImageView()
@@ -60,17 +74,22 @@ class rootViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        floatRatingView.delegate = self
         view.backgroundColor = .white
         view.addSubview(backgroundImage)
         view.addSubview(logoImage)
         view.addSubview(signupButton)
         view.addSubview(loginButton)
+        view.addSubview(floatRatingView)
         setupBackgroudImage()
         setupLogoImage()
         setupButton()
+        setupRating()
         
         
+    }
+     func floatRatingView(_ ratingView: FloatRatingView, didUpdate rating: Float) {
+        print(231231)
     }
     override func viewWillAppear(_ animated: Bool) {
         
@@ -96,6 +115,13 @@ class rootViewController: UIViewController {
         return .lightContent
     }
     
+    
+    func setupRating(){
+        floatRatingView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        floatRatingView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        floatRatingView.widthAnchor.constraint(equalTo: view.widthAnchor, constant:-16).isActive = true
+        floatRatingView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    }
     func setupBackgroudImage(){
         backgroundImage.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         backgroundImage.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true

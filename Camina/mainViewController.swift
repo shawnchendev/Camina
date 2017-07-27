@@ -75,11 +75,6 @@ class mainViewController: UITableViewController, UISearchResultsUpdating, UISear
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //        if Auth.auth().currentUser == nil{
-        //            perform(#selector(presentRootView), with: nil, afterDelay: 0)
-        //        }
-        
   
         tableView.register(trailHeadsCell.self, forCellReuseIdentifier: cellId)
         print(currentReachabilityStatus)
@@ -93,6 +88,7 @@ class mainViewController: UITableViewController, UISearchResultsUpdating, UISear
         super.viewWillAppear(animated)
         setupSearchView()
         setupNavBarItem()
+        tableView.separatorColor = .white
         //for location in locationManager.monitoredRegions {
             //locationManager.stopMonitoring(for: location)
             //print(location)
@@ -205,12 +201,21 @@ class mainViewController: UITableViewController, UISearchResultsUpdating, UISear
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let layout = UICollectionViewFlowLayout()
-        let infoView = infoController(collectionViewLayout: layout)
+//        let layout = UICollectionViewFlowLayout()
+//        let infoView = infoController(collectionViewLayout: layout)
+        let trailDetailView = trailDetailViewController()
         self.hidesBottomBarWhenPushed = true;
-        infoView.trailProperties = trailHeads[indexPath.row].properties
-        infoView.trailLandMark = placemarks
-        self.navigationController?.pushViewController(infoView, animated: true)
+        trailDetailView.trailHead = trailHeads[indexPath.row]
+        var tp = [Placemark]()
+        for p in placemarks{
+            if trailHeads[indexPath.item].properties?.ParkID != p.properties?.ParkID{
+                continue
+            } else {
+            tp.append(p)
+            }
+        }
+        trailDetailView.trailPlacemark = tp
+        self.navigationController?.pushViewController(trailDetailView, animated: true)
         self.hidesBottomBarWhenPushed = false;
         
    }
