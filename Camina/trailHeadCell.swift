@@ -47,7 +47,7 @@ class trailHeadsCell: UITableViewCell {
 
     let trailNameLabel: UILabel = {
         let lbl = UILabel()
-        lbl.font = UIFont.systemFont(ofSize: 16)
+        lbl.font = UIFont.systemFont(ofSize: 14)
         lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
     }()
@@ -55,7 +55,7 @@ class trailHeadsCell: UITableViewCell {
     
     let trailTypeLabel: UILabel = {
         let lbl = UILabel()
-        lbl.font = UIFont.systemFont(ofSize: 13)
+        lbl.font = UIFont.systemFont(ofSize: 11)
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.textColor = UIColor(hex: "95989A")
         return lbl

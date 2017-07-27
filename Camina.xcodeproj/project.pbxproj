@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		C11E86521F26677300C3A3C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E86511F26677300C3A3C0 /* AppDelegate.swift */; };
-		C11E86571F26677300C3A3C0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C11E86551F26677300C3A3C0 /* Main.storyboard */; };
 		C11E86591F26677300C3A3C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C11E86581F26677300C3A3C0 /* Assets.xcassets */; };
 		C11E865C1F26677300C3A3C0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C11E865A1F26677300C3A3C0 /* LaunchScreen.storyboard */; };
 		C11E86821F2668F700C3A3C0 /* connectionCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E86631F2668F700C3A3C0 /* connectionCheck.swift */; };
@@ -45,6 +44,7 @@
 		C11E86AB1F26690D00C3A3C0 /* trailsData.geojson in Resources */ = {isa = PBXBuildFile; fileRef = C11E86A51F26690D00C3A3C0 /* trailsData.geojson */; };
 		C11E86AC1F26690D00C3A3C0 /* Walks.geojson in Resources */ = {isa = PBXBuildFile; fileRef = C11E86A61F26690D00C3A3C0 /* Walks.geojson */; };
 		C11E86AE1F266CCB00C3A3C0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C11E86AD1F266CCB00C3A3C0 /* GoogleService-Info.plist */; };
+		C1F8DB101F2A041E005EA542 /* trailDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F8DB0F1F2A041E005EA542 /* trailDetailViewController.swift */; };
 		D4FD11002CF9BAE764A1FD39 /* Pods_Camina.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39A9C38CD199F89F828C22EF /* Pods_Camina.framework */; };
 /* End PBXBuildFile section */
 
@@ -54,7 +54,6 @@
 		8A429E94462A43D97EE1B047 /* Pods-Camina.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Camina.release.xcconfig"; path = "Pods/Target Support Files/Pods-Camina/Pods-Camina.release.xcconfig"; sourceTree = "<group>"; };
 		C11E864E1F26677300C3A3C0 /* Camina.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Camina.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C11E86511F26677300C3A3C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C11E86561F26677300C3A3C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C11E86581F26677300C3A3C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C11E865B1F26677300C3A3C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C11E865D1F26677300C3A3C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -92,6 +91,7 @@
 		C11E86A51F26690D00C3A3C0 /* trailsData.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = trailsData.geojson; sourceTree = "<group>"; };
 		C11E86A61F26690D00C3A3C0 /* Walks.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Walks.geojson; sourceTree = "<group>"; };
 		C11E86AD1F266CCB00C3A3C0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C1F8DB0F1F2A041E005EA542 /* trailDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = trailDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,7 +152,6 @@
 				C11E86771F2668F700C3A3C0 /* sessionManagement.swift */,
 				C11E867C1F2668F700C3A3C0 /* trailHeadCell.swift */,
 				C11E86641F2668F700C3A3C0 /* CustomCollectionViewCell.swift */,
-				C11E86551F26677300C3A3C0 /* Main.storyboard */,
 				C11E86581F26677300C3A3C0 /* Assets.xcassets */,
 				C11E865A1F26677300C3A3C0 /* LaunchScreen.storyboard */,
 				C11E865D1F26677300C3A3C0 /* Info.plist */,
@@ -207,6 +206,7 @@
 				C11E86781F2668F700C3A3C0 /* sessionViewController.swift */,
 				C11E86791F2668F700C3A3C0 /* signupViewController.swift */,
 				C11E867F1F2668F700C3A3C0 /* userProfileViewController.swift */,
+				C1F8DB0F1F2A041E005EA542 /* trailDetailViewController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -252,6 +252,9 @@
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
+							com.apple.Keychain = {
+								enabled = 0;
+							};
 						};
 					};
 				};
@@ -285,7 +288,6 @@
 				C11E86591F26677300C3A3C0 /* Assets.xcassets in Resources */,
 				C11E86A71F26690D00C3A3C0 /* GCPoints.geojson in Resources */,
 				C11E86A91F26690D00C3A3C0 /* point.geojson in Resources */,
-				C11E86571F26677300C3A3C0 /* Main.storyboard in Resources */,
 				C11E86AE1F266CCB00C3A3C0 /* GoogleService-Info.plist in Resources */,
 				C11E86AB1F26690D00C3A3C0 /* trailsData.geojson in Resources */,
 				C11E86AA1F26690D00C3A3C0 /* trails.geojson in Resources */,
@@ -355,6 +357,7 @@
 				C11E86851F2668F700C3A3C0 /* CustomUIColor.swift in Sources */,
 				C11E86A01F2668F700C3A3C0 /* viewExtension.swift in Sources */,
 				C11E86961F2668F700C3A3C0 /* sessionManagement.swift in Sources */,
+				C1F8DB101F2A041E005EA542 /* trailDetailViewController.swift in Sources */,
 				C11E869D1F2668F700C3A3C0 /* User.swift in Sources */,
 				C11E868A1F2668F700C3A3C0 /* inputProfileViewController.swift in Sources */,
 				C11E86821F2668F700C3A3C0 /* connectionCheck.swift in Sources */,
@@ -381,14 +384,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		C11E86551F26677300C3A3C0 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C11E86561F26677300C3A3C0 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		C11E865A1F26677300C3A3C0 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
