@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9249E2391F27BDC50061B7ED /* camina.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9249E2371F27BDC50061B7ED /* camina.xcdatamodeld */; };
 		9249E2451F28F6460061B7ED /* fetchingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9249E2441F28F6460061B7ED /* fetchingController.swift */; };
 		9249E2481F2902530061B7ED /* Session+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9249E2461F2902530061B7ED /* Session+CoreDataClass.swift */; };
 		9249E2491F2902530061B7ED /* Session+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9249E2471F2902530061B7ED /* Session+CoreDataProperties.swift */; };
@@ -55,7 +54,6 @@
 		01663C0E33B4067C6B9FF704 /* Pods-Camina.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Camina.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Camina/Pods-Camina.debug.xcconfig"; sourceTree = "<group>"; };
 		39A9C38CD199F89F828C22EF /* Pods_Camina.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Camina.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A429E94462A43D97EE1B047 /* Pods-Camina.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Camina.release.xcconfig"; path = "Pods/Target Support Files/Pods-Camina/Pods-Camina.release.xcconfig"; sourceTree = "<group>"; };
-		9249E2381F27BDC50061B7ED /* camina.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = camina.xcdatamodel; sourceTree = "<group>"; };
 		9249E2441F28F6460061B7ED /* fetchingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = fetchingController.swift; sourceTree = "<group>"; };
 		9249E2461F2902530061B7ED /* Session+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Session+CoreDataClass.swift"; sourceTree = "<group>"; };
 		9249E2471F2902530061B7ED /* Session+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Session+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -124,8 +122,6 @@
 		9249E2421F28C3CD0061B7ED /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C11E867C1F2668F700C3A3C0 /* trailHeadCell.swift */,
-				C11E86641F2668F700C3A3C0 /* CustomCollectionViewCell.swift */,
 				C11E86661F2668F700C3A3C0 /* CustomUIColor.swift */,
 				C11E86801F2668F700C3A3C0 /* viewControllerExtension.swift */,
 				C11E86811F2668F700C3A3C0 /* viewExtension.swift */,
@@ -136,8 +132,6 @@
 		9249E2431F28C3D10061B7ED /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				C11E86671F2668F700C3A3C0 /* geofencingController.swift */,
-				C11E86771F2668F700C3A3C0 /* sessionManagement.swift */,
 				C11E86701F2668F700C3A3C0 /* notificationController.swift */,
 				C11E86741F2668F700C3A3C0 /* searchBar.swift */,
 				9249E2441F28F6460061B7ED /* fetchingController.swift */,
@@ -390,7 +384,6 @@
 				C11E868A1F2668F700C3A3C0 /* inputProfileViewController.swift in Sources */,
 				C11E86821F2668F700C3A3C0 /* connectionCheck.swift in Sources */,
 				C11E86981F2668F700C3A3C0 /* signupViewController.swift in Sources */,
-				9249E2391F27BDC50061B7ED /* camina.xcdatamodeld in Sources */,
 				C11E86831F2668F700C3A3C0 /* CustomCollectionViewCell.swift in Sources */,
 				C11E868D1F2668F700C3A3C0 /* mapViewController.swift in Sources */,
 				C11E86901F2668F700C3A3C0 /* Placemark.swift in Sources */,
@@ -569,19 +562,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		9249E2371F27BDC50061B7ED /* camina.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				9249E2381F27BDC50061B7ED /* camina.xcdatamodel */,
-			);
-			currentVersion = 9249E2381F27BDC50061B7ED /* camina.xcdatamodel */;
-			path = camina.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = C11E86461F26677300C3A3C0 /* Project object */;
 }

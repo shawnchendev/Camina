@@ -158,12 +158,25 @@ extension mapViewController {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEE, dd MMM yyyy"
         let dateObj = dateFormatter.string(from: date!)
+        var userUID : String?
+        if Auth.auth().currentUser != nil{
+            userUID = Auth.auth().currentUser?.uid
+            
+            let post : [String: AnyObject] = [ "UserID": userUID as AnyObject, "date" : dateObj as String as AnyObject, "distance" : distance as AnyObject, "pastCheckpoint" : pastCheckPoint as AnyObject, "steps" : steps as AnyObject, "time" : time as AnyObject, "trailID" : trailID as AnyObject, "path" : tempCoordArray]
+            //firebase code
+            ref = Database.database().reference()
+            
+            ref?.child("Session").childByAutoId().setValue(post)
+         
+        }
         
-        let post : [String: AnyObject] = [ "date" : dateObj as String as AnyObject, "distance" : distance as AnyObject, "pastCheckpoint" : pastCheckPoint as AnyObject, "steps" : steps as AnyObject, "time" : time as AnyObject, "trailID" : trailID as AnyObject, "path" : tempCoordArray]
+        let post : [String: AnyObject] = ["date" : dateObj as String as AnyObject, "distance" : distance as AnyObject, "pastCheckpoint" : pastCheckPoint as AnyObject, "steps" : steps as AnyObject, "time" : time as AnyObject, "trailID" : trailID as AnyObject, "path" : tempCoordArray]
         //firebase code
         ref = Database.database().reference()
         
         ref?.child("Session").childByAutoId().setValue(post)
+        
+ 
         
         if activeSession{
             return

@@ -76,9 +76,9 @@ class mainViewController: UITableViewController, UISearchResultsUpdating, UISear
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //        if Auth.auth().currentUser == nil{
-        //            perform(#selector(presentRootView), with: nil, afterDelay: 0)
-        //        }
+                if Auth.auth().currentUser == nil{
+                    perform(#selector(presentRootView), with: nil, afterDelay: 0)
+                }
         
   
         tableView.register(trailHeadsCell.self, forCellReuseIdentifier: cellId)
