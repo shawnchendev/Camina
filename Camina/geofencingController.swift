@@ -161,6 +161,12 @@ extension mapViewController: CLLocationManagerDelegate {
         if closestLocation == nil {
             checkProximity()
         }
+        if activeSession {
+            for loc in locations {
+                allCoordinates.append(loc.coordinate)
+            }
+            updateLocationLine()
+        }
         let newDistance = userLocation!.distance(from: closestLocation!)
         if newDistance > shortestDistance {
             checkProximity()
