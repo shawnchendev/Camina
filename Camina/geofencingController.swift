@@ -158,7 +158,6 @@ extension mapViewController: CLLocationManagerDelegate {
     //function that triggers whenever the user location changes to check proximity to existing areas
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let userLocation = locationManager.location
-        mapView.setCenter((userLocation?.coordinate)!, zoomLevel: 15, animated: true)
 
         if closestLocation == nil {
             checkProximity()

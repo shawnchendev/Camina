@@ -18,7 +18,8 @@ extension mapViewController {
     func setupSession(){
         startTimer()
         startPedometer()
-        
+        self.userPathLayer?.isVisible = true
+
         date = Date()
         //trailID = head.properties?.ParkID
         //pastCheckPoint = head.properties?.ParkID
@@ -28,6 +29,7 @@ extension mapViewController {
     
     func finishSession(){
         stopTimer()
+        self.userPathLayer?.isVisible = false
         //Stop the pedometer
         pedometer.stopUpdates()
         activeSession = false
@@ -152,7 +154,7 @@ extension mapViewController {
     func save() {
         if allCoordinates.count > 0 {
             for coord in allCoordinates {
-                tempCoordArray.adding([coord.latitude, coord.longitude])
+                tempCoordArray.append([coord.latitude, coord.longitude])
             }
         }
         let dateFormatter = DateFormatter()
@@ -161,20 +163,19 @@ extension mapViewController {
         var userUID : String?
         if Auth.auth().currentUser != nil{
             userUID = Auth.auth().currentUser?.uid
-            
-            let post : [String: AnyObject] = [ "UserID": userUID as AnyObject, "date" : dateObj as String as AnyObject, "distance" : distance as AnyObject, "pastCheckpoint" : pastCheckPoint as AnyObject, "steps" : steps as AnyObject, "time" : time as AnyObject, "trailID" : trailID as AnyObject, "path" : tempCoordArray]
+            let sessionUuid = UUID().uuidString
+
+            let post : [String: AnyObject] = [ "UserID": userUID as AnyObject, "date" : dateObj as String as AnyObject, "distance" : distance as AnyObject, "pastCheckpoint" : pastCheckPoint as AnyObject, "steps" : steps as AnyObject, "time" : time as AnyObject, "trailID" : trailID as AnyObject, "path" : tempCoordArray as AnyObject]
             //firebase code
             ref = Database.database().reference()
             
-            ref?.child("Session").childByAutoId().setValue(post)
+            ref?.child("Session").child(sessionUuid).setValue(post)
+            
+            let userSessionRef = Database.database().reference()
+            let session : [String:AnyObject] = ["SessionID": sessionUuid as AnyObject]
+            userSessionRef.child("userSession").child(userUID!).childByAutoId().setValue(session)
          
         }
-        
-        let post : [String: AnyObject] = ["date" : dateObj as String as AnyObject, "distance" : distance as AnyObject, "pastCheckpoint" : pastCheckPoint as AnyObject, "steps" : steps as AnyObject, "time" : time as AnyObject, "trailID" : trailID as AnyObject, "path" : tempCoordArray]
-        //firebase code
-        ref = Database.database().reference()
-        
-        ref?.child("Session").childByAutoId().setValue(post)
         
  
         
