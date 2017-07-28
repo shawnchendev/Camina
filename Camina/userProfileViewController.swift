@@ -8,13 +8,13 @@
 
 import UIKit
 import Firebase
-import GoogleSignIn
 
-class userProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    var userUID : String = ""
+
+class userProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
     lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "profile-icon")
+        imageView.layer.cornerRadius = 25
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
         imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSelectProfileImageView)))
@@ -31,6 +31,7 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
         view.addSubview(profileImageView)
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(handleLogOut))
         setupProfileImageView()
+        checkIfUserIsLoggedIn()
         
     }
     
@@ -44,15 +45,29 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     func handleLogOut(_ sender: Any) {
         do {
-
             try Auth.auth().signOut()
         } catch let logoutError{
             print(logoutError)
         }
-
         self.presentRootView()
     }
     
+    
+    func checkIfUserIsLoggedIn() {
+        if Auth.auth().currentUser?.uid == nil {
+            perform(#selector(handleLogOut), with: nil, afterDelay: 0)
+        } else {
+            let uid = Auth.auth().currentUser?.uid
+            Database.database().reference().child("users").child(uid!).observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                if let dictionary = snapshot.value as? [String: AnyObject] {
+                    self.profileImageView.loadImageUsingCacheWithUrlString(dictionary["profileImageUrl"] as! String)
+                    print(dictionary)
+                }
+                
+            }, withCancel: nil)
+        }
+    }
     
     
     func handleSelectProfileImageView() {

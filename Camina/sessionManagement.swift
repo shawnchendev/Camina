@@ -93,7 +93,7 @@ extension mapViewController {
  
         travelTime.text = time
 
-        travelDistance.text = String(format:"%02.02f meters",distance)
+        travelDistance.text = String(format:"%02.02f m",distance)
         
         trailName.text = " \(String(describing: trailID!)) - \(String(describing: pastCheckPoint!)) "
         

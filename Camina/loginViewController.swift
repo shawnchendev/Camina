@@ -42,6 +42,7 @@ class loginViewController: UIViewController {
         let tf = UITextField()
         tf.placeholder = "Email"
         tf.translatesAutoresizingMaskIntoConstraints = false
+        tf.keyboardType = .emailAddress
         return tf
     }()
     
@@ -57,6 +58,7 @@ class loginViewController: UIViewController {
         tf.placeholder = "Password"
         tf.translatesAutoresizingMaskIntoConstraints = false
         tf.isSecureTextEntry = true
+        
         return tf
     }()
     
@@ -65,7 +67,8 @@ class loginViewController: UIViewController {
     
     lazy var loginButton: UIButton = {
         let button = UIButton(type: .system)
-        button.backgroundColor = UIColor(r: 80, g: 101, b: 161)
+        button.layer.cornerRadius = 5
+        button.backgroundColor = UIColor(hex: "00B16A")
         button.setTitle("Login ", for: UIControlState())
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitleColor(UIColor.white, for: UIControlState())
@@ -79,7 +82,7 @@ class loginViewController: UIViewController {
         button.setTitle("Forget your password? ", for: UIControlState())
         button.translatesAutoresizingMaskIntoConstraints = false
 
-        button.setTitleColor(UIColor.black, for: UIControlState())
+        button.setTitleColor(UIColor(hex: "00B16A"), for: UIControlState())
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         button.addTarget(self, action: #selector(handleForgetpassword), for: .touchUpInside)
         return button
@@ -214,8 +217,6 @@ class loginViewController: UIViewController {
                 guard let uid = user?.uid else{ return }
 
                 if authProviders.count > 0 {
-                    let userProfileController = userProfileViewController()
-                    userProfileController.userUID = uid
                     self.perform(#selector(self.presentMainView), with: nil, afterDelay: 0)
                 }else{
                     self.gotoCreateprofile(email: email, userUuid: uid,name: name,profileUrl: url)
@@ -225,7 +226,8 @@ class loginViewController: UIViewController {
     }
     
     func handleForgetpassword(){
-        print(123)
+        let forgerPasswordView = forgetPasswordViewController()
+        self.navigationController?.pushViewController(forgerPasswordView, animated: true)
     }
     // preapare all necessary infomation for create profile view controller
     func gotoCreateprofile(email:String, userUuid: String, name:String? = "", profileUrl:String? = nil){
