@@ -8,9 +8,9 @@
 
 import Foundation
 import CoreMotion
-import CoreData
 import UIKit
 import Firebase
+import Mapbox
 
 extension mapViewController {
     
@@ -18,7 +18,8 @@ extension mapViewController {
     func setupSession(){
         startTimer()
         startPedometer()
-        
+        locationManager.distanceFilter = 100
+
         date = Date()
         //trailID = head.properties?.ParkID
         //pastCheckPoint = head.properties?.ParkID
@@ -33,13 +34,14 @@ extension mapViewController {
         activeSession = false
         //save the data
         save()
-        //stopActivePlacemarks()
-        //time = ""
-        //distance = 0
-        //steps = 0
-        //pastCheckPoint = ""
-        //trailID = ""
-        //allCoordinates = []
+        stopActivePlacemarks()
+        time = ""
+        distance = 0
+        steps = 0
+        pastCheckPoint = ""
+        trailID = ""
+        allCoordinates = []
+        locationManager.distanceFilter = 80
         
     }
     
@@ -87,7 +89,7 @@ extension mapViewController {
         timeElapsed += 1.0
         time = timeIntervalFormat(interval: timeElapsed)
 
-        totalSteps.text = String(format:"Steps: %i",steps)
+        totalSteps.text = String(format:"%i",steps)
  
         travelTime.text = time
 
@@ -150,9 +152,11 @@ extension mapViewController {
     }
     
     func save() {
+        
+        
         if allCoordinates.count > 0 {
             for coord in allCoordinates {
-                tempCoordArray.adding([coord.latitude, coord.longitude])
+                tempCoordArray.append([coord.latitude, coord.longitude])
             }
         }
         let dateFormatter = DateFormatter()
@@ -162,7 +166,7 @@ extension mapViewController {
         if Auth.auth().currentUser != nil{
             userUID = Auth.auth().currentUser?.uid
             
-            let post : [String: AnyObject] = [ "UserID": userUID as AnyObject, "date" : dateObj as String as AnyObject, "distance" : distance as AnyObject, "pastCheckpoint" : pastCheckPoint as AnyObject, "steps" : steps as AnyObject, "time" : time as AnyObject, "trailID" : trailID as AnyObject, "path" : tempCoordArray]
+            let post : [String: AnyObject] = [ "UserID": userUID as AnyObject, "date" : dateObj as String as AnyObject, "distance" : distance as AnyObject, "pastCheckpoint" : pastCheckPoint as AnyObject, "steps" : steps as AnyObject, "time" : time as AnyObject, "trailID" : trailID as AnyObject, "path" : tempCoordArray as AnyObject]
             //firebase code
             ref = Database.database().reference()
             
@@ -170,48 +174,42 @@ extension mapViewController {
          
         }
         
-        let post : [String: AnyObject] = ["date" : dateObj as String as AnyObject, "distance" : distance as AnyObject, "pastCheckpoint" : pastCheckPoint as AnyObject, "steps" : steps as AnyObject, "time" : time as AnyObject, "trailID" : trailID as AnyObject, "path" : tempCoordArray]
-        //firebase code
-        ref = Database.database().reference()
-        
-        ref?.child("Session").childByAutoId().setValue(post)
-        
  
         
-        if activeSession{
-            return
-        }
+        //if activeSession{
+        //return
+        //}
         
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
+        //guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+        //        return
+        //}
         
         // 1
-        let managedContext = appDelegate.persistentContainer.viewContext
+        //let managedContext = appDelegate.persistentContainer.viewContext
         
         // 2
-        let entity = NSEntityDescription.entity(forEntityName: "Session", in: managedContext)!
+        //let entity = NSEntityDescription.entity(forEntityName: "Session", in: managedContext)!
         
-        let session = Session(entity: entity,
-                              insertInto: managedContext)
+        //let session = Session(entity: entity,
+        //                      insertInto: managedContext)
         
         // 3
-        session.date = date
-        session.distance = distance as NSNumber
-        session.pastCheckpoint = pastCheckPoint
-        session.steps = steps as NSNumber
-        session.time = time
-        session.trailID = trailID
+        //session.date = date
+        //session.distance = distance as NSNumber
+        //session.pastCheckpoint = pastCheckPoint
+        //session.steps = steps as NSNumber
+        //session.time = time
+        //session.trailID = trailID
    
-        session.path = tempCoordArray as NSArray
+        //session.path = tempCoordArray as NSArray
     
         
         // 4
-        do {
-            try managedContext.save()
-        } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
-        }
+        //do {
+            //try managedContext.save()
+        //} catch let error as NSError {
+        //    print("Could not save. \(error), \(error.userInfo)")
+        //}
     }
     
 }
