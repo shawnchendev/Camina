@@ -166,7 +166,7 @@ extension mapViewController: CLLocationManagerDelegate {
             for loc in locations {
                 allCoordinates.append(loc.coordinate)
             }
-            updateLocationLine()
+            //updateLocationLine()
         }
         let newDistance = userLocation!.distance(from: closestLocation!)
         if newDistance > shortestDistance {

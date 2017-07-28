@@ -165,7 +165,7 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
         
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.distanceFilter = 15
+        locationManager.distanceFilter = 80
         locationManager.startUpdatingLocation()
         setupMap()
         view.addSubview(self.mapView)
@@ -195,7 +195,7 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
     
     // Wait until the map is loaded before adding to the map.
     func mapView(_ mapView: MGLMapView, didFinishLoading style: MGLStyle) {
-        addLayer(to: style)
+        //addLayer(to: style)
     }
     
     func updateLocationLine() {

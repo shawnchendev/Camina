@@ -8,9 +8,9 @@
 
 import Foundation
 import CoreMotion
-import CoreData
 import UIKit
 import Firebase
+import Mapbox
 
 extension mapViewController {
     
@@ -35,13 +35,14 @@ extension mapViewController {
         activeSession = false
         //save the data
         save()
-        //stopActivePlacemarks()
-        //time = ""
-        //distance = 0
-        //steps = 0
-        //pastCheckPoint = ""
-        //trailID = ""
-        //allCoordinates = []
+        stopActivePlacemarks()
+        time = ""
+        distance = 0
+        steps = 0
+        pastCheckPoint = ""
+        trailID = ""
+        allCoordinates = []
+        locationManager.distanceFilter = 80
         
     }
     
@@ -152,6 +153,8 @@ extension mapViewController {
     }
     
     func save() {
+        
+        
         if allCoordinates.count > 0 {
             for coord in allCoordinates {
                 tempCoordArray.append([coord.latitude, coord.longitude])
@@ -179,40 +182,40 @@ extension mapViewController {
         
  
         
-        if activeSession{
-            return
-        }
+        //if activeSession{
+        //return
+        //}
         
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
+        //guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+        //        return
+        //}
         
         // 1
-        let managedContext = appDelegate.persistentContainer.viewContext
+        //let managedContext = appDelegate.persistentContainer.viewContext
         
         // 2
-        let entity = NSEntityDescription.entity(forEntityName: "Session", in: managedContext)!
+        //let entity = NSEntityDescription.entity(forEntityName: "Session", in: managedContext)!
         
-        let session = Session(entity: entity,
-                              insertInto: managedContext)
+        //let session = Session(entity: entity,
+        //                      insertInto: managedContext)
         
         // 3
-        session.date = date
-        session.distance = distance as NSNumber
-        session.pastCheckpoint = pastCheckPoint
-        session.steps = steps as NSNumber
-        session.time = time
-        session.trailID = trailID
+        //session.date = date
+        //session.distance = distance as NSNumber
+        //session.pastCheckpoint = pastCheckPoint
+        //session.steps = steps as NSNumber
+        //session.time = time
+        //session.trailID = trailID
    
-        session.path = tempCoordArray as NSArray
+        //session.path = tempCoordArray as NSArray
     
         
         // 4
-        do {
-            try managedContext.save()
-        } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
-        }
+        //do {
+            //try managedContext.save()
+        //} catch let error as NSError {
+        //    print("Could not save. \(error), \(error.userInfo)")
+        //}
     }
     
 }
