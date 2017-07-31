@@ -92,7 +92,7 @@ class trailDetailViewController: UITableViewController {
             self.navigationController?.pushViewController(landmarkView, animated: true)
         }
         if indexPath.item == 3 {
-            print(231231231231)
+            print(123)
         }
     }
     

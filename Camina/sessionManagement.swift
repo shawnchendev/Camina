@@ -18,7 +18,7 @@ extension mapViewController {
     func setupSession(){
         startTimer()
         startPedometer()
-        locationManager.distanceFilter = 100
+        locationManager.distanceFilter = 15
 
         date = Date()
         //trailID = head.properties?.ParkID
@@ -28,12 +28,15 @@ extension mapViewController {
     }
     
     func finishSession(){
+        save()
+        let alert = reviewAlertView(userID: (Auth.auth().currentUser?.uid)!, trailID: trailID!)
+        alert.show(animated: true)
         stopTimer()
         //Stop the pedometer
         pedometer.stopUpdates()
         activeSession = false
         //save the data
-        save()
+       
         stopActivePlacemarks()
         time = ""
         distance = 0
@@ -42,6 +45,10 @@ extension mapViewController {
         trailID = ""
         allCoordinates = []
         locationManager.distanceFilter = 80
+        
+
+
+
         
     }
     
@@ -153,7 +160,7 @@ extension mapViewController {
     
     func save() {
         
-        
+        //Database.database().isPersistenceEnabled = true
         if allCoordinates.count > 0 {
             for coord in allCoordinates {
                 tempCoordArray.append([coord.latitude, coord.longitude])
@@ -170,7 +177,7 @@ extension mapViewController {
             //firebase code
             ref = Database.database().reference()
             
-            ref?.child("Session").childByAutoId().setValue(post)
+            //ref?.child("Session").childByAutoId().setValue(post)
          
         }
         

@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         //firebase database configure
         FirebaseApp.configure()
+        Database.database().isPersistenceEnabled = true
         
         setupFirstView()
         setNotification()

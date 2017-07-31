@@ -80,6 +80,8 @@ class mainViewController: UITableViewController, UISearchResultsUpdating, UISear
         
         fetchTrailHead()
         fetchPlacemarks()
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool){
