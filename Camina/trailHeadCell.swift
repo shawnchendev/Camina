@@ -52,8 +52,6 @@ class trailHeadsCell: UITableViewCell {
         lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
     }()
-    
-    
     let trailTypeLabel: UILabel = {
         let lbl = UILabel()
         lbl.font = UIFont.systemFont(ofSize: 11)
@@ -75,7 +73,6 @@ class trailHeadsCell: UITableViewCell {
             }
         }
     }
-    
     
     func setupView(){
         backgroundColor = .white

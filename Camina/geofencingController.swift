@@ -84,9 +84,9 @@ extension mapViewController: CLLocationManagerDelegate {
         
         if shortestDistance < 100 {
             let head = getHead(name: locationName)
-            if head.properties?.Name != nil && !activeSession {
+            if head.properties?.ParkID != nil && !activeSession {
                 //setupSession(head: head)
-                trailID = head.properties?.Name
+                trailID = head.properties?.ParkID
                 setupTrailHeadNotification(head: head)
                 setupActivePlacemarks(head: head)
                 //print(head.properties?.Name)

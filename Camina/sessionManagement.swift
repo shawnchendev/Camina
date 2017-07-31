@@ -19,6 +19,7 @@ extension mapViewController {
         startTimer()
         startPedometer()
         self.userPathLayer?.isVisible = true
+        locationManager.distanceFilter = 10
 
         date = Date()
         //trailID = head.properties?.ParkID
@@ -28,13 +29,18 @@ extension mapViewController {
     }
     
     func finishSession(){
-        stopTimer()
         self.userPathLayer?.isVisible = false
         //Stop the pedometer
         pedometer.stopUpdates()
         activeSession = false
         //save the data
         save()
+        reset()
+        
+    }
+    
+    func reset(){
+        stopTimer()
         stopActivePlacemarks()
         time = ""
         distance = 0
@@ -43,7 +49,6 @@ extension mapViewController {
         trailID = ""
         allCoordinates = []
         locationManager.distanceFilter = 80
-        
     }
     
     
@@ -157,7 +162,8 @@ extension mapViewController {
         
         if allCoordinates.count > 0 {
             for coord in allCoordinates {
-                tempCoordArray.append([coord.latitude, coord.longitude])
+                let c = ["lat": coord.latitude, "long": coord.longitude]
+                tempCoordArray.append(c)
             }
         }
         let dateFormatter = DateFormatter()
@@ -168,7 +174,7 @@ extension mapViewController {
             userUID = Auth.auth().currentUser?.uid
             let sessionUuid = UUID().uuidString
 
-            let post : [String: AnyObject] = [ "UserID": userUID as AnyObject, "date" : dateObj as String as AnyObject, "distance" : distance as AnyObject, "pastCheckpoint" : pastCheckPoint as AnyObject, "steps" : steps as AnyObject, "time" : time as AnyObject, "trailID" : trailID as AnyObject, "path" : tempCoordArray as AnyObject]
+            let post : [String: AnyObject] = [ "UserID": userUID as AnyObject, "date" : dateObj as String as AnyObject, "distance" : distance as AnyObject, "pastCheckpoint" : pastCheckPoint as AnyObject, "steps" : steps as AnyObject, "time" : timeElapsed as AnyObject, "trailID" : trailID as AnyObject, "path" : tempCoordArray as AnyObject]
             //firebase code
             ref = Database.database().reference()
             

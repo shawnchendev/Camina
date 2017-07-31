@@ -128,7 +128,6 @@
 		9249E2421F28C3CD0061B7ED /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C11E86661F2668F700C3A3C0 /* CustomUIColor.swift */,
 				C11E86801F2668F700C3A3C0 /* viewControllerExtension.swift */,
 				C11E86811F2668F700C3A3C0 /* viewExtension.swift */,
 			);
@@ -202,6 +201,7 @@
 		C11E86B01F2674D300C3A3C0 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				C11E86661F2668F700C3A3C0 /* CustomUIColor.swift */,
 				C11E86631F2668F700C3A3C0 /* connectionCheck.swift */,
 				C11E86691F2668F700C3A3C0 /* ImageViewextension.swift */,
 			);

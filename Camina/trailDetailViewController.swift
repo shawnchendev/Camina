@@ -33,7 +33,9 @@ class trailDetailViewController: UITableViewController {
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
         // Do any additional setup after loading the view.
     }
-
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+    }
 
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
