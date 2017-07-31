@@ -10,6 +10,9 @@
 		9249E2451F28F6460061B7ED /* fetchingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9249E2441F28F6460061B7ED /* fetchingController.swift */; };
 		9249E2481F2902530061B7ED /* Session+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9249E2461F2902530061B7ED /* Session+CoreDataClass.swift */; };
 		9249E2491F2902530061B7ED /* Session+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9249E2471F2902530061B7ED /* Session+CoreDataProperties.swift */; };
+		9249E24F1F2F62370061B7ED /* reviewAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9249E24E1F2F62370061B7ED /* reviewAlertView.swift */; };
+		9249E2511F2F62690061B7ED /* modal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9249E2501F2F62690061B7ED /* modal.swift */; };
+		9249E2531F2F67DF0061B7ED /* starRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9249E2521F2F67DF0061B7ED /* starRating.swift */; };
 		C11E86521F26677300C3A3C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E86511F26677300C3A3C0 /* AppDelegate.swift */; };
 		C11E86591F26677300C3A3C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C11E86581F26677300C3A3C0 /* Assets.xcassets */; };
 		C11E865C1F26677300C3A3C0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C11E865A1F26677300C3A3C0 /* LaunchScreen.storyboard */; };
@@ -47,7 +50,6 @@
 		C11E86AC1F26690D00C3A3C0 /* Walks.geojson in Resources */ = {isa = PBXBuildFile; fileRef = C11E86A61F26690D00C3A3C0 /* Walks.geojson */; };
 		C11E86AE1F266CCB00C3A3C0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C11E86AD1F266CCB00C3A3C0 /* GoogleService-Info.plist */; };
 		C1F8DB101F2A041E005EA542 /* trailDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F8DB0F1F2A041E005EA542 /* trailDetailViewController.swift */; };
-		C1F8DB201F2A0AD3005EA542 /* camina.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C1F8DB1C1F2A09C3005EA542 /* camina.xcdatamodeld */; };
 		C1F8DB221F2A23B7005EA542 /* landMarkTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F8DB211F2A23B7005EA542 /* landMarkTableViewController.swift */; };
 		C1F8DB241F2A3A90005EA542 /* forgetPasswordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F8DB231F2A3A90005EA542 /* forgetPasswordTableViewController.swift */; };
 		D4FD11002CF9BAE764A1FD39 /* Pods_Camina.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39A9C38CD199F89F828C22EF /* Pods_Camina.framework */; };
@@ -60,6 +62,9 @@
 		9249E2441F28F6460061B7ED /* fetchingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = fetchingController.swift; sourceTree = "<group>"; };
 		9249E2461F2902530061B7ED /* Session+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Session+CoreDataClass.swift"; sourceTree = "<group>"; };
 		9249E2471F2902530061B7ED /* Session+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Session+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		9249E24E1F2F62370061B7ED /* reviewAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = reviewAlertView.swift; sourceTree = "<group>"; };
+		9249E2501F2F62690061B7ED /* modal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = modal.swift; sourceTree = "<group>"; };
+		9249E2521F2F67DF0061B7ED /* starRating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = starRating.swift; sourceTree = "<group>"; };
 		C11E864E1F26677300C3A3C0 /* Camina.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Camina.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C11E86511F26677300C3A3C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C11E86581F26677300C3A3C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -99,7 +104,6 @@
 		C11E86A61F26690D00C3A3C0 /* Walks.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Walks.geojson; sourceTree = "<group>"; };
 		C11E86AD1F266CCB00C3A3C0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C1F8DB0F1F2A041E005EA542 /* trailDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = trailDetailViewController.swift; sourceTree = "<group>"; };
-		C1F8DB1D1F2A09C3005EA542 /* camina.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = camina.xcdatamodel; sourceTree = "<group>"; };
 		C1F8DB211F2A23B7005EA542 /* landMarkTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = landMarkTableViewController.swift; sourceTree = "<group>"; };
 		C1F8DB231F2A3A90005EA542 /* forgetPasswordTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = forgetPasswordTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -140,6 +144,7 @@
 				C11E86701F2668F700C3A3C0 /* notificationController.swift */,
 				C11E86741F2668F700C3A3C0 /* searchBar.swift */,
 				9249E2441F28F6460061B7ED /* fetchingController.swift */,
+				9249E2501F2F62690061B7ED /* modal.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -180,7 +185,6 @@
 				C11E86B11F26755900C3A3C0 /* Model */,
 				C11E86B21F26758A00C3A3C0 /* ViewController */,
 				C11E86671F2668F700C3A3C0 /* geofencingController.swift */,
-				C1F8DB1C1F2A09C3005EA542 /* camina.xcdatamodeld */,
 				C11E86771F2668F700C3A3C0 /* sessionManagement.swift */,
 				C11E867C1F2668F700C3A3C0 /* trailHeadCell.swift */,
 				C11E86641F2668F700C3A3C0 /* CustomCollectionViewCell.swift */,
@@ -231,6 +235,8 @@
 				C11E866C1F2668F700C3A3C0 /* loginViewController.swift */,
 				C11E866D1F2668F700C3A3C0 /* mainViewController.swift */,
 				C11E866E1F2668F700C3A3C0 /* mapViewController.swift */,
+				9249E24E1F2F62370061B7ED /* reviewAlertView.swift */,
+				9249E2521F2F67DF0061B7ED /* starRating.swift */,
 				C11E86721F2668F700C3A3C0 /* rootViewController.swift */,
 				C11E86781F2668F700C3A3C0 /* sessionViewController.swift */,
 				C11E86791F2668F700C3A3C0 /* signupViewController.swift */,
@@ -381,6 +387,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C11E86871F2668F700C3A3C0 /* Head.swift in Sources */,
+				9249E2511F2F62690061B7ED /* modal.swift in Sources */,
 				C1F8DB241F2A3A90005EA542 /* forgetPasswordTableViewController.swift in Sources */,
 				C11E868B1F2668F700C3A3C0 /* loginViewController.swift in Sources */,
 				C1F8DB221F2A23B7005EA542 /* landMarkTableViewController.swift in Sources */,
@@ -393,6 +400,7 @@
 				C11E869D1F2668F700C3A3C0 /* User.swift in Sources */,
 				9249E2481F2902530061B7ED /* Session+CoreDataClass.swift in Sources */,
 				C11E868A1F2668F700C3A3C0 /* inputProfileViewController.swift in Sources */,
+				9249E24F1F2F62370061B7ED /* reviewAlertView.swift in Sources */,
 				C11E86821F2668F700C3A3C0 /* connectionCheck.swift in Sources */,
 				C11E86981F2668F700C3A3C0 /* signupViewController.swift in Sources */,
 				C11E86831F2668F700C3A3C0 /* CustomCollectionViewCell.swift in Sources */,
@@ -400,8 +408,8 @@
 				C11E86901F2668F700C3A3C0 /* Placemark.swift in Sources */,
 				C11E86841F2668F700C3A3C0 /* CustomTabBarController.swift in Sources */,
 				9249E2491F2902530061B7ED /* Session+CoreDataProperties.swift in Sources */,
+				9249E2531F2F67DF0061B7ED /* starRating.swift in Sources */,
 				C11E86881F2668F700C3A3C0 /* ImageViewextension.swift in Sources */,
-				C1F8DB201F2A0AD3005EA542 /* camina.xcdatamodeld in Sources */,
 				C11E86931F2668F700C3A3C0 /* searchBar.swift in Sources */,
 				C11E869E1F2668F700C3A3C0 /* userProfileViewController.swift in Sources */,
 				9249E2451F28F6460061B7ED /* fetchingController.swift in Sources */,
@@ -574,19 +582,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		C1F8DB1C1F2A09C3005EA542 /* camina.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				C1F8DB1D1F2A09C3005EA542 /* camina.xcdatamodel */,
-			);
-			currentVersion = C1F8DB1D1F2A09C3005EA542 /* camina.xcdatamodel */;
-			path = camina.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = C11E86461F26677300C3A3C0 /* Project object */;
 }

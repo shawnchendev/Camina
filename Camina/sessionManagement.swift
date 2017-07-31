@@ -159,7 +159,7 @@ extension mapViewController {
     
     func save() {
         
-        
+        //Database.database().isPersistenceEnabled = true
         if allCoordinates.count > 0 {
             for coord in allCoordinates {
                 let c = ["lat": coord.latitude, "long": coord.longitude]

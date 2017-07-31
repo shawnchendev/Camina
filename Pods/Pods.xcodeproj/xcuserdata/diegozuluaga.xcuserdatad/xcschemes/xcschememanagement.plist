@@ -24,6 +24,11 @@
 			<key>orderHint</key>
 			<integer>4</integer>
 		</dict>
+		<key>FloatRatingView.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>10</integer>
+		</dict>
 		<key>GTMOAuth2.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -83,6 +88,21 @@
 			<true/>
 		</dict>
 		<key>BEF7E6E85DB5CDE5D7A18F4F2EB8494B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C052BEBFBD0AB5218CC64BA3450F6547</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E10250FECAFAA00B2CAAF40A7178BE26</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E204D3F4C7EC1C829B1C5A2F0C22436F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
