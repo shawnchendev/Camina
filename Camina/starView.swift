@@ -1,14 +1,15 @@
 //
-//  startRating.swift
+//  starView.swift
 //  Camina
 //
-//  Created by Diego Zuluaga on 2017-07-31.
+//  Created by Diego Zuluaga on 2017-08-01.
 //  Copyright © 2017 proximastech.com. All rights reserved.
 //
 
+
 import UIKit
 
-class ratingControl : UIStackView {
+class starView : UIStackView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,33 +23,14 @@ class ratingControl : UIStackView {
     }
     
     //MARK: Properties
-    var ratingButtons = [UIButton]()
+    var ratingButtons = [UIImageView]()
     
     var rating = 0 {
         didSet {
-            updateButtonSelectionStates()
+            setupViewableButtons()
         }
     }
     
-    
-    //MARK: Button Action
-    func ratingButtonTapped(button: UIButton) {
-        guard let index = ratingButtons.index(of: button) else {
-            fatalError("The button, \(button), is not in the ratingButtons array: \(ratingButtons)")
-        }
-        
-        // Calculate the rating of the selected button
-        let selectedRating = index + 1
-        
-        if selectedRating == rating {
-            // If the selected star represents the current rating, reset the rating to 0.
-            rating = 0
-        } else {
-            // Otherwise set the rating to the selected star
-            rating = selectedRating
-        }
-        print(rating)
-    }
     
     //MARK: Private Methods
     private func setupButtons(){
@@ -59,21 +41,15 @@ class ratingControl : UIStackView {
         let emptyStar = UIImage(named:"emptyStar", in: bundle, compatibleWith: self.traitCollection)
         
         for _ in 0..<5 {
-        
-            // Create the button
-            let button = UIButton()
             
-            // Set the button images
-            button.setImage(emptyStar, for: .normal)
-            button.setImage(filledStar, for: .selected)
+            // Create the button
+            let button = UIImageView()
+            
             
             // Add constraints
             button.translatesAutoresizingMaskIntoConstraints = false
             //button.heightAnchor.constraint(equalToConstant: 40.0).isActive = true
             button.widthAnchor.constraint(equalToConstant: 30.0).isActive = true
-            
-            // Setup the button action
-            button.addTarget(self, action: #selector(ratingControl.ratingButtonTapped(button:)), for: .touchUpInside)
             
             // Add the button to the stack
             addArrangedSubview(button)
@@ -81,17 +57,21 @@ class ratingControl : UIStackView {
             // Add the new button to the rating button array
             ratingButtons.append(button)
         }
-        
-        updateButtonSelectionStates()
-    }
+}
     
-    private func updateButtonSelectionStates() {
-        for (index, button) in ratingButtons.enumerated() {
+    
+    func setupViewableButtons() {
+     
+        
+        for (index, imageView) in ratingButtons.enumerated() {
             // If the index of a button is less than the rating, that button should be selected.
-            button.isSelected = index < rating
+            if index < rating {
+                imageView.image = #imageLiteral(resourceName: "filledStar")
+            } else {
+                imageView.image = #imageLiteral(resourceName: "emptyStar")
+            }
         }
     }
-    
     
     
 }

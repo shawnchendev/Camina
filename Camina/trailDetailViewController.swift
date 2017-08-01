@@ -94,7 +94,9 @@ class trailDetailViewController: UITableViewController {
             self.navigationController?.pushViewController(landmarkView, animated: true)
         }
         if indexPath.item == 3 {
-            print(123)
+            let reviewView = reviewViewController()
+            reviewView.trailId = trailHead?.properties?.ParkID
+            self.navigationController?.pushViewController(reviewView, animated: true)
         }
     }
     

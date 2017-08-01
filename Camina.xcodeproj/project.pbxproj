@@ -14,6 +14,8 @@
 		9249E2511F2F62690061B7ED /* modal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9249E2501F2F62690061B7ED /* modal.swift */; };
 		9249E2531F2F67DF0061B7ED /* starRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9249E2521F2F67DF0061B7ED /* starRating.swift */; };
 		9249E2551F309A300061B7ED /* reviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9249E2541F309A300061B7ED /* reviewViewController.swift */; };
+		92F4FB3C1F30A96D00B6D72B /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F4FB3B1F30A96D00B6D72B /* Review.swift */; };
+		92F4FB3E1F30B6E800B6D72B /* starView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F4FB3D1F30B6E800B6D72B /* starView.swift */; };
 		C11E86521F26677300C3A3C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E86511F26677300C3A3C0 /* AppDelegate.swift */; };
 		C11E86591F26677300C3A3C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C11E86581F26677300C3A3C0 /* Assets.xcassets */; };
 		C11E865C1F26677300C3A3C0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C11E865A1F26677300C3A3C0 /* LaunchScreen.storyboard */; };
@@ -67,6 +69,8 @@
 		9249E2501F2F62690061B7ED /* modal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = modal.swift; sourceTree = "<group>"; };
 		9249E2521F2F67DF0061B7ED /* starRating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = starRating.swift; sourceTree = "<group>"; };
 		9249E2541F309A300061B7ED /* reviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = reviewViewController.swift; sourceTree = "<group>"; };
+		92F4FB3B1F30A96D00B6D72B /* Review.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
+		92F4FB3D1F30B6E800B6D72B /* starView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = starView.swift; sourceTree = "<group>"; };
 		C11E864E1F26677300C3A3C0 /* Camina.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Camina.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C11E86511F26677300C3A3C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C11E86581F26677300C3A3C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -224,6 +228,7 @@
 				C11E86731F2668F700C3A3C0 /* SafeJsonObject.swift */,
 				C11E867B1F2668F700C3A3C0 /* TrailCoords.swift */,
 				C11E867E1F2668F700C3A3C0 /* User.swift */,
+				92F4FB3B1F30A96D00B6D72B /* Review.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -239,6 +244,7 @@
 				C11E866E1F2668F700C3A3C0 /* mapViewController.swift */,
 				9249E24E1F2F62370061B7ED /* reviewAlertView.swift */,
 				9249E2521F2F67DF0061B7ED /* starRating.swift */,
+				92F4FB3D1F30B6E800B6D72B /* starView.swift */,
 				C11E86721F2668F700C3A3C0 /* rootViewController.swift */,
 				C11E86781F2668F700C3A3C0 /* sessionViewController.swift */,
 				C11E86791F2668F700C3A3C0 /* signupViewController.swift */,
@@ -418,10 +424,12 @@
 				C11E869E1F2668F700C3A3C0 /* userProfileViewController.swift in Sources */,
 				9249E2451F28F6460061B7ED /* fetchingController.swift in Sources */,
 				C11E86911F2668F700C3A3C0 /* rootViewController.swift in Sources */,
+				92F4FB3E1F30B6E800B6D72B /* starView.swift in Sources */,
 				C11E86971F2668F700C3A3C0 /* sessionViewController.swift in Sources */,
 				C11E86521F26677300C3A3C0 /* AppDelegate.swift in Sources */,
 				C11E869A1F2668F700C3A3C0 /* TrailCoords.swift in Sources */,
 				C11E869B1F2668F700C3A3C0 /* trailHeadCell.swift in Sources */,
+				92F4FB3C1F30A96D00B6D72B /* Review.swift in Sources */,
 				C11E868F1F2668F700C3A3C0 /* notificationController.swift in Sources */,
 				C11E868C1F2668F700C3A3C0 /* mainViewController.swift in Sources */,
 				C11E86921F2668F700C3A3C0 /* SafeJsonObject.swift in Sources */,

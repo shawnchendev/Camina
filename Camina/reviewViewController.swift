@@ -16,15 +16,6 @@ class reviewViewController : UITableViewController {
 
     var cellid = "cellid"
     
-    struct Review { //starting with a structure to hold user data
-        var firebaseKey : String?
-        var userID : String?
-        var rating : Int?
-        var review : String?
-        var title : String?
-        var trailID : String?
-    }
-    
     var reviews = [Review]()
     
     var ref : DatabaseReference!
@@ -34,7 +25,7 @@ class reviewViewController : UITableViewController {
         
         fetchFirebase()
         self.navigationItem.title = "Reviews"
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellid)
+        tableView.register(reviewCell.self, forCellReuseIdentifier: cellid)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
@@ -53,8 +44,10 @@ class reviewViewController : UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellid, for: indexPath)
-        cell.textLabel?.text = reviews[indexPath.item].title
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellid, for: indexPath) as! reviewCell
+        cell.trailNameLabel.text = reviews[indexPath.item].title
+        cell.trailTypeLabel.text = reviews[indexPath.item].review
+        cell.starViews.rating = reviews[indexPath.item].rating!
         return cell
     }
     
@@ -63,49 +56,92 @@ class reviewViewController : UITableViewController {
         
         ref.child("Review").observe(.value, with: { snapshot in
             
-            let postDict = snapshot.value as? [String : AnyObject] ?? [:]
-            print("this shit")
-            print(postDict)
-            
-            for child in snapshot.children {
-                
-                //let postChild = child.value as? [String : AnyObject] ?? [:]
-                
-                //print(postChild)
+            if let dictionary = snapshot.value as? [String: AnyObject] {
+                for review in dictionary {
+                    let reviewDict = review.value as! [String : AnyObject]
+                    let review = Review(dictionary: reviewDict)
+                    if review.trailID == self.trailId {
+                        self.reviews.append(review)
+                    }
+        
+                }
+          
             }
             
-          //  for child in snapshot.children { //.Value so iterate over nodes
-                
-          //      var firebaseKey = child.key!
-          //      let userID = (child as AnyObject).value["userID"] as! String
-          //      var rating = child.value["rating"] as! Int
-          //      var review = child.value["review"] as! String
-          //      var title = child.value["title"] as! String
-          //      var trailID = child.value["trailID"] as! String
-
-                
-          //      let u = User(firebaseKey: fbKey, theAge: age, theDistance: distance)
-                
-          //      userArray.append(u) //add the user struct to the array
-          //  }
-            
-            //the array to contain the filtered users
-           // var filteredArray: [User] = []
-           // filteredArray = userArray.filter({$0.theDistance < 100}) //Filter it, baby!
-            
-            //print out the resulting users as a test.
-           // for aUser in filteredArray {
-                
-             //   let k = aUser.firebaseKey
-               // let a = aUser.theAge
-               // let d = aUser.theDistance
-                
-              //  print("array: \(k!)  \(a!)  \(d!)")
-                
-            //}
+            self.tableView.reloadData()
             
         })
+        
+  
+    }
+}
+
+class reviewCell : UITableViewCell {
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
+        setupView()
+        
     }
     
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    let spacingView : UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(hex: "ECF0F1")
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.masksToBounds = false
+        view.layer.cornerRadius = 2.0
+        return view
+    }()
+    
+    let starViews = starView(frame:CGRect(x: UIScreen.main.bounds.width/2 , y: 12, width: 150, height: 30))
+    
+    
+    let trailNameLabel: UILabel = {
+        let lbl = UILabel()
+        lbl.font = UIFont.systemFont(ofSize: 14)
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        return lbl
+    }()
+    let trailTypeLabel: UILabel = {
+        let lbl = UILabel()
+        lbl.font = UIFont.systemFont(ofSize: 11)
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        lbl.textColor = UIColor(hex: "95989A")
+        return lbl
+    }()
+
+    
+    func setupView(){
+        backgroundColor = .white
+        addSubview(spacingView)
+        addSubview(trailNameLabel)
+        addSubview(trailTypeLabel)
+        addSubview(starViews)
+        
+        spacingView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        spacingView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        spacingView.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
+        spacingView.heightAnchor.constraint(equalToConstant: 8).isActive = true
+        
+        starViews.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        starViews.topAnchor.constraint(equalTo: spacingView.bottomAnchor, constant: 8).isActive = true
+        starViews.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -16).isActive = true
+        starViews.heightAnchor.constraint(equalToConstant:150).isActive = true
+        
+        trailNameLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 8).isActive = true
+        trailNameLabel.bottomAnchor.constraint(equalTo: trailTypeLabel.topAnchor, constant:2).isActive = true
+        trailNameLabel.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
+        
+        trailTypeLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 8).isActive = true
+        trailTypeLabel.topAnchor.constraint(equalTo: self.bottomAnchor, constant:-15).isActive = true
+        trailTypeLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/2).isActive = true
+        
+    }
+
     
 }
