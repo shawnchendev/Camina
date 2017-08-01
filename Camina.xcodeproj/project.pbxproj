@@ -52,6 +52,8 @@
 		C11E86AB1F26690D00C3A3C0 /* trailsData.geojson in Resources */ = {isa = PBXBuildFile; fileRef = C11E86A51F26690D00C3A3C0 /* trailsData.geojson */; };
 		C11E86AC1F26690D00C3A3C0 /* Walks.geojson in Resources */ = {isa = PBXBuildFile; fileRef = C11E86A61F26690D00C3A3C0 /* Walks.geojson */; };
 		C11E86AE1F266CCB00C3A3C0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C11E86AD1F266CCB00C3A3C0 /* GoogleService-Info.plist */; };
+		C16399E91F30AA8C004DA262 /* userHikingSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16399E81F30AA8C004DA262 /* userHikingSession.swift */; };
+		C16399EB1F30AACD004DA262 /* userSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16399EA1F30AACD004DA262 /* userSession.swift */; };
 		C1F8DB101F2A041E005EA542 /* trailDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F8DB0F1F2A041E005EA542 /* trailDetailViewController.swift */; };
 		C1F8DB221F2A23B7005EA542 /* landMarkTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F8DB211F2A23B7005EA542 /* landMarkTableViewController.swift */; };
 		C1F8DB241F2A3A90005EA542 /* forgetPasswordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F8DB231F2A3A90005EA542 /* forgetPasswordTableViewController.swift */; };
@@ -109,6 +111,8 @@
 		C11E86A51F26690D00C3A3C0 /* trailsData.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = trailsData.geojson; sourceTree = "<group>"; };
 		C11E86A61F26690D00C3A3C0 /* Walks.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Walks.geojson; sourceTree = "<group>"; };
 		C11E86AD1F266CCB00C3A3C0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C16399E81F30AA8C004DA262 /* userHikingSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = userHikingSession.swift; sourceTree = "<group>"; };
+		C16399EA1F30AACD004DA262 /* userSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = userSession.swift; sourceTree = "<group>"; };
 		C1F8DB0F1F2A041E005EA542 /* trailDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = trailDetailViewController.swift; sourceTree = "<group>"; };
 		C1F8DB211F2A23B7005EA542 /* landMarkTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = landMarkTableViewController.swift; sourceTree = "<group>"; };
 		C1F8DB231F2A3A90005EA542 /* forgetPasswordTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = forgetPasswordTableViewController.swift; sourceTree = "<group>"; };
@@ -412,6 +416,7 @@
 				C11E868A1F2668F700C3A3C0 /* inputProfileViewController.swift in Sources */,
 				9249E24F1F2F62370061B7ED /* reviewAlertView.swift in Sources */,
 				C11E86821F2668F700C3A3C0 /* connectionCheck.swift in Sources */,
+				C16399E91F30AA8C004DA262 /* userHikingSession.swift in Sources */,
 				C11E86981F2668F700C3A3C0 /* signupViewController.swift in Sources */,
 				C11E86831F2668F700C3A3C0 /* CustomCollectionViewCell.swift in Sources */,
 				C11E868D1F2668F700C3A3C0 /* mapViewController.swift in Sources */,
@@ -426,6 +431,7 @@
 				C11E86911F2668F700C3A3C0 /* rootViewController.swift in Sources */,
 				92F4FB3E1F30B6E800B6D72B /* starView.swift in Sources */,
 				C11E86971F2668F700C3A3C0 /* sessionViewController.swift in Sources */,
+				C16399EB1F30AACD004DA262 /* userSession.swift in Sources */,
 				C11E86521F26677300C3A3C0 /* AppDelegate.swift in Sources */,
 				C11E869A1F2668F700C3A3C0 /* TrailCoords.swift in Sources */,
 				C11E869B1F2668F700C3A3C0 /* trailHeadCell.swift in Sources */,
