@@ -12,14 +12,23 @@ import Firebase
 
 class userProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
     var user : defaultUser?
-    var totolSteps = 0
+    var userSessions = [userSession]()
     var totalTime = 0
     var totalSession = 0
     var totalDistance = 0.0
-    var userSessionID = [String]()
-    let cellid = "cellid "
+    var totalSteps = 0
     
-    let titleLabel = ["time", "#ofcomplete", "distance"]
+    let mapPreviewCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        cv.backgroundColor = UIColor.clear
+        cv.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
+        cv.scrollIndicatorInsets = UIEdgeInsetsMake(50, 0, 0, 0)
+        cv.isPagingEnabled = true
+        return cv
+    }()
+
     lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "profile-icon")
@@ -48,10 +57,111 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
         let lbl = UILabel()
         lbl.font = UIFont.systemFont(ofSize: 14)
         lbl.translatesAutoresizingMaskIntoConstraints = false
-        lbl.textColor = .black
+        lbl.textColor = .white
         return lbl
     }()
     
+    let statView : UIView = {
+       let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .white
+        return view
+    }()
+    
+    let overviewLabel : UILabel = {
+        let label = UILabel()
+        label.text = "Overview"
+        label.textColor = UIColor(hex: "00B16A")
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 12)
+        return label
+    }()
+    
+    let distanceLabel : UILabel = {
+        let label = UILabel()
+        label.text = "Total Distance: "
+        label.textColor = UIColor.darkGray
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 12)
+        return label
+    }()
+    
+    let sessionLabel : UILabel = {
+        let label = UILabel()
+        label.text = "Completed Session: "
+        label.textColor = UIColor.darkGray
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 12)
+        return label
+    }()
+    
+    let timeLabel : UILabel = {
+        let label = UILabel()
+        label.text = "Total Time: "
+        label.textColor = UIColor.darkGray
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 12)
+        return label
+    }()
+    
+    let stepsLabel : UILabel = {
+        let label = UILabel()
+        label.text = "Total Steps: "
+        label.textColor = UIColor.darkGray
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 12)
+        return label
+    }()
+    
+    
+    let travelDistance : UILabel = {
+        let label = UILabel()
+        label.text = "1000m"
+        label.textColor = UIColor.darkGray
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 12)
+        return label
+    }()
+    
+    let travelTime : UILabel = {
+        let label = UILabel()
+        label.text = "0:00:00"
+        label.textColor = UIColor.darkGray
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 12)
+        return label
+    }()
+    
+    let nSteps : UILabel = {
+        let label = UILabel()
+        label.text = "0 steps"
+        label.textColor = UIColor.darkGray
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 12)
+        return label
+    }()
+    
+    let nSession : UILabel = {
+        let label = UILabel()
+        label.text = "0 sdfs"
+        label.textColor = UIColor.darkGray
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 12)
+        return label
+    }()
+    
+    let separateView : UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(hex: "00B16A")
+
+        view.translatesAutoresizingMaskIntoConstraints = false
+        //        view.backgroundColor =
+        return view
+    }()
+    
+    
+    
+
  
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -63,18 +173,90 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
         setupNavigationController()
         self.profileImageView.loadImageUsingCacheWithUrlString((user?.profileImageURL)!)
         userNameLabel.text = user?.name
+        fetchUserSessionID {
+            self.nSession.text = String(self.totalSession)
+            self.travelDistance.text = String(self.totalDistance )
+            self.travelTime.text = String(self.totalTime / 60 ) + " mins"
+        }
+        
         view.addSubview(profileCoverImageView)
         view.addSubview(profileImageView)
         view.addSubview(userNameLabel)
-        fetchUserSessionID()
+        view.addSubview(statView)
+        view.addSubview(overviewLabel)
+        
         setupProfileImageView()
         setupProfileCoverImageView()
+        setupStatView()
+        
     }
     
     func setupNavigationController(){
         self.navigationController?.navigationBar.barStyle = UIBarStyle.black
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
+
+    }
+    
+    func setupStatView(){
+        overviewLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
+        overviewLabel.bottomAnchor.constraint(equalTo: statView.topAnchor, constant: -4).isActive = true
+        overviewLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        statView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        statView.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 8).isActive = true
+        statView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -8).isActive = true
+        statView.heightAnchor.constraint(equalToConstant: 110).isActive = true
+        
+        statView.addSubview(separateView)
+        statView.addSubview(sessionLabel)
+        statView.addSubview(nSession)
+        statView.addSubview(distanceLabel)
+        statView.addSubview(travelDistance)
+        statView.addSubview(timeLabel)
+        statView.addSubview(travelTime)
+        statView.addSubview(stepsLabel)
+        statView.addSubview(nSteps)
+        
+        
+        separateView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        separateView.topAnchor.constraint(equalTo: statView.topAnchor).isActive = true
+        separateView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -8).isActive = true
+        separateView.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        
+        sessionLabel.topAnchor.constraint(equalTo: statView.topAnchor, constant: 4).isActive = true
+        sessionLabel.leftAnchor.constraint(equalTo: statView.leftAnchor, constant: 16).isActive = true
+        sessionLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        nSession.leftAnchor.constraint(equalTo: sessionLabel.rightAnchor, constant: 20).isActive = true
+        nSession.topAnchor.constraint(equalTo: statView.topAnchor, constant: 4).isActive = true
+        nSession.heightAnchor.constraint(equalToConstant: 20).isActive = true
+
+        
+        distanceLabel.topAnchor.constraint(equalTo: sessionLabel.bottomAnchor, constant: 4).isActive = true
+        distanceLabel.leftAnchor.constraint(equalTo: statView.leftAnchor, constant: 16).isActive = true
+        distanceLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        timeLabel.topAnchor.constraint(equalTo: distanceLabel.bottomAnchor, constant: 4).isActive = true
+        timeLabel.leftAnchor.constraint(equalTo: statView.leftAnchor, constant: 16).isActive = true
+        timeLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        stepsLabel.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: 4).isActive = true
+        stepsLabel.leftAnchor.constraint(equalTo: statView.leftAnchor, constant: 16).isActive = true
+        stepsLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        travelDistance.leftAnchor.constraint(equalTo: sessionLabel.rightAnchor, constant: 20).isActive = true
+        travelDistance.topAnchor.constraint(equalTo: sessionLabel.bottomAnchor, constant: 4).isActive = true
+        travelDistance.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        
+        travelTime.leftAnchor.constraint(equalTo: sessionLabel.rightAnchor, constant: 20).isActive = true
+        travelTime.topAnchor.constraint(equalTo: travelDistance.bottomAnchor, constant: 4).isActive = true
+        travelTime.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        nSteps.leftAnchor.constraint(equalTo: sessionLabel.rightAnchor, constant: 20).isActive = true
+        nSteps.topAnchor.constraint(equalTo: travelTime.bottomAnchor, constant: 4).isActive = true
+        nSteps.heightAnchor.constraint(equalToConstant: 20).isActive = true
 
     }
     
@@ -85,8 +267,7 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
         profileImageView.widthAnchor.constraint(equalToConstant: 80).isActive = true
         profileImageView.heightAnchor.constraint(equalToConstant: 80).isActive = true
         userNameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        userNameLabel.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 4).isActive = true
-        
+        userNameLabel.bottomAnchor.constraint(equalTo: profileImageView.topAnchor, constant: -4).isActive = true
     }
     
     func setupProfileCoverImageView() {
@@ -107,6 +288,46 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
         self.presentRootView()
     }
     
+    
+    
+    
+    func fetchUserSessionID(_ completion: @escaping  () -> Void ){
+        var userSessionID = [String]()
+        
+        let uid = Auth.auth().currentUser?.uid
+        Database.database().reference().child("userSession").child(uid!).observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            if let dictionary = snapshot.value as? [String: AnyObject] {
+                for i in dictionary{
+                    let id = i.value as? [String: AnyObject]
+                    userSessionID.append(id?["SessionID"] as! String)
+                }
+            }
+            self.totalSession = userSessionID.count
+            for i in userSessionID{
+                Database.database().reference().child("Session").child(i).observeSingleEvent(of: .value, with: { (snapshot) in
+                    
+                    if let dictionary = snapshot.value as? [String: AnyObject] {
+                        let session = userSession(dictionary: dictionary)
+                        self.userSessions.append(session)
+                        self.totalTime += dictionary["time"] as! Int
+                        self.totalDistance += dictionary["distance"] as! Double
+                        self.totalSteps += dictionary["steps"] as! Int
+                    }
+                    
+                completion()
+ 
+                }, withCancel: nil)
+            }
+            
+
+            
+        }, withCancel: nil)
+        
+        
+    }
+    
+
     
 
     
@@ -144,41 +365,6 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
         dismiss(animated: true, completion: nil)
     }
     
-    func fetchUserSessionID(){
-        let uid = Auth.auth().currentUser?.uid
-        Database.database().reference().child("userSession").child(uid!).observeSingleEvent(of: .value, with: { (snapshot) in
-            
-            if let dictionary = snapshot.value as? [String: AnyObject] {
-                for i in dictionary{
-                   let id = i.value as? [String: AnyObject]
-                    self.userSessionID.append(id?["SessionID"] as! String)
-                }
-                
-                for i in self.userSessionID{
-                    Database.database().reference().child("Session").child(i).observeSingleEvent(of: .value, with: { (snapshot) in
-                        
-                        if let dictionary = snapshot.value as? [String: AnyObject] {
-                            self.totalTime += dictionary["time"] as! Int
-                            self.totalSession = self.userSessionID.count
-                            self.totalDistance += dictionary["distance"] as! Double
-                            self.totolSteps += dictionary["steps"] as! Int
-
-                        }
-                        print(self.totalTime)
-                        print(self.totalSession)
-                        print(self.totalDistance)
-                        print(self.totolSteps)
-                    }, withCancel: nil)
-                }
-                
-
-            }
-            
-        }, withCancel: nil)
-        
-      
-}
-
-}
+   }
 
 
