@@ -35,6 +35,8 @@ extension mapViewController {
         activeSession = false
         //save the data
         save()
+        let review = reviewAlertView(userID: (Auth.auth().currentUser?.uid)!, trailID: trailID!)
+        review.show(animated: true)
         reset()
         
     }

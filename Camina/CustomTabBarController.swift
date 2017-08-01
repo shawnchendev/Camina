@@ -34,7 +34,7 @@ class CustomTabBarController: UITabBarController {
         userProfileNavigationController.tabBarItem.image = UIImage(named: "User")
         
         
-        
+        x
         
         viewControllers = [navigationController, mapController, userProfileNavigationController]
         
@@ -68,13 +68,7 @@ class CustomTabBarController: UITabBarController {
             Database.database().reference().child("users").child(uid!).observeSingleEvent(of: .value, with: { (snapshot) in
                 
                 if let dictionary = snapshot.value as? [String: AnyObject] {
-                    let name = dictionary["name"] as! String
-                    let email = dictionary["email"] as! String
-                    let age = dictionary["age"] as! String
-                    let gender = dictionary["gender"] as! String
-                    let imageURL = dictionary["profileImageUrl"] as! String
-                    
-                    let user = defaultUser(i: uid!, n: name , e: email, a: age, g: gender, p: imageURL)
+                    let user = defaultUser(dictionary: dictionary)
                     self.userProfileController.user = user
                 }
                 

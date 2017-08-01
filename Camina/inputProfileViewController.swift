@@ -308,7 +308,7 @@ extension inputProfileViewController: UIImagePickerControllerDelegate, UINavigat
                 
                 if let profileImageUrl = metadata?.downloadURL()?.absoluteString {
                     
-                    let values = ["name": name, "email": self.email, "profileImageUrl": profileImageUrl,  "age":age, "gender":gender]
+                    let values = [ "name": name, "email": self.email, "profileImageUrl": profileImageUrl,  "age":age, "gender":gender]
                     self.registerUserIntoDatabaseWithUID(self.userUuid, values: values as [String : AnyObject])
                 }
             })
@@ -319,7 +319,6 @@ extension inputProfileViewController: UIImagePickerControllerDelegate, UINavigat
     fileprivate func registerUserIntoDatabaseWithUID(_ uid: String, values: [String: AnyObject]) {
         let ref = Database.database().reference(fromURL: DATABASE_URL)
         let usersReference = ref.child("users").child(uid)
-        
         usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
             
             if let err = err {

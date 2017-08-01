@@ -9,20 +9,19 @@
 import Foundation
 
 class defaultUser: NSObject{
-    var uid : String?
+//    var uid : String?
     var name : String?
     var email : String?
     var age : String?
     var gender : String?
     var profileImageURL : String?
     
-    init(i: String, n: String, e: String, a: String, g: String, p: String) {
-        uid = i
-        name = n
-        email = e
-        age = a
-        gender = g
-        profileImageURL = p
+    init(dictionary: [String: AnyObject]) {
+        self.name = dictionary["name"] as? String
+        self.email = dictionary["email"] as? String
+        self.age = dictionary["age"] as? String
+        self.gender = dictionary["gender"] as? String
+        self.profileImageURL = dictionary["profileImageUrl"] as? String
     }
     
 }

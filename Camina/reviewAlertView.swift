@@ -157,7 +157,7 @@ class reviewAlertView: UIView, Modal{
     }
     
     func didTappedOnBackgroundView(){
-        dismiss(animated: true)
+//        dismiss(animated: true)
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
