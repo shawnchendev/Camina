@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 class CustomTabBarController: UITabBarController {
-    
+    let userProfileController = userProfileViewController()
     override func viewDidLoad() {
         super.viewDidLoad()
         checkIfUserIsLoggedIn()
@@ -29,11 +29,10 @@ class CustomTabBarController: UITabBarController {
         mapController.tabBarItem.image = UIImage(named: "mapNofill")
         mapController.tabBarItem.selectedImage = UIImage(named: "mapFill")
         
-        let userProfileController = userProfileViewController()
         let userProfileNavigationController = UINavigationController(rootViewController: userProfileController)
-
         userProfileNavigationController.title = "Me"
         userProfileNavigationController.tabBarItem.image = UIImage(named: "User")
+        
         
         
         
@@ -57,7 +56,6 @@ class CustomTabBarController: UITabBarController {
         } catch let logoutError{
             print(logoutError)
         }
-        
         self.presentRootView()
     }
     
@@ -70,7 +68,14 @@ class CustomTabBarController: UITabBarController {
             Database.database().reference().child("users").child(uid!).observeSingleEvent(of: .value, with: { (snapshot) in
                 
                 if let dictionary = snapshot.value as? [String: AnyObject] {
-                    print(dictionary)
+                    let name = dictionary["name"] as! String
+                    let email = dictionary["email"] as! String
+                    let age = dictionary["age"] as! String
+                    let gender = dictionary["gender"] as! String
+                    let imageURL = dictionary["profileImageUrl"] as! String
+                    
+                    let user = defaultUser(i: uid!, n: name , e: email, a: age, g: gender, p: imageURL)
+                    self.userProfileController.user = user
                 }
                 
             }, withCancel: nil)

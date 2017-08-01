@@ -217,7 +217,7 @@ class mainViewController: UITableViewController, UISearchResultsUpdating, UISear
         trailDetailView.trailPlacemark = tp
         self.navigationController?.pushViewController(trailDetailView, animated: true)
         self.hidesBottomBarWhenPushed = false;
-        
+
    }
     
 

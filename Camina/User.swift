@@ -7,64 +7,22 @@
 //
 
 import Foundation
-import CoreData
 
-@objc(defaultUser)
-public class defaultUser :NSManagedObject {
+class defaultUser: NSObject{
+    var uid : String?
+    var name : String?
+    var email : String?
+    var age : String?
+    var gender : String?
+    var profileImageURL : String?
     
-}
-
-extension defaultUser {
-    
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<defaultUser> {
-        return NSFetchRequest<defaultUser>(entityName: "defaultUser")
+    init(i: String, n: String, e: String, a: String, g: String, p: String) {
+        uid = i
+        name = n
+        email = e
+        age = a
+        gender = g
+        profileImageURL = p
     }
-    
-    @NSManaged public var ID: String?
-    @NSManaged public var name: String?
-
-    @NSManaged public var gender: String?
-    @NSManaged public var age: String?
-    @NSManaged public var profilePicURL: String?
-    @NSManaged public var totalSteps : String?
-    @NSManaged public var trailsFinished : NSArray?
-    @NSManaged public var totalDistance : String?
-    @NSManaged public var sessions : NSMutableOrderedSet?
-    
-}
-
-
-// MARK: Generated accessors for session
-extension defaultUser {
-    
-    @objc(insertObject:inSessionAtIndex:)
-    @NSManaged public func insertIntoSession(_ value: Session, at idx: Int)
-    
-    @objc(removeObjectFromSessionAtIndex:)
-    @NSManaged public func removeFromSession(at idx: Int)
-    
-    @objc(insertSession:atIndexes:)
-    @NSManaged public func insertIntoSession(_ values: [Session], at indexes: NSIndexSet)
-    
-    @objc(removeSessionAtIndexes:)
-    @NSManaged public func removeFromSession(at indexes: NSIndexSet)
-    
-    @objc(replaceObjectInSessionAtIndex:withObject:)
-    @NSManaged public func replaceSession(at idx: Int, with value: Session)
-    
-    @objc(replaceSessionAtIndexes:withSession:)
-    @NSManaged public func replaceSession(at indexes: NSIndexSet, with values: [Session])
-    
-    @objc(addSessionObject:)
-    @NSManaged public func addToBitDay(_ value: Session)
-    
-    @objc(removeSessionObject:)
-    @NSManaged public func removeFromBitDay(_ value: Session)
-    
-    @objc(addSession:)
-    @NSManaged public func addToSession(_ values: NSOrderedSet)
-    
-    @objc(removeSession:)
-    @NSManaged public func removeFromSession(_ values: NSOrderedSet)
     
 }

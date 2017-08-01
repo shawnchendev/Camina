@@ -109,7 +109,6 @@ class forgetPasswordViewController: UIViewController {
                 self.warningTextLabel.text = error.localizedDescription
                 return
             }
-
             self.warningTextLabel.textColor = .black
             self.warningTextLabel.text = "Please check your email "
             

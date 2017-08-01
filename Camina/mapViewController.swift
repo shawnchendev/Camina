@@ -12,6 +12,8 @@ import CoreMotion
 import Firebase
 
 class mapViewController: UIViewController, MGLMapViewDelegate {
+    var userPathLayer: MGLStyleLayer?
+
     let statsView : UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(hex: "3ACFD5")
@@ -197,8 +199,6 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
     }
     
     func updateLocationLine() {
-        
-        
         if allCoordinates.count > 0 {
             // Update our MGLShapeSource with the current locations.
             updatePolylineWithCoordinates(coordinates: allCoordinates)
@@ -222,6 +222,7 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
                                                          18: MGLConstantStyleValue<NSNumber>(rawValue: 20)],
                                            options: [.defaultValue : MGLConstantStyleValue<NSNumber>(rawValue: 1.5)])
         style.addLayer(layer)
+        self.userPathLayer = layer
     }
     
     func updatePolylineWithCoordinates(coordinates: [CLLocationCoordinate2D]) {
@@ -344,6 +345,7 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
         mapView = MGLMapView(frame: view.bounds)
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         mapView.showsUserLocation = true
+        mapView.userTrackingMode = .followWithHeading
         mapView.setCenter(CLLocationCoordinate2D(latitude: 47.576769 , longitude: -52.731517), zoomLevel: 12, animated: false)
 
     }

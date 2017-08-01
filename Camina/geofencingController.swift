@@ -84,9 +84,9 @@ extension mapViewController: CLLocationManagerDelegate {
         
         if shortestDistance < 100 {
             let head = getHead(name: locationName)
-            if head.properties?.Name != nil && !activeSession {
+            if head.properties?.ParkID != nil && !activeSession {
                 //setupSession(head: head)
-                trailID = head.properties?.Name
+                trailID = head.properties?.ParkID
                 setupTrailHeadNotification(head: head)
                 setupActivePlacemarks(head: head)
                 //print(head.properties?.Name)
@@ -158,7 +158,6 @@ extension mapViewController: CLLocationManagerDelegate {
     //function that triggers whenever the user location changes to check proximity to existing areas
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let userLocation = locationManager.location
-        mapView.setCenter((userLocation?.coordinate)!, zoomLevel: 15, animated: true)
 
         if closestLocation == nil {
             checkProximity()
