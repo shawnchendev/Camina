@@ -89,7 +89,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         window?.makeKeyAndVisible()
         
         window?.rootViewController = CustomTabBarController()
-        
+        //window?.rootViewController = reviewViewController()
     }
     
 

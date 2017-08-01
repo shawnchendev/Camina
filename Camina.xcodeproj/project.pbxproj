@@ -13,6 +13,7 @@
 		9249E24F1F2F62370061B7ED /* reviewAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9249E24E1F2F62370061B7ED /* reviewAlertView.swift */; };
 		9249E2511F2F62690061B7ED /* modal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9249E2501F2F62690061B7ED /* modal.swift */; };
 		9249E2531F2F67DF0061B7ED /* starRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9249E2521F2F67DF0061B7ED /* starRating.swift */; };
+		9249E2551F309A300061B7ED /* reviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9249E2541F309A300061B7ED /* reviewViewController.swift */; };
 		C11E86521F26677300C3A3C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E86511F26677300C3A3C0 /* AppDelegate.swift */; };
 		C11E86591F26677300C3A3C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C11E86581F26677300C3A3C0 /* Assets.xcassets */; };
 		C11E865C1F26677300C3A3C0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C11E865A1F26677300C3A3C0 /* LaunchScreen.storyboard */; };
@@ -65,6 +66,7 @@
 		9249E24E1F2F62370061B7ED /* reviewAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = reviewAlertView.swift; sourceTree = "<group>"; };
 		9249E2501F2F62690061B7ED /* modal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = modal.swift; sourceTree = "<group>"; };
 		9249E2521F2F67DF0061B7ED /* starRating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = starRating.swift; sourceTree = "<group>"; };
+		9249E2541F309A300061B7ED /* reviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = reviewViewController.swift; sourceTree = "<group>"; };
 		C11E864E1F26677300C3A3C0 /* Camina.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Camina.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C11E86511F26677300C3A3C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C11E86581F26677300C3A3C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 				C11E86791F2668F700C3A3C0 /* signupViewController.swift */,
 				C11E867F1F2668F700C3A3C0 /* userProfileViewController.swift */,
 				C1F8DB0F1F2A041E005EA542 /* trailDetailViewController.swift */,
+				9249E2541F309A300061B7ED /* reviewViewController.swift */,
 				C1F8DB211F2A23B7005EA542 /* landMarkTableViewController.swift */,
 				C1F8DB231F2A3A90005EA542 /* forgetPasswordTableViewController.swift */,
 			);
@@ -399,6 +402,7 @@
 				C1F8DB101F2A041E005EA542 /* trailDetailViewController.swift in Sources */,
 				C11E869D1F2668F700C3A3C0 /* User.swift in Sources */,
 				9249E2481F2902530061B7ED /* Session+CoreDataClass.swift in Sources */,
+				9249E2551F309A300061B7ED /* reviewViewController.swift in Sources */,
 				C11E868A1F2668F700C3A3C0 /* inputProfileViewController.swift in Sources */,
 				9249E24F1F2F62370061B7ED /* reviewAlertView.swift in Sources */,
 				C11E86821F2668F700C3A3C0 /* connectionCheck.swift in Sources */,
