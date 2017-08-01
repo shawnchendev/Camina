@@ -34,7 +34,7 @@ class CustomTabBarController: UITabBarController {
         userProfileNavigationController.tabBarItem.image = UIImage(named: "User")
         
         
-        x
+        
         
         viewControllers = [navigationController, mapController, userProfileNavigationController]
         
