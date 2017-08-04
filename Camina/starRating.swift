@@ -47,7 +47,6 @@ class ratingControl : UIStackView {
             // Otherwise set the rating to the selected star
             rating = selectedRating
         }
-        print(rating)
     }
     
     //MARK: Private Methods

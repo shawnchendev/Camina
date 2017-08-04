@@ -11,7 +11,7 @@ import UIKit
 import Firebase
 
 import UIKit
-class reviewAlertView: UIView, Modal{
+class reviewAlertView: UIView, Modal, UITextViewDelegate{
     
     var backgroundView = UIView()
     var dialogView = UIView()
@@ -48,7 +48,7 @@ class reviewAlertView: UIView, Modal{
         dialogView.addSubview(infoLayer)
         
         let titleLabel = UILabel(frame: CGRect(x: 8, y: 8, width: dialogViewWidth-16, height: 30))
-        titleLabel.text = "Hiking session complete"
+        titleLabel.text = "Share your adventure"
         titleLabel.textColor = .white
         titleLabel.textAlignment = .center
         titleLabel.font = titleLabel.font.withSize(20)
@@ -102,6 +102,7 @@ class reviewAlertView: UIView, Modal{
         reviewInput.text = " Review (optional)"
         reviewInput.font = titleInput.font?.withSize(13)
         reviewInput.textColor = .lightGray
+        reviewInput.delegate = self
         dialogView.addSubview(reviewInput)
         
         let separatorLineView4 = UIView()
@@ -141,9 +142,17 @@ class reviewAlertView: UIView, Modal{
         
     }
     func saveInfor(){
-        print("saving")
-            
-        let post : [String: AnyObject] = [ "UserID": userId as AnyObject, "rating" : starRating.rating as AnyObject, "title" : titleInput.text as AnyObject, "review" : reviewInput.text as AnyObject, "trailID" : trailId as AnyObject]
+        
+        let date = Date()
+        let dateFormat = DateFormatter()
+        dateFormat.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+        let timestamp = dateFormat.string(from: date)
+        
+        var reviewText = reviewInput.text
+        if reviewText == " Review (optional)" {
+            reviewText = ""
+        }
+        let post : [String: AnyObject] = [ "UserID": userId as AnyObject, "rating" : starRating.rating as AnyObject, "title" : titleInput.text as AnyObject, "review" : reviewText as AnyObject, "trailID" : trailId as AnyObject, "date" : timestamp as AnyObject]
         //firebase code
         ref = Database.database().reference()
             
@@ -163,6 +172,19 @@ class reviewAlertView: UIView, Modal{
         fatalError("init(coder:) has not been implemented")
     }
     
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.lightGray {
+            textView.text = nil
+            textView.textColor = UIColor.black
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = "Review (optional)"
+            textView.textColor = UIColor.lightGray
+        }
+    }
 
     
 }
