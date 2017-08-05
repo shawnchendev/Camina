@@ -84,7 +84,6 @@ extension mapViewController: UNUserNotificationCenterDelegate {
         content.sound = UNNotificationSound.default()
         
         readText = (placemark.properties?.NAME)!
-        readText += "LALALALALALLALALALALALALALALALLALALA"
         
         
         //let url = Bundle.main.url(forResource: "camina", withExtension: "png")
