@@ -14,16 +14,14 @@ class loginViewController: UIViewController {
     
         lazy var faecbookSignupButton: UIButton = {
         let button = UIButton(type: .system)
-        button.backgroundColor = UIColor(hex: "00B16A")
+        button.backgroundColor = UIColor(hex: "557BE2")
+
+        button.layer.cornerRadius = 5
         button.setTitle("Login with Facebook ", for: UIControlState())
-        button.setImage(#imageLiteral(resourceName: "facebook"), for: UIControlState())
-        button.imageEdgeInsets = UIEdgeInsets(top: 6,left: 0,bottom: 6,right: 14)
-        button.titleEdgeInsets = UIEdgeInsets(top: 0,left: 50,bottom: 0,right: 34)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitleColor(UIColor.white, for: UIControlState())
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         button.addTarget(self, action: #selector(FacebookLogin), for: .touchUpInside)
-        button.imageView?.contentMode = .scaleAspectFit
         return button
     }()
     
@@ -39,7 +37,7 @@ class loginViewController: UIViewController {
     }()
     
     let emailTextField: UITextField = {
-        let tf = UITextField()
+        let tf = LeftPaddedTextField()
         tf.placeholder = "Email"
         tf.translatesAutoresizingMaskIntoConstraints = false
         tf.keyboardType = .emailAddress
@@ -54,7 +52,7 @@ class loginViewController: UIViewController {
     }()
     
     let passwordTextField: UITextField = {
-        let tf = UITextField()
+        let tf = LeftPaddedTextField()
         tf.placeholder = "Password"
         tf.translatesAutoresizingMaskIntoConstraints = false
         tf.isSecureTextEntry = true
@@ -262,4 +260,17 @@ class loginViewController: UIViewController {
         }, completion: nil)
     }
 
+}
+
+
+class LeftPaddedTextField: UITextField {
+    
+    override func textRect(forBounds bounds: CGRect) -> CGRect {
+        return CGRect(x: bounds.origin.x + 10, y: bounds.origin.y, width: bounds.width + 10, height: bounds.height)
+    }
+    
+    override func editingRect(forBounds bounds: CGRect) -> CGRect {
+        return CGRect(x: bounds.origin.x + 10, y: bounds.origin.y, width: bounds.width + 10, height: bounds.height)
+    }
+    
 }

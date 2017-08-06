@@ -63,9 +63,7 @@ class reviewViewController : UITableViewController {
                     if review.trailID == self.trailId {
                         self.reviews.append(review)
                     }
-        
                 }
-          
             }
             
             self.tableView.reloadData()
@@ -98,7 +96,7 @@ class reviewCell : UITableViewCell {
         return view
     }()
     
-    let starViews = starView(frame:CGRect(x: UIScreen.main.bounds.width/2 , y: 12, width: 150, height: 30))
+    let starViews = starView(frame:CGRect(x: 0 , y: 12, width: 150, height: 30))
     
     
     let trailNameLabel: UILabel = {
@@ -118,23 +116,18 @@ class reviewCell : UITableViewCell {
     
     func setupView(){
         backgroundColor = .white
-        addSubview(spacingView)
+        addSubview(starViews)
         addSubview(trailNameLabel)
         addSubview(trailTypeLabel)
-        addSubview(starViews)
         
-        spacingView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        spacingView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        spacingView.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
-        spacingView.heightAnchor.constraint(equalToConstant: 8).isActive = true
         
         starViews.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        starViews.topAnchor.constraint(equalTo: spacingView.bottomAnchor, constant: 8).isActive = true
+        starViews.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         starViews.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -16).isActive = true
         starViews.heightAnchor.constraint(equalToConstant:150).isActive = true
         
         trailNameLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 8).isActive = true
-        trailNameLabel.bottomAnchor.constraint(equalTo: trailTypeLabel.topAnchor, constant:2).isActive = true
+        trailNameLabel.bottomAnchor.constraint(equalTo: starViews.topAnchor, constant:2).isActive = true
         trailNameLabel.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
         
         trailTypeLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 8).isActive = true

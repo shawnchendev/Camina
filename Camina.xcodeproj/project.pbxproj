@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		9249E2451F28F6460061B7ED /* fetchingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9249E2441F28F6460061B7ED /* fetchingController.swift */; };
-		9249E2481F2902530061B7ED /* Session+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9249E2461F2902530061B7ED /* Session+CoreDataClass.swift */; };
-		9249E2491F2902530061B7ED /* Session+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9249E2471F2902530061B7ED /* Session+CoreDataProperties.swift */; };
 		9249E24F1F2F62370061B7ED /* reviewAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9249E24E1F2F62370061B7ED /* reviewAlertView.swift */; };
 		9249E2511F2F62690061B7ED /* modal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9249E2501F2F62690061B7ED /* modal.swift */; };
 		9249E2531F2F67DF0061B7ED /* starRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9249E2521F2F67DF0061B7ED /* starRating.swift */; };
@@ -52,8 +50,14 @@
 		C11E86AB1F26690D00C3A3C0 /* trailsData.geojson in Resources */ = {isa = PBXBuildFile; fileRef = C11E86A51F26690D00C3A3C0 /* trailsData.geojson */; };
 		C11E86AC1F26690D00C3A3C0 /* Walks.geojson in Resources */ = {isa = PBXBuildFile; fileRef = C11E86A61F26690D00C3A3C0 /* Walks.geojson */; };
 		C11E86AE1F266CCB00C3A3C0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C11E86AD1F266CCB00C3A3C0 /* GoogleService-Info.plist */; };
-		C16399E91F30AA8C004DA262 /* userHikingSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16399E81F30AA8C004DA262 /* userHikingSession.swift */; };
-		C16399EB1F30AACD004DA262 /* userSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16399EA1F30AACD004DA262 /* userSession.swift */; };
+		C16399EF1F310657004DA262 /* userSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16399ED1F310657004DA262 /* userSession.swift */; };
+		C16399F11F349F09004DA262 /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16399F01F349F09004DA262 /* Page.swift */; };
+		C16399F31F349F6F004DA262 /* PageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16399F21F349F6F004DA262 /* PageCell.swift */; };
+		C16399F51F34A056004DA262 /* UIViewConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16399F41F34A056004DA262 /* UIViewConstraint.swift */; };
+		C16399F81F34A096004DA262 /* Session+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16399F61F34A096004DA262 /* Session+CoreDataClass.swift */; };
+		C16399F91F34A096004DA262 /* Session+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16399F71F34A096004DA262 /* Session+CoreDataProperties.swift */; };
+		C16399FB1F34A1F9004DA262 /* UserGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16399FA1F34A1F9004DA262 /* UserGuideViewController.swift */; };
+		C16399FD1F34A38E004DA262 /* rootCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16399FC1F34A38E004DA262 /* rootCell.swift */; };
 		C1F8DB101F2A041E005EA542 /* trailDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F8DB0F1F2A041E005EA542 /* trailDetailViewController.swift */; };
 		C1F8DB221F2A23B7005EA542 /* landMarkTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F8DB211F2A23B7005EA542 /* landMarkTableViewController.swift */; };
 		C1F8DB241F2A3A90005EA542 /* forgetPasswordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F8DB231F2A3A90005EA542 /* forgetPasswordTableViewController.swift */; };
@@ -65,8 +69,6 @@
 		39A9C38CD199F89F828C22EF /* Pods_Camina.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Camina.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A429E94462A43D97EE1B047 /* Pods-Camina.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Camina.release.xcconfig"; path = "Pods/Target Support Files/Pods-Camina/Pods-Camina.release.xcconfig"; sourceTree = "<group>"; };
 		9249E2441F28F6460061B7ED /* fetchingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = fetchingController.swift; sourceTree = "<group>"; };
-		9249E2461F2902530061B7ED /* Session+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Session+CoreDataClass.swift"; sourceTree = "<group>"; };
-		9249E2471F2902530061B7ED /* Session+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Session+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		9249E24E1F2F62370061B7ED /* reviewAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = reviewAlertView.swift; sourceTree = "<group>"; };
 		9249E2501F2F62690061B7ED /* modal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = modal.swift; sourceTree = "<group>"; };
 		9249E2521F2F67DF0061B7ED /* starRating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = starRating.swift; sourceTree = "<group>"; };
@@ -111,8 +113,14 @@
 		C11E86A51F26690D00C3A3C0 /* trailsData.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = trailsData.geojson; sourceTree = "<group>"; };
 		C11E86A61F26690D00C3A3C0 /* Walks.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Walks.geojson; sourceTree = "<group>"; };
 		C11E86AD1F266CCB00C3A3C0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		C16399E81F30AA8C004DA262 /* userHikingSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = userHikingSession.swift; sourceTree = "<group>"; };
-		C16399EA1F30AACD004DA262 /* userSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = userSession.swift; sourceTree = "<group>"; };
+		C16399ED1F310657004DA262 /* userSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userSession.swift; sourceTree = "<group>"; };
+		C16399F01F349F09004DA262 /* Page.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
+		C16399F21F349F6F004DA262 /* PageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageCell.swift; sourceTree = "<group>"; };
+		C16399F41F34A056004DA262 /* UIViewConstraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewConstraint.swift; sourceTree = "<group>"; };
+		C16399F61F34A096004DA262 /* Session+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Session+CoreDataClass.swift"; sourceTree = "<group>"; };
+		C16399F71F34A096004DA262 /* Session+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Session+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C16399FA1F34A1F9004DA262 /* UserGuideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserGuideViewController.swift; sourceTree = "<group>"; };
+		C16399FC1F34A38E004DA262 /* rootCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = rootCell.swift; sourceTree = "<group>"; };
 		C1F8DB0F1F2A041E005EA542 /* trailDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = trailDetailViewController.swift; sourceTree = "<group>"; };
 		C1F8DB211F2A23B7005EA542 /* landMarkTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = landMarkTableViewController.swift; sourceTree = "<group>"; };
 		C1F8DB231F2A3A90005EA542 /* forgetPasswordTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = forgetPasswordTableViewController.swift; sourceTree = "<group>"; };
@@ -144,6 +152,9 @@
 			children = (
 				C11E86801F2668F700C3A3C0 /* viewControllerExtension.swift */,
 				C11E86811F2668F700C3A3C0 /* viewExtension.swift */,
+				C11E867C1F2668F700C3A3C0 /* trailHeadCell.swift */,
+				C16399F21F349F6F004DA262 /* PageCell.swift */,
+				C16399FC1F34A38E004DA262 /* rootCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -196,7 +207,6 @@
 				C11E86B21F26758A00C3A3C0 /* ViewController */,
 				C11E86671F2668F700C3A3C0 /* geofencingController.swift */,
 				C11E86771F2668F700C3A3C0 /* sessionManagement.swift */,
-				C11E867C1F2668F700C3A3C0 /* trailHeadCell.swift */,
 				C11E86641F2668F700C3A3C0 /* CustomCollectionViewCell.swift */,
 				C11E86581F26677300C3A3C0 /* Assets.xcassets */,
 				C11E865A1F26677300C3A3C0 /* LaunchScreen.storyboard */,
@@ -218,6 +228,7 @@
 				C11E86661F2668F700C3A3C0 /* CustomUIColor.swift */,
 				C11E86631F2668F700C3A3C0 /* connectionCheck.swift */,
 				C11E86691F2668F700C3A3C0 /* ImageViewextension.swift */,
+				C16399F41F34A056004DA262 /* UIViewConstraint.swift */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -225,14 +236,16 @@
 		C11E86B11F26755900C3A3C0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				9249E2461F2902530061B7ED /* Session+CoreDataClass.swift */,
-				9249E2471F2902530061B7ED /* Session+CoreDataProperties.swift */,
+				C16399F61F34A096004DA262 /* Session+CoreDataClass.swift */,
+				C16399F71F34A096004DA262 /* Session+CoreDataProperties.swift */,
+				C16399ED1F310657004DA262 /* userSession.swift */,
 				C11E86681F2668F700C3A3C0 /* Head.swift */,
 				C11E86711F2668F700C3A3C0 /* Placemark.swift */,
 				C11E86731F2668F700C3A3C0 /* SafeJsonObject.swift */,
 				C11E867B1F2668F700C3A3C0 /* TrailCoords.swift */,
 				C11E867E1F2668F700C3A3C0 /* User.swift */,
 				92F4FB3B1F30A96D00B6D72B /* Review.swift */,
+				C16399F01F349F09004DA262 /* Page.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -257,6 +270,7 @@
 				9249E2541F309A300061B7ED /* reviewViewController.swift */,
 				C1F8DB211F2A23B7005EA542 /* landMarkTableViewController.swift */,
 				C1F8DB231F2A3A90005EA542 /* forgetPasswordTableViewController.swift */,
+				C16399FA1F34A1F9004DA262 /* UserGuideViewController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -399,9 +413,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C16399EF1F310657004DA262 /* userSession.swift in Sources */,
 				C11E86871F2668F700C3A3C0 /* Head.swift in Sources */,
 				9249E2511F2F62690061B7ED /* modal.swift in Sources */,
 				C1F8DB241F2A3A90005EA542 /* forgetPasswordTableViewController.swift in Sources */,
+				C16399FD1F34A38E004DA262 /* rootCell.swift in Sources */,
+				C16399F91F34A096004DA262 /* Session+CoreDataProperties.swift in Sources */,
 				C11E868B1F2668F700C3A3C0 /* loginViewController.swift in Sources */,
 				C1F8DB221F2A23B7005EA542 /* landMarkTableViewController.swift in Sources */,
 				C11E86861F2668F700C3A3C0 /* geofencingController.swift in Sources */,
@@ -409,32 +426,33 @@
 				C11E86851F2668F700C3A3C0 /* CustomUIColor.swift in Sources */,
 				C11E86A01F2668F700C3A3C0 /* viewExtension.swift in Sources */,
 				C11E86961F2668F700C3A3C0 /* sessionManagement.swift in Sources */,
+				C16399FB1F34A1F9004DA262 /* UserGuideViewController.swift in Sources */,
 				C1F8DB101F2A041E005EA542 /* trailDetailViewController.swift in Sources */,
 				C11E869D1F2668F700C3A3C0 /* User.swift in Sources */,
-				9249E2481F2902530061B7ED /* Session+CoreDataClass.swift in Sources */,
 				9249E2551F309A300061B7ED /* reviewViewController.swift in Sources */,
 				C11E868A1F2668F700C3A3C0 /* inputProfileViewController.swift in Sources */,
 				9249E24F1F2F62370061B7ED /* reviewAlertView.swift in Sources */,
 				C11E86821F2668F700C3A3C0 /* connectionCheck.swift in Sources */,
-				C16399E91F30AA8C004DA262 /* userHikingSession.swift in Sources */,
 				C11E86981F2668F700C3A3C0 /* signupViewController.swift in Sources */,
 				C11E86831F2668F700C3A3C0 /* CustomCollectionViewCell.swift in Sources */,
 				C11E868D1F2668F700C3A3C0 /* mapViewController.swift in Sources */,
 				C11E86901F2668F700C3A3C0 /* Placemark.swift in Sources */,
+				C16399F51F34A056004DA262 /* UIViewConstraint.swift in Sources */,
 				C11E86841F2668F700C3A3C0 /* CustomTabBarController.swift in Sources */,
-				9249E2491F2902530061B7ED /* Session+CoreDataProperties.swift in Sources */,
 				9249E2531F2F67DF0061B7ED /* starRating.swift in Sources */,
 				C11E86881F2668F700C3A3C0 /* ImageViewextension.swift in Sources */,
 				C11E86931F2668F700C3A3C0 /* searchBar.swift in Sources */,
+				C16399F81F34A096004DA262 /* Session+CoreDataClass.swift in Sources */,
 				C11E869E1F2668F700C3A3C0 /* userProfileViewController.swift in Sources */,
 				9249E2451F28F6460061B7ED /* fetchingController.swift in Sources */,
 				C11E86911F2668F700C3A3C0 /* rootViewController.swift in Sources */,
 				92F4FB3E1F30B6E800B6D72B /* starView.swift in Sources */,
+				C16399F11F349F09004DA262 /* Page.swift in Sources */,
 				C11E86971F2668F700C3A3C0 /* sessionViewController.swift in Sources */,
-				C16399EB1F30AACD004DA262 /* userSession.swift in Sources */,
 				C11E86521F26677300C3A3C0 /* AppDelegate.swift in Sources */,
 				C11E869A1F2668F700C3A3C0 /* TrailCoords.swift in Sources */,
 				C11E869B1F2668F700C3A3C0 /* trailHeadCell.swift in Sources */,
+				C16399F31F349F6F004DA262 /* PageCell.swift in Sources */,
 				92F4FB3C1F30A96D00B6D72B /* Review.swift in Sources */,
 				C11E868F1F2668F700C3A3C0 /* notificationController.swift in Sources */,
 				C11E868C1F2668F700C3A3C0 /* mainViewController.swift in Sources */,

@@ -66,7 +66,7 @@ class starView : UIStackView {
         for (index, imageView) in ratingButtons.enumerated() {
             // If the index of a button is less than the rating, that button should be selected.
             if index < rating {
-                imageView.image = #imageLiteral(resourceName: "filledStar")
+                imageView.image = #imageLiteral(resourceName: "fillledStar")
             } else {
                 imageView.image = #imageLiteral(resourceName: "emptyStar")
             }

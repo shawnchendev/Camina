@@ -361,16 +361,7 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
     }
     
     func mapView(_ mapView: MGLMapView, strokeColorForShapeAnnotation annotation: MGLShape) -> UIColor {
-        // Give our polyline a unique color by checking for its `title` property
-        if (annotation.title == "Signal Hill - North Head" && annotation is MGLPolyline) {
-            // Mapbox cyan
             return UIColor(red: 59/255, green:178/255, blue:208/255, alpha:1)
-        }
-        else
-        {
-            return .black
-
-        }
     }
     
     func mapView(_ mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
@@ -380,6 +371,7 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
     
     func startSession(){
         if !activeSession {
+            UIApplication.shared.statusBarView?.backgroundColor = UIColor(hex: "3ACFD5")
             setupStatView()
             activeSession = true
             setupSession()
@@ -398,6 +390,7 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
     }
 
     func setupStatView(){
+        
         view.addSubview(statsView)
         statsView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         statsView.topAnchor.constraint(equalTo: self.view.topAnchor, constant:20).isActive = true
