@@ -20,8 +20,13 @@ class reviewViewController : UITableViewController {
     
     var ref : DatabaseReference!
     
+  
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let addReviewButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.compose , target: self, action: #selector(addReview))
+        navigationItem.rightBarButtonItem = addReviewButton
         
         fetchFirebase()
         self.navigationItem.title = "Reviews"
@@ -48,6 +53,8 @@ class reviewViewController : UITableViewController {
         cell.trailNameLabel.text = reviews[indexPath.item].title
         cell.trailTypeLabel.text = reviews[indexPath.item].review
         cell.starViews.rating = reviews[indexPath.item].rating!
+        cell.selectionStyle = .none
+        cell.isUserInteractionEnabled = false
         return cell
     }
     
@@ -55,22 +62,33 @@ class reviewViewController : UITableViewController {
         let ref = Database.database().reference()
         
         ref.child("Review").observe(.value, with: { snapshot in
-            
+            self.reviews = []
             if let dictionary = snapshot.value as? [String: AnyObject] {
                 for review in dictionary {
                     let reviewDict = review.value as! [String : AnyObject]
                     let review = Review(dictionary: reviewDict)
                     if review.trailID == self.trailId {
                         self.reviews.append(review)
+                        
+                        DispatchQueue.main.async(execute: {
+                            self.tableView.reloadData()
+
+                        })
                     }
                 }
             }
-            
-            self.tableView.reloadData()
+//            print(self.reviews)
+//            self.tableView.reloadData()
             
         })
         
   
+    }
+    
+    func addReview(){
+        let review = reviewAlertView(userID: (Auth.auth().currentUser?.uid)!, trailID: trailId)
+        review.show(animated: true)
+        self.tableView.reloadData()
     }
 }
 
@@ -135,6 +153,8 @@ class reviewCell : UITableViewCell {
         trailTypeLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/2).isActive = true
         
     }
+    
+
 
     
 }

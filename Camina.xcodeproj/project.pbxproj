@@ -14,6 +14,8 @@
 		9249E2551F309A300061B7ED /* reviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9249E2541F309A300061B7ED /* reviewViewController.swift */; };
 		92F4FB3C1F30A96D00B6D72B /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F4FB3B1F30A96D00B6D72B /* Review.swift */; };
 		92F4FB3E1F30B6E800B6D72B /* starView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F4FB3D1F30B6E800B6D72B /* starView.swift */; };
+		92F4FB401F31064F00B6D72B /* userHikingSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F4FB3F1F31064F00B6D72B /* userHikingSession.swift */; };
+		92F4FB421F31065600B6D72B /* userSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F4FB411F31065600B6D72B /* userSession.swift */; };
 		C11E86521F26677300C3A3C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E86511F26677300C3A3C0 /* AppDelegate.swift */; };
 		C11E86591F26677300C3A3C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C11E86581F26677300C3A3C0 /* Assets.xcassets */; };
 		C11E865C1F26677300C3A3C0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C11E865A1F26677300C3A3C0 /* LaunchScreen.storyboard */; };
@@ -47,7 +49,6 @@
 		C11E86A81F26690D00C3A3C0 /* head.geojson in Resources */ = {isa = PBXBuildFile; fileRef = C11E86A21F26690D00C3A3C0 /* head.geojson */; };
 		C11E86A91F26690D00C3A3C0 /* point.geojson in Resources */ = {isa = PBXBuildFile; fileRef = C11E86A31F26690D00C3A3C0 /* point.geojson */; };
 		C11E86AA1F26690D00C3A3C0 /* trails.geojson in Resources */ = {isa = PBXBuildFile; fileRef = C11E86A41F26690D00C3A3C0 /* trails.geojson */; };
-		C11E86AB1F26690D00C3A3C0 /* trailsData.geojson in Resources */ = {isa = PBXBuildFile; fileRef = C11E86A51F26690D00C3A3C0 /* trailsData.geojson */; };
 		C11E86AC1F26690D00C3A3C0 /* Walks.geojson in Resources */ = {isa = PBXBuildFile; fileRef = C11E86A61F26690D00C3A3C0 /* Walks.geojson */; };
 		C11E86AE1F266CCB00C3A3C0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C11E86AD1F266CCB00C3A3C0 /* GoogleService-Info.plist */; };
 		C16399EF1F310657004DA262 /* userSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16399ED1F310657004DA262 /* userSession.swift */; };
@@ -75,6 +76,8 @@
 		9249E2541F309A300061B7ED /* reviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = reviewViewController.swift; sourceTree = "<group>"; };
 		92F4FB3B1F30A96D00B6D72B /* Review.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		92F4FB3D1F30B6E800B6D72B /* starView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = starView.swift; sourceTree = "<group>"; };
+		92F4FB3F1F31064F00B6D72B /* userHikingSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = userHikingSession.swift; sourceTree = "<group>"; };
+		92F4FB411F31065600B6D72B /* userSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = userSession.swift; sourceTree = "<group>"; };
 		C11E864E1F26677300C3A3C0 /* Camina.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Camina.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C11E86511F26677300C3A3C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C11E86581F26677300C3A3C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -110,7 +113,6 @@
 		C11E86A21F26690D00C3A3C0 /* head.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = head.geojson; sourceTree = "<group>"; };
 		C11E86A31F26690D00C3A3C0 /* point.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = point.geojson; sourceTree = "<group>"; };
 		C11E86A41F26690D00C3A3C0 /* trails.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = trails.geojson; sourceTree = "<group>"; };
-		C11E86A51F26690D00C3A3C0 /* trailsData.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = trailsData.geojson; sourceTree = "<group>"; };
 		C11E86A61F26690D00C3A3C0 /* Walks.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Walks.geojson; sourceTree = "<group>"; };
 		C11E86AD1F266CCB00C3A3C0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C16399ED1F310657004DA262 /* userSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userSession.swift; sourceTree = "<group>"; };
@@ -216,7 +218,6 @@
 				C11E86AD1F266CCB00C3A3C0 /* GoogleService-Info.plist */,
 				C11E86A31F26690D00C3A3C0 /* point.geojson */,
 				C11E86A41F26690D00C3A3C0 /* trails.geojson */,
-				C11E86A51F26690D00C3A3C0 /* trailsData.geojson */,
 				C11E86A61F26690D00C3A3C0 /* Walks.geojson */,
 			);
 			path = Camina;
@@ -257,6 +258,8 @@
 				C11E866A1F2668F700C3A3C0 /* infoController.swift */,
 				C11E866B1F2668F700C3A3C0 /* inputProfileViewController.swift */,
 				C11E866C1F2668F700C3A3C0 /* loginViewController.swift */,
+				92F4FB411F31065600B6D72B /* userSession.swift */,
+				92F4FB3F1F31064F00B6D72B /* userHikingSession.swift */,
 				C11E866D1F2668F700C3A3C0 /* mainViewController.swift */,
 				C11E866E1F2668F700C3A3C0 /* mapViewController.swift */,
 				9249E24E1F2F62370061B7ED /* reviewAlertView.swift */,
@@ -353,7 +356,6 @@
 				C11E86A71F26690D00C3A3C0 /* GCPoints.geojson in Resources */,
 				C11E86A91F26690D00C3A3C0 /* point.geojson in Resources */,
 				C11E86AE1F266CCB00C3A3C0 /* GoogleService-Info.plist in Resources */,
-				C11E86AB1F26690D00C3A3C0 /* trailsData.geojson in Resources */,
 				C11E86AA1F26690D00C3A3C0 /* trails.geojson in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -458,6 +460,7 @@
 				C11E868C1F2668F700C3A3C0 /* mainViewController.swift in Sources */,
 				C11E86921F2668F700C3A3C0 /* SafeJsonObject.swift in Sources */,
 				C11E869F1F2668F700C3A3C0 /* viewControllerExtension.swift in Sources */,
+				92F4FB421F31065600B6D72B /* userSession.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
