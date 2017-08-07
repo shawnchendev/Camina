@@ -47,11 +47,8 @@ extension mapViewController: CLLocationManagerDelegate {
     func setupRegions( trail: NSArray, name: String){
         for i in 0...trail.count-1{
             let line : NSArray = trail[i] as! NSArray
-            
             for j in 0...line.count-1{
-                print(j)
                 let point: NSArray = line[j] as! NSArray
-                
                 let region = CLCircularRegion(center: CLLocationCoordinate2D(latitude:point[1] as! CLLocationDegrees,longitude:point[0] as! CLLocationDegrees ), radius: 100, identifier: name)
                 allPlacemarks.append(region)
                 

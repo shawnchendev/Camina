@@ -371,7 +371,6 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
     
     func startSession(){
         if !activeSession {
-            UIApplication.shared.statusBarView?.backgroundColor = UIColor(hex: "3ACFD5")
             setupStatView()
             activeSession = true
             setupSession()
@@ -382,6 +381,7 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
     
     func stopSession(){
         if activeSession {
+
             activeSession = false
             statsView.removeFromSuperview()
             finishSession()
@@ -393,7 +393,7 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
         
         view.addSubview(statsView)
         statsView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        statsView.topAnchor.constraint(equalTo: self.view.topAnchor, constant:20).isActive = true
+        statsView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
         statsView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
         statsView.heightAnchor.constraint(equalToConstant:120).isActive = true
         

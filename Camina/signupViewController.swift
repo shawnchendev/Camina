@@ -164,8 +164,11 @@ class signupViewController: UIViewController {
                     return
                 }
         
+                if providers != nil{
                 authProviders = providers!
-                print(authProviders)
+                }else{
+                    authProviders = []
+                }
             })
             
             Auth.auth().signIn(with: credential) { (user, error) in

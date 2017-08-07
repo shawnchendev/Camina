@@ -116,7 +116,7 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     let travelDistance : UILabel = {
         let label = UILabel()
-        label.text = "1000m"
+        label.text = "0 m"
         label.textColor = UIColor.darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 12)
@@ -125,7 +125,7 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     let travelTime : UILabel = {
         let label = UILabel()
-        label.text = "0:00:00"
+        label.text = "0 mins"
         label.textColor = UIColor.darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 12)
@@ -143,7 +143,7 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     let nSession : UILabel = {
         let label = UILabel()
-        label.text = "0 sdfs"
+        label.text = "0 "
         label.textColor = UIColor.darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 12)
@@ -175,8 +175,9 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
         userNameLabel.text = user?.name
         fetchUserSessionID {
             self.nSession.text = String(self.totalSession)
-            self.travelDistance.text = String(self.totalDistance )
+            self.travelDistance.text = String(self.totalDistance ) + "meters"
             self.travelTime.text = String(self.totalTime / 60 ) + " mins"
+            self.nSteps.text = String(self.totalSteps) + "steps"
         }
         
         view.addSubview(profileCoverImageView)
