@@ -75,6 +75,7 @@
 		92F4FB3B1F30A96D00B6D72B /* Review.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		92F4FB3D1F30B6E800B6D72B /* starView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = starView.swift; sourceTree = "<group>"; };
 		92F4FB411F31065600B6D72B /* userSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = userSession.swift; sourceTree = "<group>"; };
+		92F4FB451F38999D00B6D72B /* placemarkAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = placemarkAlertView.swift; sourceTree = "<group>"; };
 		C11E864E1F26677300C3A3C0 /* Camina.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Camina.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C11E86511F26677300C3A3C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C11E86581F26677300C3A3C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -259,6 +260,7 @@
 				C11E866D1F2668F700C3A3C0 /* mainViewController.swift */,
 				C11E866E1F2668F700C3A3C0 /* mapViewController.swift */,
 				9249E24E1F2F62370061B7ED /* reviewAlertView.swift */,
+				92F4FB451F38999D00B6D72B /* placemarkAlertView.swift */,
 				9249E2521F2F67DF0061B7ED /* starRating.swift */,
 				92F4FB3D1F30B6E800B6D72B /* starView.swift */,
 				C11E86721F2668F700C3A3C0 /* rootViewController.swift */,
@@ -422,6 +424,7 @@
 				C11E86861F2668F700C3A3C0 /* geofencingController.swift in Sources */,
 				C11E86891F2668F700C3A3C0 /* infoController.swift in Sources */,
 				C11E86851F2668F700C3A3C0 /* CustomUIColor.swift in Sources */,
+				92F4FB461F38999D00B6D72B /* placemarkAlertView.swift in Sources */,
 				C11E86A01F2668F700C3A3C0 /* viewExtension.swift in Sources */,
 				C11E86961F2668F700C3A3C0 /* sessionManagement.swift in Sources */,
 				C16399FB1F34A1F9004DA262 /* UserGuideViewController.swift in Sources */,

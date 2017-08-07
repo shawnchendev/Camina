@@ -81,6 +81,9 @@ class mainViewController: UITableViewController, UISearchResultsUpdating, UISear
         fetchTrailHead()
         fetchPlacemarks()
         
+        //let review = placemarkAlertView(placemarkName: "Something", description: "description")
+        //review.show(animated: true)
+        
         
     }
     
