@@ -10,7 +10,8 @@ import UIKit
 extension UIViewController{
     
     func presentRootView(){
-        let rootView = rootViewController()
+//        let rootView = rootViewController()
+        let rootView = UserGuideViewController()
         let nav = UINavigationController()
         nav.navigationBar.tintColor = UIColor(hex: "00B16A")
         nav.setNavigationBarHidden(true, animated: true)

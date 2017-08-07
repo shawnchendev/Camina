@@ -195,6 +195,8 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
         self.navigationController?.navigationBar.barStyle = UIBarStyle.black
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Log out", style: .plain, target: self, action: #selector(handleLogOut))
+        self.navigationItem.leftBarButtonItem?.tintColor = UIColor(hex: "00B16A")
 
     }
     
@@ -279,12 +281,14 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
     }
 
     
-    func handleLogOut(_ sender: Any) {
+    func handleLogOut() {
         do {
             try Auth.auth().signOut()
         } catch let logoutError{
             print(logoutError)
         }
+//        let root = UserGuideViewController()
+//        self.present(root, animated: true, completion: nil)
         self.presentRootView()
     }
     
