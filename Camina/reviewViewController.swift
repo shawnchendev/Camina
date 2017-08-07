@@ -24,7 +24,8 @@ class reviewViewController : UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        tableView.tableFooterView = UIView()  // it's just 1 line, awesome!
+
         let addReviewButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.compose , target: self, action: #selector(addReview))
         navigationItem.rightBarButtonItem = addReviewButton
         
@@ -45,6 +46,10 @@ class reviewViewController : UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return reviews.count
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
     }
     
     
@@ -114,7 +119,7 @@ class reviewCell : UITableViewCell {
         return view
     }()
     
-    let starViews = starView(frame:CGRect(x: 0 , y: 12, width: 150, height: 30))
+    let starViews = starView(frame:CGRect(x:16 , y: 8, width: 150, height: 30))
     
     
     let trailNameLabel: UILabel = {
@@ -125,7 +130,7 @@ class reviewCell : UITableViewCell {
     }()
     let trailTypeLabel: UILabel = {
         let lbl = UILabel()
-        lbl.font = UIFont.systemFont(ofSize: 11)
+        lbl.font = UIFont.systemFont(ofSize: 12)
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.textColor = UIColor(hex: "95989A")
         return lbl
@@ -138,18 +143,13 @@ class reviewCell : UITableViewCell {
         addSubview(trailNameLabel)
         addSubview(trailTypeLabel)
         
-        
-        starViews.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        starViews.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        starViews.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -16).isActive = true
-        starViews.heightAnchor.constraint(equalToConstant:150).isActive = true
-        
-        trailNameLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 8).isActive = true
-        trailNameLabel.bottomAnchor.constraint(equalTo: starViews.topAnchor, constant:2).isActive = true
+     
+        trailNameLabel.leftAnchor.constraint(equalTo: starViews.leftAnchor, constant: 8).isActive = true
+        trailNameLabel.topAnchor.constraint(equalTo: starViews.bottomAnchor, constant:2).isActive = true
         trailNameLabel.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
         
-        trailTypeLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 8).isActive = true
-        trailTypeLabel.topAnchor.constraint(equalTo: self.bottomAnchor, constant:-15).isActive = true
+        trailTypeLabel.leftAnchor.constraint(equalTo: starViews.leftAnchor, constant: 8).isActive = true
+        trailTypeLabel.topAnchor.constraint(equalTo: trailNameLabel.bottomAnchor, constant:4).isActive = true
         trailTypeLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/2).isActive = true
         
     }

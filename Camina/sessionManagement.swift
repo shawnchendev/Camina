@@ -72,11 +72,12 @@ extension mapViewController {
     func startPedometer() {
         //Start the pedometer
         pedometer = CMPedometer()
-        pedometer.startUpdates(from: Date(), withHandler: { (pedometerData, error) in
-            if let pedData = pedometerData{
-                self.steps = Int(pedData.numberOfSteps)
+        if (CMPedometer.isStepCountingAvailable()){
+            pedometer.startUpdates(from: Date(), withHandler: { (pedometerData, error) in
+                if let pedData = pedometerData{
+                    self.steps = Int(pedData.numberOfSteps)
                 //self.stepsLabel.text = "Steps:\(pedData.numberOfSteps)"
-                if let distance = pedData.distance{
+                    if let distance = pedData.distance{
                     self.distance = Double(distance)
                 }
                 //                if let averageActivePace = pedData.averageActivePace {
@@ -90,6 +91,7 @@ extension mapViewController {
             }
         })
         
+    }
     }
     // display the updated data
     func displayPedometerData(){

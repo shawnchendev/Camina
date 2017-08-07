@@ -28,6 +28,7 @@ class trailDetailViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Trail Detail"
+        tableView.tableFooterView = UIView()  // it's just 1 line, awesome!
         self.tableView.register(trailHeadsCell.self, forCellReuseIdentifier: headCellId)
         self.tableView.register(trailDetailCell.self, forCellReuseIdentifier: detailCellId)
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)

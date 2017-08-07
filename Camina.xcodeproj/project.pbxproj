@@ -459,7 +459,6 @@
 				C11E868C1F2668F700C3A3C0 /* mainViewController.swift in Sources */,
 				C11E86921F2668F700C3A3C0 /* SafeJsonObject.swift in Sources */,
 				C11E869F1F2668F700C3A3C0 /* viewControllerExtension.swift in Sources */,
-				92F4FB421F31065600B6D72B /* userSession.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
