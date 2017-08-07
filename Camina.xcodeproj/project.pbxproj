@@ -14,7 +14,6 @@
 		9249E2551F309A300061B7ED /* reviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9249E2541F309A300061B7ED /* reviewViewController.swift */; };
 		92F4FB3C1F30A96D00B6D72B /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F4FB3B1F30A96D00B6D72B /* Review.swift */; };
 		92F4FB3E1F30B6E800B6D72B /* starView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F4FB3D1F30B6E800B6D72B /* starView.swift */; };
-		92F4FB401F31064F00B6D72B /* userHikingSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F4FB3F1F31064F00B6D72B /* userHikingSession.swift */; };
 		92F4FB421F31065600B6D72B /* userSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F4FB411F31065600B6D72B /* userSession.swift */; };
 		92F4FB461F38999D00B6D72B /* placemarkAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F4FB451F38999D00B6D72B /* placemarkAlertView.swift */; };
 		C11E86521F26677300C3A3C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E86511F26677300C3A3C0 /* AppDelegate.swift */; };
@@ -52,7 +51,6 @@
 		C11E86AA1F26690D00C3A3C0 /* trails.geojson in Resources */ = {isa = PBXBuildFile; fileRef = C11E86A41F26690D00C3A3C0 /* trails.geojson */; };
 		C11E86AC1F26690D00C3A3C0 /* Walks.geojson in Resources */ = {isa = PBXBuildFile; fileRef = C11E86A61F26690D00C3A3C0 /* Walks.geojson */; };
 		C11E86AE1F266CCB00C3A3C0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C11E86AD1F266CCB00C3A3C0 /* GoogleService-Info.plist */; };
-		C16399EF1F310657004DA262 /* userSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16399ED1F310657004DA262 /* userSession.swift */; };
 		C16399F11F349F09004DA262 /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16399F01F349F09004DA262 /* Page.swift */; };
 		C16399F31F349F6F004DA262 /* PageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16399F21F349F6F004DA262 /* PageCell.swift */; };
 		C16399F51F34A056004DA262 /* UIViewConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16399F41F34A056004DA262 /* UIViewConstraint.swift */; };
@@ -77,7 +75,6 @@
 		9249E2541F309A300061B7ED /* reviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = reviewViewController.swift; sourceTree = "<group>"; };
 		92F4FB3B1F30A96D00B6D72B /* Review.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		92F4FB3D1F30B6E800B6D72B /* starView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = starView.swift; sourceTree = "<group>"; };
-		92F4FB3F1F31064F00B6D72B /* userHikingSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = userHikingSession.swift; sourceTree = "<group>"; };
 		92F4FB411F31065600B6D72B /* userSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = userSession.swift; sourceTree = "<group>"; };
 		92F4FB451F38999D00B6D72B /* placemarkAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = placemarkAlertView.swift; sourceTree = "<group>"; };
 		C11E864E1F26677300C3A3C0 /* Camina.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Camina.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -261,7 +258,6 @@
 				C11E866B1F2668F700C3A3C0 /* inputProfileViewController.swift */,
 				C11E866C1F2668F700C3A3C0 /* loginViewController.swift */,
 				92F4FB411F31065600B6D72B /* userSession.swift */,
-				92F4FB3F1F31064F00B6D72B /* userHikingSession.swift */,
 				C11E866D1F2668F700C3A3C0 /* mainViewController.swift */,
 				C11E866E1F2668F700C3A3C0 /* mapViewController.swift */,
 				9249E24E1F2F62370061B7ED /* reviewAlertView.swift */,
@@ -418,7 +414,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C16399EF1F310657004DA262 /* userSession.swift in Sources */,
 				C11E86871F2668F700C3A3C0 /* Head.swift in Sources */,
 				9249E2511F2F62690061B7ED /* modal.swift in Sources */,
 				C1F8DB241F2A3A90005EA542 /* forgetPasswordTableViewController.swift in Sources */,
