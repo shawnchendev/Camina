@@ -38,7 +38,6 @@ extension mapViewController {
         let review = reviewAlertView(userID: (Auth.auth().currentUser?.uid)!, trailID: trailID!)
         review.show(animated: true)
         reset()
-        
     }
     
     func reset(){

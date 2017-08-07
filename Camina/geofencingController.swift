@@ -33,7 +33,6 @@ extension mapViewController: CLLocationManagerDelegate {
                         let trailhead = TrailCoords()
                         trailhead.setValuesForKeys(trailheadDictionary)
                         setupRegions(trail: (trailhead.geometry?.coordinates)!, name: (trailhead.properties?.ParkID)!)
-                        
                     }
                 }
             } catch let err {

@@ -18,6 +18,7 @@
 		92F4FB3E1F30B6E800B6D72B /* starView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F4FB3D1F30B6E800B6D72B /* starView.swift */; };
 		92F4FB401F31064F00B6D72B /* userHikingSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F4FB3F1F31064F00B6D72B /* userHikingSession.swift */; };
 		92F4FB421F31065600B6D72B /* userSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F4FB411F31065600B6D72B /* userSession.swift */; };
+		92F4FB461F38999D00B6D72B /* placemarkAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F4FB451F38999D00B6D72B /* placemarkAlertView.swift */; };
 		C11E86521F26677300C3A3C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E86511F26677300C3A3C0 /* AppDelegate.swift */; };
 		C11E86591F26677300C3A3C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C11E86581F26677300C3A3C0 /* Assets.xcassets */; };
 		C11E865C1F26677300C3A3C0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C11E865A1F26677300C3A3C0 /* LaunchScreen.storyboard */; };
@@ -74,6 +75,7 @@
 		92F4FB3D1F30B6E800B6D72B /* starView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = starView.swift; sourceTree = "<group>"; };
 		92F4FB3F1F31064F00B6D72B /* userHikingSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = userHikingSession.swift; sourceTree = "<group>"; };
 		92F4FB411F31065600B6D72B /* userSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = userSession.swift; sourceTree = "<group>"; };
+		92F4FB451F38999D00B6D72B /* placemarkAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = placemarkAlertView.swift; sourceTree = "<group>"; };
 		C11E864E1F26677300C3A3C0 /* Camina.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Camina.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C11E86511F26677300C3A3C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C11E86581F26677300C3A3C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 				C11E866D1F2668F700C3A3C0 /* mainViewController.swift */,
 				C11E866E1F2668F700C3A3C0 /* mapViewController.swift */,
 				9249E24E1F2F62370061B7ED /* reviewAlertView.swift */,
+				92F4FB451F38999D00B6D72B /* placemarkAlertView.swift */,
 				9249E2521F2F67DF0061B7ED /* starRating.swift */,
 				92F4FB3D1F30B6E800B6D72B /* starView.swift */,
 				C11E86721F2668F700C3A3C0 /* rootViewController.swift */,
@@ -405,6 +408,7 @@
 				C11E86861F2668F700C3A3C0 /* geofencingController.swift in Sources */,
 				C11E86891F2668F700C3A3C0 /* infoController.swift in Sources */,
 				C11E86851F2668F700C3A3C0 /* CustomUIColor.swift in Sources */,
+				92F4FB461F38999D00B6D72B /* placemarkAlertView.swift in Sources */,
 				C11E86A01F2668F700C3A3C0 /* viewExtension.swift in Sources */,
 				C11E86961F2668F700C3A3C0 /* sessionManagement.swift in Sources */,
 				C1F8DB101F2A041E005EA542 /* trailDetailViewController.swift in Sources */,
