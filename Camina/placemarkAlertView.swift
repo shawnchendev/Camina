@@ -24,7 +24,7 @@ class placemarkAlertView: UIView, Modal{
         addSubview(backgroundView)
 
         
-        let dialogViewWidth = frame.width-64
+        let dialogViewWidth = frame.width - 64
         
         let infoLayerFrame = CGRect(x: 0, y : 0, width: dialogViewWidth, height: 60 )
         let infoLayer = UIView(frame: infoLayerFrame)

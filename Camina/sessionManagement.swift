@@ -1,19 +1,19 @@
-//
-//  sessionManagement.swift
-//  EastCoastTrail
-//
-//  Created by Diego Zuluaga on 2017-07-19.
-//  Copyright © 2017 Shawn Chen. All rights reserved.
-//
+    //
+    //  sessionManagement.swift
+    //  EastCoastTrail
+    //
+    //  Created by Diego Zuluaga on 2017-07-19.
+    //  Copyright © 2017 Shawn Chen. All rights reserved.
+    //
 
-import Foundation
-import CoreMotion
-import UIKit
-import Firebase
-import Mapbox
+    import Foundation
+    import CoreMotion
+    import UIKit
+    import Firebase
+    import Mapbox
 
-extension mapViewController {
-    
+    extension mapViewController {
+
     //session functions
     func setupSession(){
         startTimer()
@@ -27,7 +27,7 @@ extension mapViewController {
         activeSession = true
         
     }
-    
+
     func finishSession(){
         self.userPathLayer?.isVisible = false
         //Stop the pedometer
@@ -39,7 +39,7 @@ extension mapViewController {
         review.show(animated: true)
         reset()
     }
-    
+
     func reset(){
         stopTimer()
         stopActivePlacemarks()
@@ -51,20 +51,20 @@ extension mapViewController {
         allCoordinates = []
         locationManager.distanceFilter = 80
     }
-    
-    
+
+
     //MARK: - timer functions
     func startTimer(){
         if timer.isValid { timer.invalidate() }
         timer = Timer.scheduledTimer(timeInterval: timerInterval,target: self,selector: #selector(timerAction(timer:)) ,userInfo: nil,repeats: true)
     }
-    
+
     func stopTimer(){
         timer.invalidate()
         displayPedometerData()
         timeElapsed = 0
     }
-    
+
     func timerAction(timer:Timer){
         displayPedometerData()
     }
@@ -99,7 +99,7 @@ extension mapViewController {
         time = timeIntervalFormat(interval: timeElapsed)
 
         totalSteps.text = String(format:"%i",steps)
- 
+
         travelTime.text = time
 
         travelDistance.text = String(format:"%02.02f m",distance)
@@ -122,9 +122,9 @@ extension mapViewController {
         //            paceLabel.text =  paceString(title: "Avg Comp Pace", pace: computedAvgPace())
         //        }
     }
-    
+
     //MARK: - Display and time format functions
-    
+
     // convert seconds to hh:mm:ss as a string
     func timeIntervalFormat(interval:TimeInterval)-> String{
         var seconds = Int(interval + 0.5) //round up seconds
@@ -145,7 +145,7 @@ extension mapViewController {
         let seconds = Int(minPerMile * 60) % 60
         return String(format: "%@: %02.2f m/s \n\t\t %02i:%02i min/mi",title,pace,minutes,seconds)
     }
-    
+
     //    func computedAvgPace()-> Double {
     //        if let distance = self.distance{
     //            pace = distance / timeElapsed
@@ -154,12 +154,12 @@ extension mapViewController {
     //            return 0.0
     //        }
     //    }
-    
+
     func miles(meters:Double)-> Double{
         let mile = 0.000621371192
         return meters * mile
     }
-    
+
     func save() {
         
         //Database.database().isPersistenceEnabled = true
@@ -189,42 +189,7 @@ extension mapViewController {
          
         }
         
- 
-        
-        //if activeSession{
-        //return
-        //}
-        
-        //guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-        //        return
-        //}
-        
-        // 1
-        //let managedContext = appDelegate.persistentContainer.viewContext
-        
-        // 2
-        //let entity = NSEntityDescription.entity(forEntityName: "Session", in: managedContext)!
-        
-        //let session = Session(entity: entity,
-        //                      insertInto: managedContext)
-        
-        // 3
-        //session.date = date
-        //session.distance = distance as NSNumber
-        //session.pastCheckpoint = pastCheckPoint
-        //session.steps = steps as NSNumber
-        //session.time = time
-        //session.trailID = trailID
-   
-        //session.path = tempCoordArray as NSArray
-    
-        
-        // 4
-        //do {
-            //try managedContext.save()
-        //} catch let error as NSError {
-        //    print("Could not save. \(error), \(error.userInfo)")
-        //}
+
     }
-    
-}
+
+    }

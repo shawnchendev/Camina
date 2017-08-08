@@ -164,7 +164,7 @@ class mainViewController: UITableViewController, UISearchResultsUpdating, UISear
                     }
                 }
             } catch let err {
-                print(err)
+                print(err.localizedDescription)
             }
         }
     }

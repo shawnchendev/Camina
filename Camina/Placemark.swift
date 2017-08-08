@@ -43,6 +43,8 @@ class PlacemarkProperties: NSObject{
     var Installati:String?
     var Point_Numb:NSNumber?
     var NAME:String?
+    var caption: String?
+    var featureclass: String?
 
 }
 

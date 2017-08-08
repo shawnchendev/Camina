@@ -41,11 +41,11 @@ extension mapViewController: UNUserNotificationCenterDelegate {
         
         
         let content = UNMutableNotificationContent()
-        content.title = "Trail reached"
+        content.title = (head.properties?.Name)!
         //content.subtitle = String(describing: (trailHead.properties?.Distance)!)
         content.body = "You have reached "
         content.body += (head.properties?.Name)!
-        content.body += ", You can either play the informative recording or find more information within the app"
+//        content.body += ", You can either play the informative recording or find more information within the app"
         content.badge = 1
         content.categoryIdentifier = "actions"
         content.sound = UNNotificationSound.default()
@@ -83,14 +83,7 @@ extension mapViewController: UNUserNotificationCenterDelegate {
         content.categoryIdentifier = "actions"
         content.sound = UNNotificationSound.default()
         
-        readText = (placemark.properties?.NAME)!
-        
-        
-        //let url = Bundle.main.url(forResource: "camina", withExtension: "png")
-        
-        //if let attachment = try? UNNotificationAttachment(identifier: "actions", url: url!, options: nil){
-        //    content.attachments = [attachment]
-        //}
+        readText = (placemark.properties?.caption)!
         
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
         let placeIdentifier = "Placemark reached"

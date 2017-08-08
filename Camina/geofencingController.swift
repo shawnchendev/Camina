@@ -9,10 +9,10 @@
 import CoreLocation
 import UserNotifications
 import CoreMotion
-
+import UIKit
 extension mapViewController: CLLocationManagerDelegate {
-    
-    
+
+
     func getHead ( name: String) -> Head {
         for aHead in trailHeads {
             if aHead.properties?.ParkID == name {
@@ -21,7 +21,7 @@ extension mapViewController: CLLocationManagerDelegate {
         }
         return Head()
     }
-    
+
     //starts monitoring for the trail heads
     func setupGeofencing(){
         if let path = Bundle.main.path(forResource: "trails", ofType: "geojson") {
@@ -41,7 +41,7 @@ extension mapViewController: CLLocationManagerDelegate {
             }
         }
     }
-    
+
     //sets all the points in the trail paths for proximity check
     func setupRegions( trail: NSArray, name: String){
         for i in 0...trail.count-1{
@@ -62,7 +62,7 @@ extension mapViewController: CLLocationManagerDelegate {
         }
         
     }
-    
+
     //check which trail paths are closer to the user
     func checkProximity(){
         shortestDistance = 9999999
@@ -96,7 +96,7 @@ extension mapViewController: CLLocationManagerDelegate {
 
         
     }
-    
+
     // expands all of the placemarks of a given trail head
     func setupActivePlacemarks( head:Head){
         for placemark in placemarks {
@@ -112,7 +112,7 @@ extension mapViewController: CLLocationManagerDelegate {
         }
         
     }
-    
+
     //stops monitoring the active placemarks
     func stopActivePlacemarks(){
         for placemark in activePlacemarks {
@@ -120,8 +120,8 @@ extension mapViewController: CLLocationManagerDelegate {
         }
         activePlacemarks = []
     }
-    
-    
+
+
        
     //function that triggers whenever the user enters a monitored area, monitored range is roughly the same as when the area is created
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
@@ -131,27 +131,34 @@ extension mapViewController: CLLocationManagerDelegate {
                 placemark = placemarks[i]
             }
         }
-        if region.identifier != lastID {
+        if region.identifier != lastID && placemark.properties?.NAME != nil{
             lastID = region.identifier
             pastCheckPoint = region.identifier
-            setupPlacemarkNotification(placemark: placemark)
+            let state = UIApplication.shared.applicationState
+            if state == .background{
+                setupPlacemarkNotification(placemark: placemark)
+            } else if state == .active{
+                let place = placemarkAlertView(placemarkName: (placemark.properties?.NAME)!, description: (placemark.properties?.caption)!)
+                place.show(animated: true)
+        }
+        
         }
         
     }
-    
+
     func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
         
     }
-    
+
     func locationManager(_ manager: CLLocationManager, monitoringDidFailFor region: CLRegion?, withError error: Error) {
         print("Failed monitoring region: \(error.localizedDescription)")
         
     }
-    
+
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Location manager failed: \(error.localizedDescription)")
     }
-    
+
     //function that triggers whenever the user location changes to check proximity to existing areas
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let userLocation = locationManager.location
@@ -182,6 +189,6 @@ extension mapViewController: CLLocationManagerDelegate {
        
      
     }
-    
-    
-}
+
+
+    }

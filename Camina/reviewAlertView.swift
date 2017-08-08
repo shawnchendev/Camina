@@ -126,9 +126,10 @@ class reviewAlertView: UIView, Modal, UITextViewDelegate{
         dialogView.addSubview(saveButton)
         
         
-        let dialogViewHeight = titleLabel.frame.height + 8 + separatorLineView2.frame.height + 8 + dialogViewWidth - 16 + 8 - 30
+        let dialogViewHeight = titleLabel.frame.height + 8 + separatorLineView2.frame.height + 8 + dialogViewWidth - 16 + 8 - 30 + 50
+        
         dialogView.frame.origin = CGPoint(x: 32, y: frame.height)
-        dialogView.frame.size = CGSize(width: frame.width-64, height: dialogViewHeight)
+        dialogView.frame.size = CGSize(width: frame.width-64, height: 300)
         dialogView.backgroundColor = UIColor.white
         dialogView.layer.cornerRadius = 6
         dialogView.clipsToBounds = true
