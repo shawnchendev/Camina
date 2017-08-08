@@ -11,7 +11,7 @@ import UIKit
 import Firebase
 
 import UIKit
-class reviewAlertView: UIView, Modal, UITextViewDelegate{
+class reviewAlertView: UIView, Modal {
     
     var backgroundView = UIView()
     var dialogView = UIView()
@@ -141,56 +141,11 @@ class reviewAlertView: UIView, Modal, UITextViewDelegate{
         super.init(frame: frame)
         
     }
-    func saveInfor(){
-        
-//        let date = Date()
-        let date = Date()
-        
-        // convert Date to TimeInterval (typealias for Double)
-        let timeInterval = date.timeIntervalSince1970
-        
-        // convert to Integer
-        let myInt = Int(timeInterval)
-//        dateFormat.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
-//        let timestamp = dateFormat.string(from: date)
-        
-        var reviewText = reviewInput.text
-        if reviewText == " Review (optional)" {
-            reviewText = ""
-        }
-        let post : [String: AnyObject] = [ "UserID": userId as AnyObject, "rating" : starRating.rating as AnyObject, "title" : titleInput.text as AnyObject, "review" : reviewText as AnyObject, "trailID" : trailId as AnyObject, "date" : myInt as AnyObject]
-        //firebase code
-        ref = Database.database().reference()
-            
-        ref?.child("Review").childByAutoId().setValue(post)
-            
-        dismiss(animated: true)
-    }
-    
-    func closeView() {
-        dismiss(animated: true)
-    }
-    
-    func didTappedOnBackgroundView(){
-//        dismiss(animated: true)
-    }
-    required init?(coder aDecoder: NSCoder) {
+       required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.textColor == UIColor.lightGray {
-            textView.text = nil
-            textView.textColor = UIColor.black
-        }
-    }
-    
-    func textViewDidEndEditing(_ textView: UITextView) {
-        if textView.text.isEmpty {
-            textView.text = "Review (optional)"
-            textView.textColor = UIColor.lightGray
-        }
-    }
+   
 
     
 }

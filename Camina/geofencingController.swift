@@ -52,6 +52,7 @@ extension mapViewController: CLLocationManagerDelegate {
                 allPlacemarks.append(region)
                 
                 let location = CLLocation(latitude: point[1] as! CLLocationDegrees, longitude: point[0] as! CLLocationDegrees)
+                
                 allLocations.append(location)
             }
             
