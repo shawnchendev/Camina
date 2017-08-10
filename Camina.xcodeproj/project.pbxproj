@@ -14,8 +14,6 @@
 		9249E2551F309A300061B7ED /* reviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9249E2541F309A300061B7ED /* reviewViewController.swift */; };
 		92F4FB3C1F30A96D00B6D72B /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F4FB3B1F30A96D00B6D72B /* Review.swift */; };
 		92F4FB3E1F30B6E800B6D72B /* starView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F4FB3D1F30B6E800B6D72B /* starView.swift */; };
-		92F4FB421F31065600B6D72B /* userSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F4FB411F31065600B6D72B /* userSession.swift */; };
-		92F4FB461F38999D00B6D72B /* placemarkAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F4FB451F38999D00B6D72B /* placemarkAlertView.swift */; };
 		C11E86521F26677300C3A3C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E86511F26677300C3A3C0 /* AppDelegate.swift */; };
 		C11E86591F26677300C3A3C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C11E86581F26677300C3A3C0 /* Assets.xcassets */; };
 		C11E865C1F26677300C3A3C0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C11E865A1F26677300C3A3C0 /* LaunchScreen.storyboard */; };
@@ -59,6 +57,7 @@
 		C16399FB1F34A1F9004DA262 /* UserGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16399FA1F34A1F9004DA262 /* UserGuideViewController.swift */; };
 		C16399FD1F34A38E004DA262 /* rootCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16399FC1F34A38E004DA262 /* rootCell.swift */; };
 		C1D339141F39F632004AF0BA /* placemarkAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F4FB451F38999D00B6D72B /* placemarkAlertView.swift */; };
+		C1D339151F3A21A3004AF0BA /* userSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F4FB411F31065600B6D72B /* userSession.swift */; };
 		C1F8DB101F2A041E005EA542 /* trailDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F8DB0F1F2A041E005EA542 /* trailDetailViewController.swift */; };
 		C1F8DB221F2A23B7005EA542 /* landMarkTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F8DB211F2A23B7005EA542 /* landMarkTableViewController.swift */; };
 		C1F8DB241F2A3A90005EA542 /* forgetPasswordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F8DB231F2A3A90005EA542 /* forgetPasswordTableViewController.swift */; };
@@ -115,7 +114,6 @@
 		C11E86A41F26690D00C3A3C0 /* trails.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = trails.geojson; sourceTree = "<group>"; };
 		C11E86A61F26690D00C3A3C0 /* Walks.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Walks.geojson; sourceTree = "<group>"; };
 		C11E86AD1F266CCB00C3A3C0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		C16399ED1F310657004DA262 /* userSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userSession.swift; sourceTree = "<group>"; };
 		C16399F01F349F09004DA262 /* Page.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
 		C16399F21F349F6F004DA262 /* PageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageCell.swift; sourceTree = "<group>"; };
 		C16399F41F34A056004DA262 /* UIViewConstraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewConstraint.swift; sourceTree = "<group>"; };
@@ -239,11 +237,11 @@
 			children = (
 				C16399F61F34A096004DA262 /* Session+CoreDataClass.swift */,
 				C16399F71F34A096004DA262 /* Session+CoreDataProperties.swift */,
-				C16399ED1F310657004DA262 /* userSession.swift */,
 				C11E86681F2668F700C3A3C0 /* Head.swift */,
 				C11E86711F2668F700C3A3C0 /* Placemark.swift */,
 				C11E86731F2668F700C3A3C0 /* SafeJsonObject.swift */,
 				C11E867B1F2668F700C3A3C0 /* TrailCoords.swift */,
+				92F4FB411F31065600B6D72B /* userSession.swift */,
 				C11E867E1F2668F700C3A3C0 /* User.swift */,
 				92F4FB3B1F30A96D00B6D72B /* Review.swift */,
 				C16399F01F349F09004DA262 /* Page.swift */,
@@ -258,7 +256,6 @@
 				C11E866A1F2668F700C3A3C0 /* infoController.swift */,
 				C11E866B1F2668F700C3A3C0 /* inputProfileViewController.swift */,
 				C11E866C1F2668F700C3A3C0 /* loginViewController.swift */,
-				92F4FB411F31065600B6D72B /* userSession.swift */,
 				C11E866D1F2668F700C3A3C0 /* mainViewController.swift */,
 				C11E866E1F2668F700C3A3C0 /* mapViewController.swift */,
 				9249E24E1F2F62370061B7ED /* reviewAlertView.swift */,
@@ -415,8 +412,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1D339151F3A21A3004AF0BA /* userSession.swift in Sources */,
 				C1D339141F39F632004AF0BA /* placemarkAlertView.swift in Sources */,
-				C16399EF1F310657004DA262 /* userSession.swift in Sources */,
 				C11E86871F2668F700C3A3C0 /* Head.swift in Sources */,
 				9249E2511F2F62690061B7ED /* modal.swift in Sources */,
 				C1F8DB241F2A3A90005EA542 /* forgetPasswordTableViewController.swift in Sources */,

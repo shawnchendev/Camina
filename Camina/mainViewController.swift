@@ -77,12 +77,11 @@ class mainViewController: UITableViewController, UISearchResultsUpdating, UISear
   
         tableView.register(trailHeadsCell.self, forCellReuseIdentifier: cellId)
         print(currentReachabilityStatus)
-        
         fetchTrailHead()
         fetchPlacemarks()
+        fetchReviewFromFirebase()
         
-        //let review = placemarkAlertView(placemarkName: "Something", description: "description")
-        //review.show(animated: true)
+
         
         
     }
@@ -92,10 +91,6 @@ class mainViewController: UITableViewController, UISearchResultsUpdating, UISear
         setupSearchView()
         setupNavBarItem()
         tableView.separatorColor = .white
-        //for location in locationManager.monitoredRegions {
-            //locationManager.stopMonitoring(for: location)
-            //print(location)
-        //}
     }
     
     
@@ -137,17 +132,55 @@ class mainViewController: UITableViewController, UISearchResultsUpdating, UISear
                     for trailheadDictionary in trailHeadArray {
                         let trailhead = Head()
                         trailhead.setValuesForKeys(trailheadDictionary)
-                        self.trailHeads.append(trailhead)
+                        trailHeads.append(trailhead)
+                    }
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
                     }
                 }
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
+             
             } catch let err {
                 print(err)
             }
         }
     }
+    
+    func fetchReviewFromFirebase() {
+        for thead in trailHeads {
+            var trating = 0
+            var rateCount = 0
+            let ref = Database.database().reference()
+            ref.child("Review").observe(.value, with: { snapshot in
+                if let dictionary = snapshot.value as? [String: AnyObject] {
+                    for review in dictionary {
+                        let reviewDict = review.value as! [String : AnyObject]
+                        let review = Review(dictionary: reviewDict)
+                        if review.trailID == thead.properties?.ParkID {
+                            trating += review.rating!
+                            rateCount += 1
+                           
+                        }
+                    }
+                    if (trating != 0 && rateCount != 0) {
+                        thead.rating = Int(trating / rateCount)
+                    }
+                    else{
+                        thead.rating = 0
+                    }
+                }
+                
+
+                
+            })
+            
+            DispatchQueue.main.async(execute: {
+                self.tableView.reloadData()
+                
+            })
+        
+        }
+    }
+ 
     
     func fetchPlacemarks() {
         if let path = Bundle.main.path(forResource: "point", ofType: "geojson") {
@@ -195,6 +228,9 @@ class mainViewController: UITableViewController, UISearchResultsUpdating, UISear
         
         
         cell.trail = trailHead
+        if trailHead.rating == nil { trailHead.rating = 0}
+        cell.starViews.rating = trailHead.rating!
+        
         
         return cell
     }

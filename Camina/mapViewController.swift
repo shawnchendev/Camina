@@ -94,6 +94,7 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
     var distance: Double = 0
     var pastCheckPoint : String? = ""
     var trailID : String? = ""
+    var trailN : String? = ""
 
     //the pedometer
     var pedometer = CMPedometer()
@@ -151,11 +152,10 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
     lazy var showMyLocationButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .white
-        button.layer.cornerRadius = 25
+        button.layer.cornerRadius = 20
         button.setImage(#imageLiteral(resourceName: "myLocation"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitleColor(UIColor.blue, for: UIControlState())
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         button.addTarget(self, action: #selector(flyTomyLocation), for: .touchUpInside)
         return button
     }()
@@ -164,7 +164,7 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        icon = UIImage(named: "trail_sign_fill_orange")
+        icon = UIImage(named: "trail_sign_fill")
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.distanceFilter = 80
@@ -174,9 +174,6 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
         view.addSubview(showMyLocationButton)
         setupMyLocationButton()
         mapView.delegate = self
-        drawTrailHeadPoint()
-//        drawPlacemarkPoint()
-        
         fetchTrailHead()
         fetchPlacemarks()
         setupGeofencing()
@@ -186,7 +183,6 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         if activeSession {
             setupStatView()
         }
@@ -240,48 +236,30 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
         self.mapView.setCenter(myLocation,  zoomLevel: 14,animated: true)
     }
     
-    func drawTrailPathLine() {
-        // Parsing GeoJSON can be CPU intensive, do it on a background thread
-        DispatchQueue.global(qos: .background).async(execute: {
-            // Get the path for example.geojson in the app's bundle
-            
-            let jsonPath = Bundle.main.path(forResource: "trails", ofType: "geojson")
-            let url = URL(fileURLWithPath: jsonPath!)
-            
-            do {
-                // Convert the file contents to a shape collection feature object
-                let data = try Data(contentsOf: url)
-                let shapeCollectionFeature = try MGLShape(data: data, encoding: String.Encoding.utf8.rawValue) as! MGLShapeCollectionFeature
-                for i in 0...((shapeCollectionFeature.shapes.count) - 1){
-                    if let polyline = shapeCollectionFeature.shapes[i] as? MGLPolylineFeature {
-                        // Optionally set the title of the polyline, which can be used for:
-                        //  - Callout view
-                        //  - Object identification
-                        polyline.title = polyline.attributes["Name"] as? String
-                        // Add the annotation on the main thread
-                        DispatchQueue.main.async(execute: {
-                            // Unowned reference to self to prevent retain cycle
-                            [unowned self] in
-                            self.mapView.addAnnotation(polyline)
-                        })
-                    }else{
-                        let multipolyline = shapeCollectionFeature.shapes[i] as? MGLMultiPolylineFeature
-                        //print(multipolyline?.attributes["Name"] as! String)
-                        for i in 0...((multipolyline?.polylines.count)! - 1){
-                            DispatchQueue.main.async(execute: {
-                                // Unowned reference to self to prevent retain cycle
-                                [unowned self] in
-                                self.mapView.addAnnotation((multipolyline?.polylines[i])!)
-                            })
-                        }
-                    }
-                
-            }
-            }
-            catch {
-                print("GeoJSON parsing failed")
-            }
-        })
+    
+    func drawPathLineCollection(data: Data){
+        guard let style = self.mapView.style else { return }
+        
+        // Use [MGLShape shapeWithData:encoding:error:] to create a MGLShapeCollectionFeature from GeoJSON data.
+        let feature = try! MGLShape(data: data, encoding: String.Encoding.utf8.rawValue) as! MGLShapeCollectionFeature
+        
+        // Create source and add it to the map style.
+        let source = MGLShapeSource(identifier: "path", shape: feature, options: nil)
+        style.addSource(source)
+        
+        // Create station style layer.
+        
+
+        // Create line style layer.
+        let lineLayer = MGLLineStyleLayer(identifier: "trail-line", source: source)
+        
+        // Use a predicate to filter out the stations.
+        lineLayer.lineColor = MGLStyleValue(rawValue: UIColor(hex:"557BE2"))
+        lineLayer.lineWidth = MGLStyleValue(rawValue: 4)
+        
+        // Add style layers to the map view's style.
+        style.addLayer(lineLayer)
+        
     }
     
     func drawTrailHeadPoint(){
@@ -309,45 +287,20 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
         })
     }
     
-    func drawPlacemarkPoint(){
-        DispatchQueue.global(qos: .background).async(execute: {
-            let jsonPath = Bundle.main.path(forResource: "point", ofType: "geojson")
-            let url = URL(fileURLWithPath: jsonPath!)
-            do{
-                let data = try Data(contentsOf: url)
-                let placemarkpointCollectionFeature = try MGLShape(data: data, encoding: String.Encoding.utf8.rawValue) as! MGLShapeCollectionFeature
-                for i in 0...(placemarkpointCollectionFeature.shapes.count) - 1{
-                    if let point = placemarkpointCollectionFeature.shapes[i]as? MGLPointFeature{
-                        point.title = point.attribute(forKey: "NAME" ) as? String
-                        
-                        DispatchQueue.main.async(execute: {
-                            // Unowned reference to self to prevent retain cycle
-                            [unowned self] in
-                            self.mapView.addAnnotation(point)
-                        })
-                    }
-                }
-            }catch{
-                print(error.localizedDescription)
-                print("GeoJSON parsing failed")
-                
-            }
-            
-        })
-    }
+
     
     func setupMyLocationButton(){
-        showMyLocationButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -12).isActive = true
-        showMyLocationButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -72).isActive = true
-        showMyLocationButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
-        showMyLocationButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        showMyLocationButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
+        showMyLocationButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -64).isActive = true
+        showMyLocationButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        showMyLocationButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
     func setupMap(){
         mapView = MGLMapView(frame: view.bounds)
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         mapView.showsUserLocation = true
         mapView.userTrackingMode = .followWithHeading
-        mapView.setCenter(CLLocationCoordinate2D(latitude: 47.576769 , longitude: -52.731517), zoomLevel: 12, animated: false)
+        mapView.setCenter(CLLocationCoordinate2D(latitude: 47.576769 , longitude: -52.731517), zoomLevel: 12, animated: true)
 
     }
     
@@ -356,72 +309,42 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
         return 1
     }
     
-    func mapView(_ mapView: MGLMapView, lineWidthForPolylineAnnotation annotation: MGLPolyline) -> CGFloat {
-        // Set the line width for polyline annotations
-        return 5
-    }
-    
-    func mapView(_ mapView: MGLMapView, strokeColorForShapeAnnotation annotation: MGLShape) -> UIColor {
-            return UIColor(red: 59/255, green:178/255, blue:208/255, alpha:1)
-    }
-    
     func mapView(_ mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
         // Always allow callouts to popup when annotations are tapped.
         return true
     }
 
     func mapView(_ mapView: MGLMapView, didFinishLoading style: MGLStyle) {
-        drawTrailPathLine()
+        
+        DispatchQueue.global().async {
+            guard let url = Bundle.main.url(forResource: "trails", withExtension: "geojson") else { return }
+            
+            let data = try! Data(contentsOf: url)
+            
+            DispatchQueue.main.async {
+                self.drawPathLineCollection(data: data)
+                self.drawClusterPlacemark(style: style)
+            }
+            
+            self.drawTrailHeadPoint()
 
-        let url = URL(fileURLWithPath: Bundle.main.path(forResource: "point", ofType: "geojson")!)
-        
-        let source = MGLShapeSource(identifier: "clusteredPlacemarks", url: url, options: [.clustered: true, .clusterRadius: icon.size.width])
-    
-        style.addSource(source)
-        
-        // Use a template image so that we can tint it with the `iconColor` runtime styling property.
-        style.setImage(icon.withRenderingMode(.alwaysTemplate), forName: "trail_sign_fill_orange")
-        
-        // Show unclustered features as icons. The `cluster` attribute is built into clustering-enabled source features.
-        let placemarks = MGLSymbolStyleLayer(identifier: "placemark", source: source)
-        placemarks.iconImageName = MGLStyleValue(rawValue: "trail_sign_fill_orange")
-        placemarks.iconColor = MGLStyleValue(rawValue: UIColor.darkGray.withAlphaComponent(0.9))
-        placemarks.predicate = NSPredicate(format: "%K != YES", "cluster")
-        style.addLayer(placemarks)
-        
-        // Color clustered features based on clustered point counts.
-        let stops = [
-            5:  MGLStyleValue(rawValue: UIColor.cyan),
-            15:  MGLStyleValue(rawValue: UIColor.orange),
-            20: MGLStyleValue(rawValue: UIColor.red),
-            50: MGLStyleValue(rawValue: UIColor.purple)
-        ]
-        
-        // Show clustered features as circles. The `point_count` attribute is built into clustering-enabled source features.
-        let circlesLayer = MGLCircleStyleLayer(identifier: "clusteredPlacemarks", source: source)
-        circlesLayer.circleRadius = MGLStyleValue(rawValue: NSNumber(value: Double(icon.size.width) / 2))
-        circlesLayer.circleOpacity = MGLStyleValue(rawValue: 0.75)
-        circlesLayer.circleStrokeColor = MGLStyleValue(rawValue: UIColor.white.withAlphaComponent(0.75))
-        circlesLayer.circleStrokeWidth = MGLStyleValue(rawValue: 2)
-        circlesLayer.circleColor = MGLSourceStyleFunction(interpolationMode: .interval,
-                                                          stops: stops,
-                                                          attributeName: "point_count",
-                                                          options: nil)
-        circlesLayer.predicate = NSPredicate(format: "%K == YES", "cluster")
-        style.addLayer(circlesLayer)
-        
-        // Label cluster circles with a layer of text indicating feature count. Per text token convention, wrap the attribute in {}.
-        let numbersLayer = MGLSymbolStyleLayer(identifier: "clusteredplacemarksNumbers", source: source)
-        numbersLayer.textColor = MGLStyleValue(rawValue: UIColor.white)
-        numbersLayer.textFontSize = MGLStyleValue(rawValue: NSNumber(value: Double(icon.size.width) / 2))
-        numbersLayer.iconAllowsOverlap = MGLStyleValue(rawValue: true)
-        numbersLayer.text = MGLStyleValue(rawValue: "{point_count}")
-        numbersLayer.predicate = NSPredicate(format: "%K == YES", "cluster")
-        style.addLayer(numbersLayer)
-        
-        // Add a tap gesture for zooming in to clusters or showing popups on individual features.
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap(_:))))
+        }
+
     }
+    
+    //custom annotation image
+    func mapView(_ mapView: MGLMapView, imageFor annotation: MGLAnnotation) -> MGLAnnotationImage? {
+        var annotationImage = mapView.dequeueReusableAnnotationImage(withIdentifier: "trailHead")
+        
+        if annotationImage == nil {
+            var image = UIImage(named: "trail_sign_fill_green")!
+            image = image.withAlignmentRectInsets(UIEdgeInsets(top: 0, left: 0, bottom: image.size.height/2, right: 0))
+            annotationImage = MGLAnnotationImage(image: image, reuseIdentifier: "trailHead")
+        }
+        
+        return annotationImage
+    }
+    
     
     func mapViewRegionIsChanging(_ mapView: MGLMapView) {
         showPopup(false, animated: false)
@@ -482,11 +405,64 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
         }
     }
     
+    func drawClusterPlacemark(style: MGLStyle){
+        
+        let url = URL(fileURLWithPath: Bundle.main.path(forResource: "point", ofType: "geojson")!)
+        
+        let source = MGLShapeSource(identifier: "clusteredPlacemarks", url: url, options: [.clustered: true, .clusterRadius: icon.size.width])
+        
+        style.addSource(source)
+        
+        // Use a template image so that we can tint it with the `iconColor` runtime styling property.
+        style.setImage(icon.withRenderingMode(.alwaysTemplate), forName: "trail_sign_fill")
+        
+        // Show unclustered features as icons. The `cluster` attribute is built into clustering-enabled source features.
+        let placemarks = MGLSymbolStyleLayer(identifier: "placemark", source: source)
+        placemarks.iconImageName = MGLStyleValue(rawValue: "trail_sign_fill")
+        placemarks.iconColor = MGLStyleValue(rawValue: UIColor(hex:"AC7B56").withAlphaComponent(1))
+        placemarks.predicate = NSPredicate(format: "%K != YES", "cluster")
+        style.addLayer(placemarks)
+        
+        // Color clustered features based on clustered point counts.
+        let stops = [
+            5:  MGLStyleValue(rawValue: UIColor.darkGray),
+            15:  MGLStyleValue(rawValue: UIColor.orange),
+            20: MGLStyleValue(rawValue: UIColor.red),
+            50: MGLStyleValue(rawValue: UIColor.purple)
+        ]
+        
+        // Show clustered features as circles. The `point_count` attribute is built into clustering-enabled source features.
+        let circlesLayer = MGLCircleStyleLayer(identifier: "clusteredPlacemarks", source: source)
+        circlesLayer.circleRadius = MGLStyleValue(rawValue: NSNumber(value: Double(icon.size.width) / 2))
+        circlesLayer.circleOpacity = MGLStyleValue(rawValue: 0.75)
+        circlesLayer.circleStrokeColor = MGLStyleValue(rawValue: UIColor.white.withAlphaComponent(0.9))
+        circlesLayer.circleStrokeWidth = MGLStyleValue(rawValue: 2)
+        circlesLayer.circleColor = MGLSourceStyleFunction(interpolationMode: .interval,stops: stops,attributeName: "point_count",options: nil)
+        circlesLayer.predicate = NSPredicate(format: "%K == YES", "cluster")
+        style.addLayer(circlesLayer)
+        
+        // Label cluster circles with a layer of text indicating feature count. Per text token convention, wrap the attribute in {}.
+        let numbersLayer = MGLSymbolStyleLayer(identifier: "clusteredplacemarksNumbers", source: source)
+        numbersLayer.textColor = MGLStyleValue(rawValue: UIColor.white)
+        numbersLayer.textFontSize = MGLStyleValue(rawValue: NSNumber(value: Double(icon.size.width) / 2))
+        numbersLayer.iconAllowsOverlap = MGLStyleValue(rawValue: true)
+        numbersLayer.text = MGLStyleValue(rawValue: "{point_count}")
+        numbersLayer.predicate = NSPredicate(format: "%K == YES", "cluster")
+        style.addLayer(numbersLayer)
+        
+        // Add a tap gesture for zooming in to clusters or showing popups on individual features.
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap(_:))))
+    }
+    
     func startSession(){
         if !activeSession {
             setupStatView()
             activeSession = true
             setupSession()
+            guard let myLocation = self.mapView.userLocation?.location?.coordinate else { return }
+            self.mapView.setCenter(myLocation,  zoomLevel: 15,animated: true)
+            self.mapView.maximumZoomLevel = 16
+
             
         }
     
@@ -508,9 +484,7 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
         statsView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         statsView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
         statsView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
-        statsView.heightAnchor.constraint(equalToConstant:120).isActive = true
-        
-        //trailName.text = trailProperties?.Name
+        statsView.heightAnchor.constraint(equalToConstant:140).isActive = true
         
         statsView.addSubview(trailName)
         statsView.addSubview(distanceLabel)
@@ -520,7 +494,7 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
         statsView.addSubview(stepsLabel)
         statsView.addSubview(totalSteps)
         
-        trailName.topAnchor.constraint(equalTo: statsView.topAnchor, constant: 8).isActive = true
+        trailName.topAnchor.constraint(equalTo: statsView.topAnchor, constant: 20).isActive = true
         trailName.leftAnchor.constraint(equalTo: statsView.leftAnchor, constant: 8).isActive = true
         trailName.heightAnchor.constraint(equalToConstant: 30).isActive = true
         

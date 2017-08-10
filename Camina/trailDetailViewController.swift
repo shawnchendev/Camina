@@ -34,6 +34,10 @@ class trailDetailViewController: UITableViewController {
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
         // Do any additional setup after loading the view.
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+    }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
     }
@@ -83,7 +87,7 @@ class trailDetailViewController: UITableViewController {
         cell.preservesSuperviewLayoutMargins = false
         cell.separatorInset = UIEdgeInsets.zero
         cell.layoutMargins = UIEdgeInsets.zero
-        cell.textLabel?.font = UIFont.systemFont(ofSize: 13)
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
 
         return cell
     }
@@ -93,17 +97,19 @@ class trailDetailViewController: UITableViewController {
             let landmarkView = landMarkTableViewController()
             landmarkView.tarilPlacemark = trailPlacemark
             self.navigationController?.pushViewController(landmarkView, animated: true)
+
         }
         if indexPath.item == 3 {
             let reviewView = reviewViewController()
             reviewView.trailId = trailHead?.properties?.ParkID
             self.navigationController?.pushViewController(reviewView, animated: true)
+
         }
     }
     
 
     func descriptionAttributedText() -> NSAttributedString {
-        let attributedText = NSMutableAttributedString(string: "Detail\n", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 15), NSForegroundColorAttributeName: UIColor(hex: "00B16A")])
+        let attributedText = NSMutableAttributedString(string: "Detail\n", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 17), NSForegroundColorAttributeName: UIColor(hex: "00B16A")])
         
         let style = NSMutableParagraphStyle()
         style.lineSpacing = 10
@@ -112,18 +118,18 @@ class trailDetailViewController: UITableViewController {
         attributedText.addAttribute(NSParagraphStyleAttributeName, value: style, range: range)
         
         if let desc = trailHead?.properties?.CAPTION {
-            attributedText.append(NSAttributedString(string: desc, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 13), NSForegroundColorAttributeName: UIColor.black]))
+            attributedText.append(NSAttributedString(string: desc, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 15), NSForegroundColorAttributeName: UIColor.black]))
         }
         if let distance = trailHead?.properties?.Distance{
-            attributedText.append(NSAttributedString(string: "\n\nDistance: " + String(describing: distance) + " km",  attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 12), NSForegroundColorAttributeName: UIColor.darkGray]))
+            attributedText.append(NSAttributedString(string: "\n\nDistance: " + String(describing: distance) + " km",  attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14), NSForegroundColorAttributeName: UIColor.darkGray]))
         }
         
         if let time = trailHead?.properties?.Stroll{
-            attributedText.append(NSAttributedString(string: "\n\nApproximate Time: " + String(describing: time) + " minutes",  attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 12), NSForegroundColorAttributeName: UIColor.darkGray]))
+            attributedText.append(NSAttributedString(string: "\n\nApproximate Time: " + String(describing: time) + " minutes",  attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14), NSForegroundColorAttributeName: UIColor.darkGray]))
         }
         
         if let parking = trailHead?.properties?.Parking{
-            attributedText.append(NSAttributedString(string: "\n\nParking Lot : " + parking,  attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 12), NSForegroundColorAttributeName: UIColor.darkGray]))
+            attributedText.append(NSAttributedString(string: "\n\nParking Lot : " + parking,  attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14), NSForegroundColorAttributeName: UIColor.darkGray]))
         }
         
         return attributedText

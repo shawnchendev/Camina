@@ -13,7 +13,6 @@ class landMarkTableViewController: UITableViewController {
     var cellid = "cellid"
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.navigationItem.title = "Landmark"
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellid)
         // Uncomment the following line to preserve selection between presentations

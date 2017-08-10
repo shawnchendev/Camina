@@ -84,6 +84,7 @@ extension mapViewController: CLLocationManagerDelegate {
             if head.properties?.ParkID != nil && !activeSession {
                 //setupSession(head: head)
                 trailID = head.properties?.ParkID
+                trailN = head.properties?.Name
                 setupTrailHeadNotification(head: head)
                 setupActivePlacemarks(head: head)
                 //print(head.properties?.Name)
@@ -138,6 +139,7 @@ extension mapViewController: CLLocationManagerDelegate {
             if state == .background{
                 setupPlacemarkNotification(placemark: placemark)
             } else if state == .active{
+           
                 let place = placemarkAlertView(placemarkName: (placemark.properties?.NAME)!, description: (placemark.properties?.caption)!)
                 place.show(animated: true)
         }
@@ -181,8 +183,6 @@ extension mapViewController: CLLocationManagerDelegate {
         }
         
         if shortestDistance > 100 && activeSession {
-            //finishSession()
-            //NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Stop session"), object: nil)
             stopSession()
             stopActivePlacemarks()
         }

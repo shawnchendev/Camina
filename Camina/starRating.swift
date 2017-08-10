@@ -68,8 +68,7 @@ class ratingControl : UIStackView {
             
             // Add constraints
             button.translatesAutoresizingMaskIntoConstraints = false
-            //button.heightAnchor.constraint(equalToConstant: 40.0).isActive = true
-            button.widthAnchor.constraint(equalToConstant: 30.0).isActive = true
+            button.widthAnchor.constraint(equalToConstant: frame.width / 5).isActive = true
             
             // Setup the button action
             button.addTarget(self, action: #selector(ratingControl.ratingButtonTapped(button:)), for: .touchUpInside)

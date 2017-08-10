@@ -6,13 +6,13 @@
     //  Copyright © 2017 Shawn Chen. All rights reserved.
     //
 
-    import Foundation
-    import CoreMotion
-    import UIKit
-    import Firebase
-    import Mapbox
+import Foundation
+import CoreMotion
+import UIKit
+import Firebase
+import Mapbox
 
-    extension mapViewController {
+extension mapViewController {
 
     //session functions
     func setupSession(){
@@ -104,7 +104,7 @@
 
         travelDistance.text = String(format:"%02.02f m",distance)
         
-        trailName.text = " \(String(describing: trailID!)) - \(String(describing: pastCheckPoint!)) "
+        trailName.text = " \(String(describing: trailN!)) - \(String(describing: pastCheckPoint!)) "
         
         //        //average pace
         //        if let averagePace = self.averagePace{

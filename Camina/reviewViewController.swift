@@ -40,8 +40,21 @@ class reviewViewController : UITableViewController {
     }
     
     
-    // MARK: - Table view data source
-    
+    func reviewAttributedText(review : Review) -> NSAttributedString {
+        let attributedText = NSMutableAttributedString(string: review.title!, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 15), NSForegroundColorAttributeName: UIColor(hex: "00B16A")])
+        
+        let style = NSMutableParagraphStyle()
+        style.lineSpacing = 5
+        
+        let range = NSMakeRange(0, attributedText.string.characters.count)
+        attributedText.addAttribute(NSParagraphStyleAttributeName, value: style, range: range)
+        
+        if let reviewDescription = review.review {
+            attributedText.append(NSAttributedString(string: "\n" + reviewDescription, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 13), NSForegroundColorAttributeName: UIColor.black]))
+        }
+  
+        return attributedText
+    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
@@ -49,14 +62,16 @@ class reviewViewController : UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        let dummySize = CGSize(width: view.frame.width, height: 1000)
+        let options = NSStringDrawingOptions.usesFontLeading.union(NSStringDrawingOptions.usesLineFragmentOrigin)
+        let rect = reviewAttributedText(review: reviews[indexPath.item]).boundingRect(with: dummySize, options: options, context: nil)
+        return rect.height + 50
     }
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellid, for: indexPath) as! reviewCell
-        cell.trailNameLabel.text = reviews[indexPath.item].title
-        cell.trailTypeLabel.text = reviews[indexPath.item].review
+        cell.textView.attributedText = reviewAttributedText(review: reviews[indexPath.item])
         cell.starViews.rating = reviews[indexPath.item].rating!
         cell.selectionStyle = .none
         cell.isUserInteractionEnabled = false
@@ -119,40 +134,44 @@ class reviewCell : UITableViewCell {
         return view
     }()
     
-    let starViews = starView(frame:CGRect(x:16 , y: 8, width: 150, height: 30))
-    
-    
-    let trailNameLabel: UILabel = {
-        let lbl = UILabel()
-        lbl.font = UIFont.systemFont(ofSize: 14)
-        lbl.translatesAutoresizingMaskIntoConstraints = false
-        return lbl
-    }()
-    let trailTypeLabel: UILabel = {
-        let lbl = UILabel()
-        lbl.font = UIFont.systemFont(ofSize: 12)
-        lbl.translatesAutoresizingMaskIntoConstraints = false
-        lbl.textColor = UIColor(hex: "95989A")
-        return lbl
-    }()
+    let starViews = starView(frame:CGRect(x: 8 , y: 8, width: 100, height: 20))
 
     
-    func setupView(){
+    var textView: UITextView = {
+        let tv = UITextView()
+        tv.text = "SAMPLE DESCRIPTION"
+        tv.isScrollEnabled = false
+        return tv
+    }()
+    
+    func setupView() {
         backgroundColor = .white
+
         addSubview(starViews)
-        addSubview(trailNameLabel)
-        addSubview(trailTypeLabel)
+        addSubview(textView)
         
-     
-        trailNameLabel.leftAnchor.constraint(equalTo: starViews.leftAnchor, constant: 8).isActive = true
-        trailNameLabel.topAnchor.constraint(equalTo: starViews.bottomAnchor, constant:2).isActive = true
-        trailNameLabel.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
+        addConstraintsWithFormat("H:|-8-[v0]-8-|", views: textView)
         
-        trailTypeLabel.leftAnchor.constraint(equalTo: starViews.leftAnchor, constant: 8).isActive = true
-        trailTypeLabel.topAnchor.constraint(equalTo: trailNameLabel.bottomAnchor, constant:4).isActive = true
-        trailTypeLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/2).isActive = true
-        
+        addConstraintsWithFormat("V:|-25-[v0]|", views: textView)
     }
+    
+//    
+//    func setupView(){
+//        backgroundColor = .white
+//        addSubview(starViews)
+//        addSubview(trailNameLabel)
+//        addSubview(trailTypeLabel)
+//        
+//     
+//        trailNameLabel.leftAnchor.constraint(equalTo: starViews.leftAnchor, constant: 8).isActive = true
+//        trailNameLabel.topAnchor.constraint(equalTo: starViews.bottomAnchor, constant:2).isActive = true
+//        trailNameLabel.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
+//        
+//        trailTypeLabel.leftAnchor.constraint(equalTo: starViews.leftAnchor, constant: 8).isActive = true
+//        trailTypeLabel.topAnchor.constraint(equalTo: trailNameLabel.bottomAnchor, constant:4).isActive = true
+//        trailTypeLabel.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
+//        
+//    }
     
 
 

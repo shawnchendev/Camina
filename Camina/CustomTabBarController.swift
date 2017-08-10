@@ -11,10 +11,14 @@ import Firebase
 
 class CustomTabBarController: UITabBarController {
     let userProfileController = userProfileViewController()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         checkIfUserIsLoggedIn()
-        
+
         let mainController = mainViewController()
         let navigationController = UINavigationController(rootViewController: mainController)
         navigationController.title = "Trail"
@@ -65,8 +69,7 @@ class CustomTabBarController: UITabBarController {
             perform(#selector(handleLogOut), with: nil, afterDelay: 0)
         } else {
             let uid = Auth.auth().currentUser?.uid
-            Database.database().reference().child("users").child(uid!).observeSingleEvent(of: .value, with: { (snapshot) in
-                
+            Database.database().reference().child("users").child(uid!).observe(.value, with: { (snapshot) in
                 if let dictionary = snapshot.value as? [String: AnyObject] {
                     let user = defaultUser(dictionary: dictionary)
                     self.userProfileController.user = user

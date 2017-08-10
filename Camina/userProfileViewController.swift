@@ -153,15 +153,68 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
     let separateView : UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(hex: "00B16A")
-
         view.translatesAutoresizingMaskIntoConstraints = false
         //        view.backgroundColor =
         return view
     }()
     
+    let collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        cv.backgroundColor = UIColor.red
+        cv.translatesAutoresizingMaskIntoConstraints = false
+        return cv
+    }()
     
+     let cellId = "cellId"
+
     
 
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+       return userSessions.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+//        if let imageName = userSessions?.screenshots?[indexPath.item] {
+//            cell.imageView.image = UIImage(named: imageName)
+//        }
+        cell.backgroundColor = UIColor.green
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 200, height: 200)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsetsMake(0, 14, 0, 14)
+    }
+    
+    fileprivate class SessionViewCell: BaseCell {
+        
+        let imageView: UIImageView = {
+            let iv = UIImageView()
+            iv.contentMode = .scaleAspectFill
+            iv.backgroundColor = UIColor.green
+            return iv
+        }()
+        
+        
+        fileprivate override func setupViews() {
+            super.setupViews()
+            
+            layer.masksToBounds = true
+            
+            addSubview(imageView)
+            addConstraintsWithFormat("H:|[v0]|", views: imageView)
+            addConstraintsWithFormat("V:|[v0]|", views: imageView)
+        }
+        
+    }
+    
  
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -179,16 +232,20 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
             self.travelTime.text = String(self.totalTime / 60 ) + " mins"
             self.nSteps.text = String(self.totalSteps) + "steps"
         }
+//        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+
         
         view.addSubview(profileCoverImageView)
         view.addSubview(profileImageView)
         view.addSubview(userNameLabel)
         view.addSubview(statView)
         view.addSubview(overviewLabel)
+//        view.addSubview(collectionView)
         
         setupProfileImageView()
         setupProfileCoverImageView()
         setupStatView()
+//        setupCollectionView()
         
     }
     
@@ -201,6 +258,8 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
 
     }
     
+    
+    
     func setupStatView(){
         overviewLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
         overviewLabel.bottomAnchor.constraint(equalTo: statView.topAnchor, constant: -4).isActive = true
@@ -209,9 +268,8 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
         statView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         statView.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 8).isActive = true
         statView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -8).isActive = true
-        statView.heightAnchor.constraint(equalToConstant: 110).isActive = true
+        statView.heightAnchor.constraint(equalToConstant: 100).isActive = true
         
-        statView.addSubview(separateView)
         statView.addSubview(sessionLabel)
         statView.addSubview(nSession)
         statView.addSubview(distanceLabel)
@@ -220,12 +278,6 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
         statView.addSubview(travelTime)
         statView.addSubview(stepsLabel)
         statView.addSubview(nSteps)
-        
-        
-        separateView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        separateView.topAnchor.constraint(equalTo: statView.topAnchor).isActive = true
-        separateView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -8).isActive = true
-        separateView.heightAnchor.constraint(equalToConstant: 1).isActive = true
         
         sessionLabel.topAnchor.constraint(equalTo: statView.topAnchor, constant: 4).isActive = true
         sessionLabel.leftAnchor.constraint(equalTo: statView.leftAnchor, constant: 16).isActive = true
@@ -280,6 +332,13 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
         profileCoverImageView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         profileCoverImageView.heightAnchor.constraint(equalToConstant: 150).isActive = true
     }
+    
+    func setupCollectionView(){
+        collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        collectionView.topAnchor.constraint(equalTo: statView.bottomAnchor, constant: 8).isActive = true
+        collectionView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -8).isActive = true
+        collectionView.heightAnchor.constraint(equalToConstant: 210).isActive = true
+    }
 
     
     func handleLogOut() {
@@ -288,8 +347,6 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
         } catch let logoutError{
             print(logoutError)
         }
-//        let root = UserGuideViewController()
-//        self.present(root, animated: true, completion: nil)
         self.presentRootView()
     }
     
@@ -324,9 +381,6 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
  
                 }, withCancel: nil)
             }
-            
-
-            
         }, withCancel: nil)
         
         

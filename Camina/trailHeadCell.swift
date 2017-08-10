@@ -59,7 +59,6 @@ class trailHeadsCell: UITableViewCell {
         lbl.textColor = UIColor(hex: "95989A")
         return lbl
     }()
-    
     var trail: Head? {
         didSet {
             if let trailName = trail?.properties?.Name {
@@ -74,12 +73,16 @@ class trailHeadsCell: UITableViewCell {
         }
     }
     
+    let starViews = starView(frame:CGRect(x:  220, y: 150 + 15 + 8, width: 75, height: 15))
+
     func setupView(){
+
         backgroundColor = .white
         addSubview(spacingView)
         addSubview(trailPreviewImage)
         addSubview(trailNameLabel)
         addSubview(trailTypeLabel)
+        addSubview(starViews)
         
         spacingView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         spacingView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true

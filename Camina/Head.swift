@@ -11,6 +11,7 @@ import Foundation
 class Head: SafeJsonObject{
     var properties : Properties?
     var geometry: Geometry?
+    var rating: Int?
     
     override func setValue(_ value: Any?, forKey key: String) {
         if key == "properties" {
