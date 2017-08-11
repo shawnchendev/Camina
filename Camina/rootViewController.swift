@@ -83,11 +83,7 @@ class rootViewController: UIViewController{
     }
     
     
-    func handleLogin(){
-        let lvc = loginViewController()
-        self.navigationController?.pushViewController(lvc, animated: true)
-    }
-
+  
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -106,11 +102,7 @@ class rootViewController: UIViewController{
         logoImage.heightAnchor.constraint(equalToConstant: 100).isActive = true
         logoImage.widthAnchor.constraint(equalToConstant:170).isActive = true
     }
-    //signup user with their email
-    func handlesignup(){
-        let svc = signupViewController()
-        self.navigationController?.pushViewController(svc, animated: true)
-    }
+
     
     func setupButton(){
         //login button constraint
@@ -124,8 +116,6 @@ class rootViewController: UIViewController{
         signupButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         signupButton.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
         signupButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        
-        
         
     }
 }
