@@ -7,9 +7,9 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>447222580474-jhc616kptpk7lpnqeuheu99am9tdpfk9.apps.googleusercontent.com</string>
+	<string>447222580474-c81nmi4l3ihrvsdd5i7t4bhsaun9ic70.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.447222580474-jhc616kptpk7lpnqeuheu99am9tdpfk9</string>
+	<string>com.googleusercontent.apps.447222580474-c81nmi4l3ihrvsdd5i7t4bhsaun9ic70</string>
 	<key>API_KEY</key>
 	<string>AIzaSyCiMMQmwCU-ssl68sdOp_2_QR-jzg1yi2M</string>
 	<key>GCM_SENDER_ID</key>
@@ -17,7 +17,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>shawnchen.Camina</string>
+	<string>com.proximastech.camina</string>
 	<key>PROJECT_ID</key>
 	<string>caminatrail</string>
 	<key>STORAGE_BUCKET</key>
@@ -33,7 +33,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:447222580474:ios:4f28dca1b32c5ba1</string>
+	<string>1:447222580474:ios:7fea5cb807a79823</string>
 	<key>DATABASE_URL</key>
 	<string>https://caminatrail.firebaseio.com</string>
 </dict>

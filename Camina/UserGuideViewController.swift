@@ -30,10 +30,10 @@ class UserGuideViewController: UIViewController, UICollectionViewDataSource, UIC
         
         let secondPage = Page(title: "Hiking log", message: "Keep track of your hiking with a friendly User Interface", imageName: "page2")
         
-        let thirdPage = Page(title: "Share your Adventure", message: "Tap the More menu in the upper corner. Choose \"Send this Book\"", imageName: "page1")
+//        let thirdPage = Page(title: "Share your Adventure", message: "Tap the More menu in the upper corner. Choose \"Send this Book\"", imageName: "page1")
         
 //        return [firstPage]
-        return [firstPage, secondPage, thirdPage]
+        return [firstPage, secondPage]
     }()
     
     lazy var pageControl: UIPageControl = {
@@ -76,7 +76,7 @@ class UserGuideViewController: UIViewController, UICollectionViewDataSource, UIC
         if pageControl.currentPage == pages.count - 1 {
             moveControlConstraintsOffScreen()
             
-            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 self.view.layoutIfNeeded()
             }, completion: nil)
         }
@@ -91,8 +91,8 @@ class UserGuideViewController: UIViewController, UICollectionViewDataSource, UIC
     }
     
     var pageControlBottomAnchor: NSLayoutConstraint?
-    var skipButtonTopAnchor: NSLayoutConstraint?
-    var nextButtonTopAnchor: NSLayoutConstraint?
+    var skipButtonBottomAnchor: NSLayoutConstraint?
+    var nextButtonBottomAnchor: NSLayoutConstraint?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -106,9 +106,9 @@ class UserGuideViewController: UIViewController, UICollectionViewDataSource, UIC
         
         pageControlBottomAnchor = pageControl.anchor(nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 40)[1]
         
-        skipButtonTopAnchor = skipButton.anchor(view.topAnchor, left: view.leftAnchor, bottom: nil, right: nil, topConstant: 16, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 60, heightConstant: 50).first
+        skipButtonBottomAnchor = skipButton.anchor(nil, left: nil, bottom: view.bottomAnchor, right: nil, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 60, heightConstant: 50).first
         
-        nextButtonTopAnchor = nextButton.anchor(view.topAnchor, left: nil, bottom: nil, right: view.rightAnchor, topConstant: 16, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 60, heightConstant: 50).first
+        nextButtonBottomAnchor = nextButton.anchor(nil, left: nil, bottom:  view.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 60, heightConstant: 50).first
         
         //use autolayout instead
         collectionView.anchorToTop(view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
@@ -166,8 +166,8 @@ class UserGuideViewController: UIViewController, UICollectionViewDataSource, UIC
         } else {
             //back on regular pages
             pageControlBottomAnchor?.constant = 0
-            skipButtonTopAnchor?.constant = 16
-            nextButtonTopAnchor?.constant = 16
+            skipButtonBottomAnchor?.constant = 0
+            nextButtonBottomAnchor?.constant = 0
         }
         
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
@@ -177,8 +177,8 @@ class UserGuideViewController: UIViewController, UICollectionViewDataSource, UIC
     
     fileprivate func moveControlConstraintsOffScreen() {
         pageControlBottomAnchor?.constant = 40
-        skipButtonTopAnchor?.constant = -40
-        nextButtonTopAnchor?.constant = -40
+        skipButtonBottomAnchor?.constant = 40
+        nextButtonBottomAnchor?.constant = 40
     }
     
     fileprivate func registerCells() {
