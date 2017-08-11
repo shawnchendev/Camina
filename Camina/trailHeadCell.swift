@@ -54,9 +54,11 @@ class trailHeadsCell: UITableViewCell {
     }()
     let trailTypeLabel: UILabel = {
         let lbl = UILabel()
-        lbl.font = UIFont.systemFont(ofSize: 11)
+        lbl.font = UIFont.systemFont(ofSize: 12)
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.textColor = UIColor(hex: "95989A")
+        lbl.adjustsFontSizeToFitWidth = true
+        lbl.minimumScaleFactor = 0.5
         return lbl
     }()
     var trail: Head? {

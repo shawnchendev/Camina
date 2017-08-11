@@ -149,14 +149,37 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
     var icon: UIImage!
     var popup: UILabel?
     
-    lazy var showMyLocationButton: UIButton = {
+    var regionChanged = false
+    
+    lazy var centerUserLocationButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .white
-        button.layer.cornerRadius = 20
-        button.setImage(#imageLiteral(resourceName: "myLocation"), for: .normal)
+        button.layer.cornerRadius = 30
+        button.setImage(#imageLiteral(resourceName: "userLocationCenter"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitleColor(UIColor.blue, for: UIControlState())
-        button.addTarget(self, action: #selector(flyTomyLocation), for: .touchUpInside)
+        button.addTarget(self, action: #selector(flytoUserLocation), for: .touchUpInside)
+        return button
+    }()
+    
+    lazy var zoomInButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.backgroundColor = .white
+        button.setTitle("+", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitleColor(UIColor.darkGray, for: UIControlState())
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        button.addTarget(self, action: #selector(zoomInMap), for: .touchUpInside)
+        return button
+    }()
+    
+    lazy var zoomOutButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.backgroundColor = .white
+        button.setTitle("-", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitleColor(UIColor.darkGray, for: UIControlState())
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        button.addTarget(self, action: #selector(zoomOutMap), for: .touchUpInside)
         return button
     }()
 
@@ -171,9 +194,10 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
         locationManager.startUpdatingLocation()
         setupMap()
         view.addSubview(self.mapView)
-        view.addSubview(showMyLocationButton)
-        setupMyLocationButton()
-        mapView.delegate = self
+        view.addSubview(centerUserLocationButton)
+        view.addSubview(zoomOutButton)
+        view.addSubview(zoomInButton)
+        setupMapViewButtonControll()
         fetchTrailHead()
         fetchPlacemarks()
         setupGeofencing()
@@ -190,11 +214,19 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
      
     }
     
-    // Wait until the map is loaded before adding to the map.
-//    func mapView(_ mapView: MGLMapView, didFinishLoading style: MGLStyle) {
-//        //addLayer(to: style)
-//    }
-//    
+    func checkIfUserLocationServiceAvaible() -> Bool{
+        if CLLocationManager.locationServicesEnabled() {
+            switch(CLLocationManager.authorizationStatus()) {
+            case .notDetermined, .restricted, .denied, .authorizedWhenInUse:
+                return false
+            case .authorizedAlways:
+                return true
+            }
+        } else {
+            return false
+        }
+        
+    }
     func updateLocationLine() {
         if allCoordinates.count > 0 {
             // Update our MGLShapeSource with the current locations.
@@ -203,7 +235,7 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
         
     }
     
-    func addLayer(to style: MGLStyle) {
+    func drawTemplateUserPathLine(to style: MGLStyle) {
         // Add an empty MGLShapeSource, we’ll keep a reference to this and add points to this later.
         let source = MGLShapeSource(identifier: "polyline", shape: nil, options: nil)
         style.addSource(source)
@@ -213,10 +245,10 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
         let layer = MGLLineStyleLayer(identifier: "polyline", source: source)
         layer.lineJoin = MGLStyleValue(rawValue: NSValue(mglLineJoin: .round))
         layer.lineCap = MGLStyleValue(rawValue: NSValue(mglLineCap: .round))
-        layer.lineColor = MGLStyleValue(rawValue: UIColor.red)
+        layer.lineColor = MGLStyleValue(rawValue: UIColor.darkGray)
         layer.lineWidth = MGLStyleFunction(interpolationMode: .exponential,
                                            cameraStops: [14: MGLConstantStyleValue<NSNumber>(rawValue: 5),
-                                                         18: MGLConstantStyleValue<NSNumber>(rawValue: 20)],
+                                                         18: MGLConstantStyleValue<NSNumber>(rawValue: 7)],
                                            options: [.defaultValue : MGLConstantStyleValue<NSNumber>(rawValue: 1.5)])
         style.addLayer(layer)
         self.userPathLayer = layer
@@ -224,16 +256,26 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
     
     func updatePolylineWithCoordinates(coordinates: [CLLocationCoordinate2D]) {
         var mutableCoordinates = coordinates
-        
         let polyline = MGLPolylineFeature(coordinates: &mutableCoordinates, count: UInt(mutableCoordinates.count))
-        
         // Updating the MGLShapeSource’s shape will have the map redraw our polyline with the current coordinates.
         polylineSource?.shape = polyline
     }
     
-    func flyTomyLocation(){
-        guard let myLocation = self.mapView.userLocation?.location?.coordinate else { return }
-        self.mapView.setCenter(myLocation,  zoomLevel: 14,animated: true)
+    func flytoUserLocation(){
+        if checkIfUserLocationServiceAvaible(){
+            guard let userLocation = mapView.userLocation?.location?.coordinate else {
+                return
+            }
+            if activeSession{
+                mapView.userTrackingMode = .followWithHeading
+            }else{
+                mapView.setCenter(userLocation, zoomLevel: 14, animated: false)
+                mapView.userTrackingMode = .follow
+            }
+            regionChanged = false
+        } else{
+            return
+        }
     }
     
     
@@ -246,8 +288,6 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
         // Create source and add it to the map style.
         let source = MGLShapeSource(identifier: "path", shape: feature, options: nil)
         style.addSource(source)
-        
-        // Create station style layer.
         
 
         // Create line style layer.
@@ -289,18 +329,27 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
     
 
     
-    func setupMyLocationButton(){
-        showMyLocationButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
-        showMyLocationButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -64).isActive = true
-        showMyLocationButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
-        showMyLocationButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+    func setupMapViewButtonControll(){
+        centerUserLocationButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
+        centerUserLocationButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -64).isActive = true
+        centerUserLocationButton.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        centerUserLocationButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        
+        zoomInButton.rightAnchor.constraint(equalTo: centerUserLocationButton.rightAnchor, constant: -10).isActive = true
+        zoomInButton.bottomAnchor.constraint(equalTo: zoomOutButton.topAnchor).isActive = true
+        zoomInButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        zoomInButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        
+        zoomOutButton.rightAnchor.constraint(equalTo: centerUserLocationButton.rightAnchor, constant: -10).isActive = true
+        zoomOutButton.bottomAnchor.constraint(equalTo: centerUserLocationButton.topAnchor, constant: -16).isActive = true
+        zoomOutButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        zoomOutButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
     func setupMap(){
         mapView = MGLMapView(frame: view.bounds)
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         mapView.showsUserLocation = true
-        mapView.userTrackingMode = .followWithHeading
-        mapView.setCenter(CLLocationCoordinate2D(latitude: 47.576769 , longitude: -52.731517), zoomLevel: 12, animated: true)
+        mapView.delegate = self
 
     }
     
@@ -313,6 +362,20 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
         // Always allow callouts to popup when annotations are tapped.
         return true
     }
+    
+    func mapView(_ mapView: MGLMapView, didUpdate userLocation: MGLUserLocation?){
+        
+        if userLocation != nil && !regionChanged{
+            
+            if activeSession{
+                mapView.userTrackingMode = .followWithHeading
+            }else{
+                mapView.userTrackingMode = .follow
+
+            }
+        }
+        
+    }
 
     func mapView(_ mapView: MGLMapView, didFinishLoading style: MGLStyle) {
         
@@ -324,11 +387,14 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
             DispatchQueue.main.async {
                 self.drawPathLineCollection(data: data)
                 self.drawClusterPlacemark(style: style)
+
             }
             
             self.drawTrailHeadPoint()
-
         }
+        
+        drawTemplateUserPathLine(to: style)
+
 
     }
     
@@ -348,7 +414,13 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
     
     func mapViewRegionIsChanging(_ mapView: MGLMapView) {
         showPopup(false, animated: false)
+        regionChanged = true
+
     }
+    func mapView(_ mapView: MGLMapView, regionDidChangeAnimated animated: Bool) {
+
+    }
+    
     
     func handleTap(_ tap: UITapGestureRecognizer) {
         if tap.state == .ended {
@@ -477,6 +549,17 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
         }
    
     }
+    func zoomInMap(){
+       let zoomLevel = mapView.zoomLevel
+       mapView.setZoomLevel(zoomLevel + 1, animated: true)
+    }
+    
+    
+    func zoomOutMap(){
+        let zoomLevel = mapView.zoomLevel
+        mapView.setZoomLevel(zoomLevel - 1, animated: true)
+    }
+
 
     func setupStatView(){
         

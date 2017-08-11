@@ -50,6 +50,7 @@ extension mapViewController {
         trailID = ""
         allCoordinates = []
         locationManager.distanceFilter = 80
+        mapView.style?.removeLayer(self.userPathLayer!)
     }
 
 
@@ -105,7 +106,7 @@ extension mapViewController {
         travelDistance.text = String(format:"%02.02f m",distance)
         
         trailName.text = " \(String(describing: trailN!)) - \(String(describing: pastCheckPoint!)) "
-        
+        self.updateLocationLine()
         //        //average pace
         //        if let averagePace = self.averagePace{
         //            avgPaceLabel.text = paceString(title: "Avg Pace", pace: averagePace)

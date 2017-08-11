@@ -87,7 +87,7 @@ class signupViewController: UIViewController {
     lazy var facebooksignupButton: UIButton = {
         let button = UIButton(type: .system)
         button.layer.cornerRadius = 5
-        button.backgroundColor = UIColor(hex: "00B16A")
+        button.backgroundColor = UIColor(hex: "557BE2")
         button.setTitle("Sign Up with Facebook ", for: UIControlState())
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitleColor(UIColor.white, for: UIControlState())

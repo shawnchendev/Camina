@@ -23,5 +23,6 @@ target 'Camina' do
     pod 'FloatRatingView', '~> 2.0.0'
 
     pod 'Mapbox-iOS-SDK', '~> 3.6’
+    pod 'MapboxStatic.swift', '~> 0.9'
 
 end
