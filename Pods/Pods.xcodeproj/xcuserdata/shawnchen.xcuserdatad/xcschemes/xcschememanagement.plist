@@ -39,6 +39,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>MapboxStatic.swift.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-Camina.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -57,7 +62,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>3F2CA5454C2E6F46B839CB878CC07D53</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>44CAD6CE523055ED339E87154473A254</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A7F4DB65C129181E8FA24F30F3543438</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -78,11 +93,6 @@
 			<true/>
 		</dict>
 		<key>E10250FECAFAA00B2CAAF40A7178BE26</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E204D3F4C7EC1C829B1C5A2F0C22436F</key>
 		<dict>
 			<key>primary</key>
 			<true/>

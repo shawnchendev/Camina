@@ -215,7 +215,7 @@ class loginViewController: UIViewController {
                 guard let uid = user?.uid else{ return }
 
                 if authProviders.count > 0 {
-                    self.perform(#selector(self.presentMainView), with: nil, afterDelay: 0)
+                    self.dismiss(animated: true, completion: nil)
                 }else{
                     self.gotoCreateprofile(email: email, userUuid: uid,name: name,profileUrl: url)
                 }

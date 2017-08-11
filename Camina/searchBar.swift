@@ -17,7 +17,7 @@ extension mainViewController {
         
         self.searchController.searchBar.scopeButtonTitles = searchScropTitle
         
-        tableView.tableHeaderView = searchController.searchBar
+//        tableView.tableHeaderView = searchController.searchBar
     }
     
     func searchHandler(){

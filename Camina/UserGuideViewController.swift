@@ -26,14 +26,14 @@ class UserGuideViewController: UIViewController, UICollectionViewDataSource, UIC
     let rootCellId = "rootCellId"
     
     let pages: [Page] = {
-        let firstPage = Page(title: "Automated Hiking Session", message: "It's free to send your books to the people in your life. Every recipient's first book is on us.", imageName: "page1")
+        let firstPage = Page(title: "Automated Hiking Session", message: "Just walk on any trail you like, Camina will record your progress automatically. Dont need to press any Button", imageName: "page1")
         
-        let secondPage = Page(title: "Hiking log", message: "Tap the More menu next to any book. Choose \"Send this Book\"", imageName: "page2")
+        let secondPage = Page(title: "Hiking log", message: "Keep track of your hiking with a friendly User Interface", imageName: "page2")
         
-        let thirdPage = Page(title: "Share your Adventure", message: "Tap the More menu in the upper corner. Choose \"Send this Book\"", imageName: "page3")
+        let thirdPage = Page(title: "Share your Adventure", message: "Tap the More menu in the upper corner. Choose \"Send this Book\"", imageName: "page1")
         
-        return [firstPage]
-//        return [firstPage, secondPage, thirdPage]
+//        return [firstPage]
+        return [firstPage, secondPage, thirdPage]
     }()
     
     lazy var pageControl: UIPageControl = {

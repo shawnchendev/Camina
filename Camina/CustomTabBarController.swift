@@ -61,6 +61,7 @@ class CustomTabBarController: UITabBarController {
             print(logoutError)
         }
         self.presentRootView()
+
     }
     
     

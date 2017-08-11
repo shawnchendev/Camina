@@ -80,6 +80,7 @@ PODS:
     - GoogleSymbolUtilities (~> 1.1)
   - GTMSessionFetcher/Core (1.1.11)
   - Mapbox-iOS-SDK (3.6.0)
+  - MapboxStatic.swift (0.9.1)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
     - nanopb/encode (= 0.3.8)
@@ -98,6 +99,7 @@ DEPENDENCIES:
   - FloatRatingView (~> 2.0.0)
   - Google/SignIn
   - Mapbox-iOS-SDK (~> 3.6)
+  - MapboxStatic.swift (~> 0.9)
 
 SPEC CHECKSUMS:
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
@@ -123,8 +125,9 @@ SPEC CHECKSUMS:
   GoogleUtilities: 8bbc733218aad26306f9d4a253823986110e3358
   GTMSessionFetcher: 5ad62e8200fa00ed011fe5e08d27fef72c5b1429
   Mapbox-iOS-SDK: c911b1875a00f12bb74253b763ac483425bd4225
+  MapboxStatic.swift: 247d98dd6e11b8934aa5d122efcb50384f8d66f6
   nanopb: 22bc080fa3955e2116b6ff3ee6c2cb3c15ab97cb
 
-PODFILE CHECKSUM: 78fa2b4d885dee94ae766aae5275e61824efbf2f
+PODFILE CHECKSUM: 1e3beb4a49080679bdb5ba65a53548ee3063f39d
 
 COCOAPODS: 1.2.1

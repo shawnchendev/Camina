@@ -106,8 +106,10 @@ class reviewViewController : UITableViewController {
     }
     
     func addReview(){
+        print(23123123)
         let review = reviewAlertView(userID: (Auth.auth().currentUser?.uid)!, trailID: trailId)
-        review.show(animated: true)
+
+        review.show(animated: false)
         self.tableView.reloadData()
     }
 }
@@ -152,7 +154,7 @@ class reviewCell : UITableViewCell {
         
         addConstraintsWithFormat("H:|-8-[v0]-8-|", views: textView)
         
-        addConstraintsWithFormat("V:|-25-[v0]|", views: textView)
+        addConstraintsWithFormat("V:|-30-[v0]|", views: textView)
     }
     
 //    

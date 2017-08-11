@@ -74,8 +74,7 @@ class trailHeadsCell: UITableViewCell {
             }
         }
     }
-    
-    let starViews = starView(frame:CGRect(x:  220, y: 150 + 15 + 8, width: 75, height: 15))
+    let starViews = starView(frame:CGRect(x: 200, y: 150 + 15 + 5, width: 100, height: 20))
 
     func setupView(){
 
@@ -103,6 +102,8 @@ class trailHeadsCell: UITableViewCell {
         trailTypeLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 8).isActive = true
         trailTypeLabel.topAnchor.constraint(equalTo: self.bottomAnchor, constant:-15).isActive = true
         trailTypeLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/2).isActive = true
+        
+        
         
     }
 }
