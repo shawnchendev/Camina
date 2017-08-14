@@ -11,13 +11,14 @@ import Firebase
 import FirebaseAuth
 
 class inputProfileViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+    let userProfileController = userProfileViewController()
 
     let DATABASE_URL = "https://caminatrail.firebaseio.com"
-    var name : String = ""
-    var email:String = ""
-    var userUuid:String = ""
-    var password:String = ""
-    var profileUrl: String = ""
+    var name: String?
+    var email: String?
+    var userUuid: String?
+    var password: String?
+    var profileUrl: String?
     
     let genderData = [" ", "Female", "Male", "Other"]
     let ageData = [" ", "18-24", "25-34", "35-44", "45-54", "55-64", "65+"]
@@ -107,10 +108,9 @@ class inputProfileViewController: UIViewController, UIPickerViewDelegate, UIPick
         print(name)
         print(profileUrl)
         print(userUuid)
-        
-        profileImageView.loadImageUsingCacheWithUrlString(profileUrl)
-        if profileUrl != ""{
-            profileImageView.loadImageUsingCacheWithUrlString(profileUrl)
+        if profileUrl != "" {
+            print("eqweqe")
+            profileImageView.loadImageUsingCacheWithUrlString(profileUrl!)
         }
         nameTextField.text = name
         view.backgroundColor = UIColor(r: 220, g: 220, b: 220)
@@ -309,7 +309,7 @@ extension inputProfileViewController: UIImagePickerControllerDelegate, UINavigat
                 if let profileImageUrl = metadata?.downloadURL()?.absoluteString {
                     
                     let values = [ "name": name, "email": self.email, "profileImageUrl": profileImageUrl,  "age":age, "gender":gender]
-                    self.registerUserIntoDatabaseWithUID(self.userUuid, values: values as [String : AnyObject])
+                    self.registerUserIntoDatabaseWithUID(self.userUuid!, values: values as [String : AnyObject])
                 }
             })
         }
@@ -325,8 +325,14 @@ extension inputProfileViewController: UIImagePickerControllerDelegate, UINavigat
                 print(err)
                 return
             }
-        self.dismiss(animated: true, completion: nil)
-    })
+            usersReference.observe(.value, with: { (snapshot) in
+                if let dictionary = snapshot.value as? [String: AnyObject] {
+                    let user = defaultUser(dictionary: dictionary)
+                    self.userProfileController.user = user
+                }
+                self.dismiss(animated: true, completion: nil)
+            }, withCancel: nil)
+     })
     }
     
     func handleSelectProfileImageView() {

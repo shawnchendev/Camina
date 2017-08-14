@@ -10,14 +10,12 @@ import UIKit
 import Firebase
 
 class CustomTabBarController: UITabBarController {
-    let userProfileController = userProfileViewController()
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        checkIfUserIsLoggedIn()
 
         let mainController = mainViewController()
         let navigationController = UINavigationController(rootViewController: mainController)
@@ -33,6 +31,7 @@ class CustomTabBarController: UITabBarController {
         mapController.tabBarItem.image = UIImage(named: "mapNofill")
         mapController.tabBarItem.selectedImage = UIImage(named: "mapFill")
         
+        let userProfileController = userProfileViewController()
         let userProfileNavigationController = UINavigationController(rootViewController: userProfileController)
         userProfileNavigationController.title = "Me"
         userProfileNavigationController.tabBarItem.image = UIImage(named: "User")
@@ -53,32 +52,7 @@ class CustomTabBarController: UITabBarController {
         tabBar.clipsToBounds = true
         
     }
-    
-    func handleLogOut(_ sender: Any) {
-        do {
-            try Auth.auth().signOut()
-        } catch let logoutError{
-            print(logoutError)
-        }
-        self.presentRootView()
 
-    }
-    
-    
-    func checkIfUserIsLoggedIn() {
-        if Auth.auth().currentUser?.uid == nil {
-            perform(#selector(handleLogOut), with: nil, afterDelay: 0)
-        } else {
-            let uid = Auth.auth().currentUser?.uid
-            Database.database().reference().child("users").child(uid!).observe(.value, with: { (snapshot) in
-                if let dictionary = snapshot.value as? [String: AnyObject] {
-                    let user = defaultUser(dictionary: dictionary)
-                    self.userProfileController.user = user
-                }
-                
-            }, withCancel: nil)
-        }
-    }
     
 
 }

@@ -154,7 +154,6 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
         let view = UIView()
         view.backgroundColor = UIColor(hex: "00B16A")
         view.translatesAutoresizingMaskIntoConstraints = false
-        //        view.backgroundColor =
         return view
     }()
     
@@ -220,18 +219,24 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
         return .lightContent
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = UIColor(hex:"ECF0F1")
-        setupNavigationController()
-        self.profileImageView.loadImageUsingCacheWithUrlString((user?.profileImageURL)!)
-        userNameLabel.text = user?.name
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchUserData()
         fetchUserSessionID {
             self.nSession.text = String(self.totalSession)
             self.travelDistance.text = String(self.totalDistance ) + "meters"
             self.travelTime.text = String(self.totalTime / 60 ) + " mins"
             self.nSteps.text = String(self.totalSteps) + "steps"
         }
+        
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = UIColor(hex:"ECF0F1")
+        setupNavigationController()
+        
+    
 //        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
 
         
@@ -385,6 +390,7 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
         
         
     }
+  
     
 
     
@@ -422,6 +428,20 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         print("canceled picker")
         dismiss(animated: true, completion: nil)
+    }
+    
+    func fetchUserData(){
+        let uid = Auth.auth().currentUser?.uid
+        Database.database().reference().child("users").child(uid!).observe(.value, with: { (snapshot) in
+            if let dictionary = snapshot.value as? [String: AnyObject] {
+                let user = defaultUser(dictionary: dictionary)
+                if user.profileImageURL != nil{
+                    self.profileImageView.loadImageUsingCacheWithUrlString((user.profileImageURL)!)
+                }
+                self.userNameLabel.text = user.name
+            }
+            
+        }, withCancel: nil)
     }
     
    }

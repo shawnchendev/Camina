@@ -11,6 +11,7 @@ import Firebase
 import FBSDKLoginKit
 
 class loginViewController: UIViewController {
+    let userProfileController = userProfileViewController()
     
         lazy var faecbookSignupButton: UIButton = {
         let button = UIButton(type: .system)

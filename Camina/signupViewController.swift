@@ -11,6 +11,7 @@ import FBSDKLoginKit
 import Firebase
 
 class signupViewController: UIViewController {
+    let userProfileController = userProfileViewController()
     let DATABASE_URL = "https://caminatrail.firebaseio.com/"
     
     let inputsContainerView: UIView = {
@@ -178,7 +179,8 @@ class signupViewController: UIViewController {
                 }
                 guard let uid = user?.uid else{ return }
                 if authProviders.count > 0{
-                    self.presentMainView()
+                      self.dismiss(animated: true, completion: nil)
+                
                 }else{
                     self.gotoCreateprofile(email: email, userUuid: uid,name: name,profileUrl: url)
                 }
@@ -219,7 +221,6 @@ class signupViewController: UIViewController {
         inputProfileview.profileUrl = profileUrl!
         inputProfileview.name = name!
         self.navigationController?.pushViewController(inputProfileview, animated: true)
-
     }
     
     

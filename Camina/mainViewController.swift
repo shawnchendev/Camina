@@ -16,7 +16,7 @@ import CoreMotion
 
 
 class mainViewController: UITableViewController, UISearchResultsUpdating, UISearchControllerDelegate {
-
+    let userProfileController = userProfileViewController()
     
 
     let navView : UIView = {
@@ -88,6 +88,7 @@ class mainViewController: UITableViewController, UISearchResultsUpdating, UISear
     
     override func viewWillAppear(_ animated: Bool){
         super.viewWillAppear(animated)
+        checkIfUserIsLoggedIn()
         setupSearchView()
         setupNavBarItem()
         tableView.separatorColor = .white
@@ -258,6 +259,24 @@ class mainViewController: UITableViewController, UISearchResultsUpdating, UISear
         self.hidesBottomBarWhenPushed = false;
 
    }
+    
+    
+    func handleLogOut(_ sender: Any) {
+        do {
+            try Auth.auth().signOut()
+        } catch let logoutError{
+            print(logoutError)
+        }
+        self.presentRootView()
+        
+    }
+    
+    
+    func checkIfUserIsLoggedIn() {
+        if Auth.auth().currentUser?.uid == nil {
+            perform(#selector(handleLogOut), with: nil, afterDelay: 0)
+        }
+    }
     
 
 
