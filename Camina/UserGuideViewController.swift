@@ -26,16 +26,16 @@ class UserGuideViewController: UIViewController, UICollectionViewDataSource, UIC
     let rootCellId = "rootCellId"
     
     let pages: [Page] = {
-        let firstPage = Page(title: "Automated Hiking Session", message: "Just walk on any trail you like, Camina will record your progress automatically. Dont need to press any Button", imageName: "page1")
-        
-        let secondPage = Page(title: "Hiking log", message: "Keep track of your hiking with a friendly User Interface", imageName: "page2")
+        let firstPage = Page(title: "Automated Hiking Session", message: "Just walk on any trail you like, Camina will records your progress automatically. Dont need to press any Button", imageName: "page1")
+//        
+//        let secondPage = Page(title: "Hiking log", message: "Keep track of your hiking with a friendly User Interface", imageName: "page2")
         
 //        let thirdPage = Page(title: "Share your Adventure", message: "Tap the More menu in the upper corner. Choose \"Send this Book\"", imageName: "page1")
         
-//        return [firstPage]
-        return [firstPage, secondPage]
+        return [firstPage]
+//        return [firstPage, secondPage]
     }()
-    
+  
     lazy var pageControl: UIPageControl = {
         let pc = UIPageControl()
         pc.pageIndicatorTintColor = .lightGray
@@ -85,35 +85,33 @@ class UserGuideViewController: UIViewController, UICollectionViewDataSource, UIC
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         pageControl.currentPage += 1
     }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-    
+
     var pageControlBottomAnchor: NSLayoutConstraint?
-    var skipButtonBottomAnchor: NSLayoutConstraint?
-    var nextButtonBottomAnchor: NSLayoutConstraint?
+    var skipButtonTopAnchor: NSLayoutConstraint?
+    var nextButtonTopAnchor: NSLayoutConstraint?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.edgesForExtendedLayout = UIRectEdge()
         observeKeyboardNotifications()
         
         view.addSubview(collectionView)
         view.addSubview(pageControl)
         view.addSubview(skipButton)
         view.addSubview(nextButton)
-        
+                
         pageControlBottomAnchor = pageControl.anchor(nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 40)[1]
         
-        skipButtonBottomAnchor = skipButton.anchor(nil, left: nil, bottom: view.bottomAnchor, right: nil, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 60, heightConstant: 50).first
+        skipButtonTopAnchor = skipButton.anchor(view.topAnchor, left: view.leftAnchor, bottom: nil, right: nil, topConstant: 16, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 60, heightConstant: 50).first
         
-        nextButtonBottomAnchor = nextButton.anchor(nil, left: nil, bottom:  view.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 60, heightConstant: 50).first
+        nextButtonTopAnchor = nextButton.anchor(view.topAnchor, left: nil, bottom: nil, right: view.rightAnchor, topConstant: 16, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 60, heightConstant: 50).first
         
         //use autolayout instead
         collectionView.anchorToTop(view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
-        
+        collectionView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
         registerCells()
+
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -156,29 +154,30 @@ class UserGuideViewController: UIViewController, UICollectionViewDataSource, UIC
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        
+        print(targetContentOffset.pointee.x)
+
         let pageNumber = Int(targetContentOffset.pointee.x / view.frame.width)
         pageControl.currentPage = pageNumber
         
-        //we are on the last page
         if pageNumber == pages.count {
-            moveControlConstraintsOffScreen()
+            pageControlBottomAnchor?.constant = 40
+            skipButtonTopAnchor?.constant = -40
+            nextButtonTopAnchor?.constant = -40
         } else {
             //back on regular pages
             pageControlBottomAnchor?.constant = 0
-            skipButtonBottomAnchor?.constant = 0
-            nextButtonBottomAnchor?.constant = 0
+            skipButtonTopAnchor?.constant = 16
+            nextButtonTopAnchor?.constant = 16
         }
         
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.view.layoutIfNeeded()
-        }, completion: nil)
+        
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: { self.view.layoutIfNeeded() }, completion: nil)
     }
     
     fileprivate func moveControlConstraintsOffScreen() {
         pageControlBottomAnchor?.constant = 40
-        skipButtonBottomAnchor?.constant = 40
-        nextButtonBottomAnchor?.constant = 40
+        skipButtonTopAnchor?.constant = -40
+        nextButtonTopAnchor?.constant = -40
     }
     
     fileprivate func registerCells() {
@@ -193,22 +192,23 @@ class UserGuideViewController: UIViewController, UICollectionViewDataSource, UIC
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if indexPath.item == pages.count {
-            let rootCell = collectionView.dequeueReusableCell(withReuseIdentifier: rootCellId, for: indexPath) as! rootCell
-            rootCell.navView = self.navigationController
-            
-            return rootCell
+            let root = collectionView.dequeueReusableCell(withReuseIdentifier: rootCellId, for: indexPath) as! rootCell
+            root.navView = self.navigationController
+            return root
         }
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! PageCell
         
-        let page = pages[(indexPath as NSIndexPath).item]
+        let page = pages[indexPath.item]
         cell.page = page
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: view.frame.height + 20)
+        print(view.frame.width)
+        print(view.frame.height)
+        return CGSize(width: view.frame.width, height: view.frame.height)
     }
     
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {

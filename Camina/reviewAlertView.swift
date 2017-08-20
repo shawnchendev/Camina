@@ -34,7 +34,7 @@ class reviewAlertView: UIView, Modal, UITextViewDelegate{
         
         backgroundView.frame = frame
         backgroundView.backgroundColor = UIColor.black
-        backgroundView.alpha = 0.6
+        backgroundView.alpha = 0.8
         addSubview(backgroundView)
         
        

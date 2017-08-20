@@ -145,26 +145,7 @@ class CustomCollectionViewCell: BaseCell, UICollectionViewDataSource, UICollecti
     }
 }
 
-//
-//    class trailDetailDescriptionCell: BaseCell {
-//        
-//        let textView: UITextView = {
-//            let tv = UITextView()
-//            tv.text = "SAMPLE DESCRIPTION"
-//            return tv
-//        }()
-//        
-//        override func setupViews() {
-//            super.setupViews()
-//            
-//            addSubview(textView)
-//            
-//            addConstraintsWithFormat("H:|-8-[v0]-8-|", views: textView)
-//            
-//            addConstraintsWithFormat("V:|-10-[v0]|", views: textView)
-//        }
-//        
-//    }
+
 
 
 
