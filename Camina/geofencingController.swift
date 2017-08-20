@@ -105,9 +105,9 @@ extension mapViewController: CLLocationManagerDelegate {
                 tempPlacemarks.append(placemark)
             }
         }
-        for activePlacemark in tempPlacemarks {
+        for activePlacemark in tempPlacemarks { 
             let coordinate = CLLocationCoordinate2D(latitude: (activePlacemark.geometry?.coordinates![1])! as! CLLocationDegrees, longitude: (activePlacemark.geometry?.coordinates![0])! as! CLLocationDegrees)
-            let region = CLCircularRegion(center: coordinate, radius: 50, identifier: (activePlacemark.properties?.NAME)!)
+            let region = CLCircularRegion(center: coordinate, radius: 30, identifier: (activePlacemark.properties?.NAME)!)
             locationManager.startMonitoring(for: region)
             activePlacemarks.append(region)
         }

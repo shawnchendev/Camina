@@ -8,9 +8,10 @@
 
 import UIKit
 import Firebase
+import MapboxStatic
 
 
-class userProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
+class userProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout  {
     var user : defaultUser?
     var userSessions = [userSession]()
     var totalTime = 0
@@ -46,7 +47,6 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
         imageView.image = UIImage(named: "CapeSpearNight")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
-//        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSelectProfileImageView)))
         imageView.isUserInteractionEnabled = true
         imageView.layer.borderWidth = 2
         imageView.clipsToBounds = true
@@ -73,7 +73,7 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
         label.text = "Overview"
         label.textColor = UIColor(hex: "00B16A")
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.systemFont(ofSize: 14)
         return label
     }()
     
@@ -82,7 +82,7 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
         label.text = "Total Distance: "
         label.textColor = UIColor.darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.systemFont(ofSize: 14)
         return label
     }()
     
@@ -91,7 +91,7 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
         label.text = "Completed Session: "
         label.textColor = UIColor.darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.systemFont(ofSize: 14)
         return label
     }()
     
@@ -100,7 +100,7 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
         label.text = "Total Time: "
         label.textColor = UIColor.darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.systemFont(ofSize: 14)
         return label
     }()
     
@@ -109,7 +109,7 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
         label.text = "Total Steps: "
         label.textColor = UIColor.darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.systemFont(ofSize: 14)
         return label
     }()
     
@@ -119,7 +119,7 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
         label.text = "0 m"
         label.textColor = UIColor.darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.systemFont(ofSize: 14)
         return label
     }()
     
@@ -128,7 +128,7 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
         label.text = "0 mins"
         label.textColor = UIColor.darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.systemFont(ofSize: 14)
         return label
     }()
     
@@ -137,7 +137,7 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
         label.text = "0 steps"
         label.textColor = UIColor.darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.systemFont(ofSize: 14)
         return label
     }()
     
@@ -146,7 +146,7 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
         label.text = "0 "
         label.textColor = UIColor.darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.systemFont(ofSize: 14)
         return label
     }()
     
@@ -157,61 +157,64 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
         return view
     }()
     
+    let completedLogLabel : UILabel = {
+        let label = UILabel()
+        label.text = "Completed Log"
+        label.textColor = UIColor(hex: "00B16A")
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 14)
+        return label
+    }()
+    
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.backgroundColor = UIColor.red
+        cv.backgroundColor = UIColor.white
         cv.translatesAutoresizingMaskIntoConstraints = false
         return cv
     }()
     
-     let cellId = "cellId"
+    var scrollView: UIScrollView!
 
     
+     let sessionCellId = "cellId"
+     let cellId = "cellId"
+
+
+      let accessToken = "pk.eyJ1IjoibWMyODgyIiwiYSI6ImNqMjZjZjdsMDAwZTEzNHFmNXk1bGJpbDIifQ.jaXEzY40GjNuZSr6PVG9Tg"
+
 
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-       return userSessions.count
+        if userSessions.count == 0{
+            return 1
+        }
+        return userSessions.count
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
-//        if let imageName = userSessions?.screenshots?[indexPath.item] {
-//            cell.imageView.image = UIImage(named: imageName)
-//        }
-        cell.backgroundColor = UIColor.green
+        if userSessions.count == 0  {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+            
+            return cell
+        }
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: sessionCellId, for: indexPath) as! userSessionCell
+        if let name = userSessions[indexPath.item].lastCheckPoint {
+            cell.nameLabel.text = name
+        }
+        let path = getPathFromSession(session: userSessions[indexPath.item])
+        cell.mapSnapShot.image = fetchMapSanpshot(path: path)
         return cell
-    }
+        }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 200, height: 200)
+        return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsetsMake(0, 14, 0, 14)
-    }
-    
-    fileprivate class SessionViewCell: BaseCell {
-        
-        let imageView: UIImageView = {
-            let iv = UIImageView()
-            iv.contentMode = .scaleAspectFill
-            iv.backgroundColor = UIColor.green
-            return iv
-        }()
-        
-        
-        fileprivate override func setupViews() {
-            super.setupViews()
-            
-            layer.masksToBounds = true
-            
-            addSubview(imageView)
-            addConstraintsWithFormat("H:|[v0]|", views: imageView)
-            addConstraintsWithFormat("V:|[v0]|", views: imageView)
-        }
-        
+        return UIEdgeInsetsMake(0, 0, 0, 14)
     }
     
  
@@ -223,30 +226,37 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
         super.viewWillAppear(animated)
         fetchUserData()
         fetchUserSessionID {
+          
             self.nSession.text = String(self.totalSession)
-            self.travelDistance.text = String(self.totalDistance ) + "meters"
+            self.travelDistance.text = String(self.totalDistance ) + " meters"
             self.travelTime.text = String(self.totalTime / 60 ) + " mins"
-            self.nSteps.text = String(self.totalSteps) + "steps"
+            self.nSteps.text = String(self.totalSteps) + " steps"
+          
         }
         
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.scrollView = UIScrollView()
+        self.scrollView.delegate = self
+        self.scrollView.contentSize.height = 1000
         view.backgroundColor = UIColor(hex:"ECF0F1")
         setupNavigationController()
         
-    
-//        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
-
-        
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.register(userSessionCell.self, forCellWithReuseIdentifier: sessionCellId)
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        view.addSubview(scrollView)
         view.addSubview(profileCoverImageView)
         view.addSubview(profileImageView)
         view.addSubview(userNameLabel)
         view.addSubview(statView)
         view.addSubview(overviewLabel)
+//        view.addSubview(completedLogLabel)
 //        view.addSubview(collectionView)
-        
         setupProfileImageView()
         setupProfileCoverImageView()
         setupStatView()
@@ -339,10 +349,46 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
     }
     
     func setupCollectionView(){
+        
+        completedLogLabel.topAnchor.constraint(equalTo: statView.bottomAnchor, constant: 8).isActive = true
+        completedLogLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8).isActive = true
+        completedLogLabel.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        
         collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        collectionView.topAnchor.constraint(equalTo: statView.bottomAnchor, constant: 8).isActive = true
+        collectionView.topAnchor.constraint(equalTo: completedLogLabel.bottomAnchor, constant: 8).isActive = true
         collectionView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -8).isActive = true
-        collectionView.heightAnchor.constraint(equalToConstant: 210).isActive = true
+        collectionView.heightAnchor.constraint(equalToConstant: 250).isActive = true
+    }
+    
+    
+    func fetchMapSanpshot(path:[CLLocationCoordinate2D])->UIImage{
+
+        let camera = SnapshotCamera(lookingAtCenter: path.first!, zoomLevel: 13)
+        let options = SnapshotOptions(styleURL: URL(string: "mapbox://styles/mapbox/streets-v10")!, camera: camera, size: CGSize(width: 200, height: 200))
+        let snapshot = Snapshot(options: options, accessToken:accessToken)
+        let route = Path(coordinates: path)
+        route.strokeWidth = 2
+    
+        route.strokeColor = .black
+        #if os(macOS)
+            route.fillColor = NSColor.red.withAlphaComponent(0.25)
+        #else
+            route.fillColor = UIColor.clear
+        #endif
+        options.overlays = [route]
+        return snapshot.image!
+    }
+    
+    func getPathFromSession(session: userSession)-> [CLLocationCoordinate2D]{
+        var path = [CLLocationCoordinate2D]()
+        
+        for c in session.path{
+            let p = c as! [String:AnyObject]
+            let coordinate = CLLocationCoordinate2D(latitude: p["lat"] as! CLLocationDegrees, longitude: p["long"] as! CLLocationDegrees)
+            path.append(coordinate)
+        }
+        
+        return path
     }
 
     
@@ -371,9 +417,12 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
                 }
             }
             self.totalSession = userSessionID.count
+            self.userSessions = []
+            self.totalTime = 0
+            self.totalDistance = 0
+            self.totalSteps = 0
             for i in userSessionID{
                 Database.database().reference().child("Session").child(i).observeSingleEvent(of: .value, with: { (snapshot) in
-                    
                     if let dictionary = snapshot.value as? [String: AnyObject] {
                         let session = userSession(dictionary: dictionary)
                         self.userSessions.append(session)
@@ -381,11 +430,13 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
                         self.totalDistance += dictionary["distance"] as! Double
                         self.totalSteps += dictionary["steps"] as! Int
                     }
-                    
+                    DispatchQueue.main.async {
+                        self.collectionView.reloadData()
+                    }
                 completion()
- 
                 }, withCancel: nil)
             }
+          
         }, withCancel: nil)
         
         
@@ -426,7 +477,6 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        print("canceled picker")
         dismiss(animated: true, completion: nil)
     }
     

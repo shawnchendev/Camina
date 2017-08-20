@@ -14,8 +14,8 @@ extension UIViewController{
         let rootView = UserGuideViewController()
         let nav = UINavigationController()
         nav.navigationBar.tintColor = UIColor(hex: "00B16A")
-        nav.setNavigationBarHidden(true, animated: true)
-        nav.viewControllers=[rootView]
+//        nav.setNavigationBarHidden(true, animated: true)
+        nav.viewControllers.append(rootView)
         self.present(nav, animated: true, completion: nil)
     }
     

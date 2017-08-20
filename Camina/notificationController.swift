@@ -78,7 +78,6 @@ extension mapViewController: UNUserNotificationCenterDelegate {
         //content.subtitle = String(describing: (trailHead.properties?.Distance)!)
         content.body = "You have reached "
         content.body += (placemark.properties?.NAME)!
-        content.body += ", You can either play the informative recording or find more information within the app"
         content.badge = 1
         content.categoryIdentifier = "actions"
         content.sound = UNNotificationSound.default()

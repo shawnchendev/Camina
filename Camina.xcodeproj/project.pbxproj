@@ -48,6 +48,7 @@
 		C11E86A91F26690D00C3A3C0 /* point.geojson in Resources */ = {isa = PBXBuildFile; fileRef = C11E86A31F26690D00C3A3C0 /* point.geojson */; };
 		C11E86AA1F26690D00C3A3C0 /* trails.geojson in Resources */ = {isa = PBXBuildFile; fileRef = C11E86A41F26690D00C3A3C0 /* trails.geojson */; };
 		C11E86AC1F26690D00C3A3C0 /* Walks.geojson in Resources */ = {isa = PBXBuildFile; fileRef = C11E86A61F26690D00C3A3C0 /* Walks.geojson */; };
+		C12203F61F431D650033BD6E /* UserSessionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12203F51F431D650033BD6E /* UserSessionCell.swift */; };
 		C16399F11F349F09004DA262 /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16399F01F349F09004DA262 /* Page.swift */; };
 		C16399F31F349F6F004DA262 /* PageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16399F21F349F6F004DA262 /* PageCell.swift */; };
 		C16399F51F34A056004DA262 /* UIViewConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16399F41F34A056004DA262 /* UIViewConstraint.swift */; };
@@ -113,6 +114,7 @@
 		C11E86A31F26690D00C3A3C0 /* point.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = point.geojson; sourceTree = "<group>"; };
 		C11E86A41F26690D00C3A3C0 /* trails.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = trails.geojson; sourceTree = "<group>"; };
 		C11E86A61F26690D00C3A3C0 /* Walks.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Walks.geojson; sourceTree = "<group>"; };
+		C12203F51F431D650033BD6E /* UserSessionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSessionCell.swift; sourceTree = "<group>"; };
 		C16399F01F349F09004DA262 /* Page.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
 		C16399F21F349F6F004DA262 /* PageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageCell.swift; sourceTree = "<group>"; };
 		C16399F41F34A056004DA262 /* UIViewConstraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewConstraint.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				C11E867C1F2668F700C3A3C0 /* trailHeadCell.swift */,
 				C16399F21F349F6F004DA262 /* PageCell.swift */,
 				C16399FC1F34A38E004DA262 /* rootCell.swift */,
+				C12203F51F431D650033BD6E /* UserSessionCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -413,6 +416,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C1D339151F3A21A3004AF0BA /* userSession.swift in Sources */,
+				C12203F61F431D650033BD6E /* UserSessionCell.swift in Sources */,
 				C1D339141F39F632004AF0BA /* placemarkAlertView.swift in Sources */,
 				C11E86871F2668F700C3A3C0 /* Head.swift in Sources */,
 				9249E2511F2F62690061B7ED /* modal.swift in Sources */,

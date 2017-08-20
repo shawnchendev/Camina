@@ -70,7 +70,7 @@ class PageCell: UICollectionViewCell {
         tv.text = "SAMPLE TEXT FOR NOW"
         tv.isEditable = false
         tv.translatesAutoresizingMaskIntoConstraints = false
-        tv.contentInset = UIEdgeInsets(top: 24, left: 0, bottom: 0, right: 0)
+        tv.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0)
         return tv
     }()
     
@@ -84,7 +84,7 @@ class PageCell: UICollectionViewCell {
     func setupViews() {
         addSubview(imageView)
         addSubview(textView)
-//        addSubview(lineSeparatorView)
+        addSubview(lineSeparatorView)
         
         
         
@@ -93,6 +93,10 @@ class PageCell: UICollectionViewCell {
         imageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.7).isActive = true
         imageView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
 
+        lineSeparatorView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        lineSeparatorView.topAnchor.constraint(equalTo: textView.topAnchor).isActive = true
+        lineSeparatorView.widthAnchor.constraint(equalTo:widthAnchor).isActive = true
+        lineSeparatorView.heightAnchor.constraint(equalToConstant: 1).isActive = true
         
         textView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
         textView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true

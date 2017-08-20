@@ -21,9 +21,11 @@ class rootCell: UICollectionViewCell {
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
-    
-    
-    
+
+//    let backgroundImage:UIImage = {
+//        let image = UIImage(named: "cabotTower")
+//        return image!
+//    }()
     var logoImage : UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "logo_white")
@@ -58,16 +60,20 @@ class rootCell: UICollectionViewCell {
     
     var nav = UINavigationController()
     
-
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .white
-        addSubview(backgroundImage)
+        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+        backgroundImage.image = UIImage(named: "cabotTower")
+        backgroundImage.contentMode =  UIViewContentMode.scaleAspectFill
+        insertSubview(backgroundImage, at: 0)
+//        backgroundColor = UIColor.green
+//        backgroundColor = UIColor(patternImage: UIImage(named: "bg-pattern")!)
+//        backgroundColor = UIColor.green
+//        addSubview(backgroundImage)
         addSubview(logoImage)
         addSubview(signupButton)
         addSubview(loginButton)
-        setupBackgroudImage()
+//        setupBackgroudImage()
         setupLogoImage()
         setupButton()
     }
@@ -75,10 +81,6 @@ class rootCell: UICollectionViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-
-    
-    
     func handleLogin(){
         let lvc = loginViewController()
         navView?.pushViewController(lvc, animated: true)
@@ -86,26 +88,23 @@ class rootCell: UICollectionViewCell {
     
 
     
-
-    func setupBackgroudImage(){
-        backgroundImage.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        backgroundImage.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        backgroundImage.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
-        backgroundImage.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-    }
-    
+//
+//    func setupBackgroudImage(){
+//        backgroundImage.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+//        backgroundImage.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+//        backgroundImage.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
+//        backgroundImage.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+//    }
+//    
     
     func setupLogoImage(){
         logoImage.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        logoImage.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        logoImage.topAnchor.constraint(equalTo: topAnchor, constant: 108).isActive = true
         logoImage.heightAnchor.constraint(equalToConstant: 100).isActive = true
         logoImage.widthAnchor.constraint(equalToConstant:170).isActive = true
     }
     //signup  with their email
     func handlesignup(){
-        
-        print(12312)
-
         let svc = signupViewController()
         navView?.pushViewController(svc, animated: true)
     }

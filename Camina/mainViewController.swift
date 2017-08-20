@@ -79,7 +79,6 @@ class mainViewController: UITableViewController, UISearchResultsUpdating, UISear
         print(currentReachabilityStatus)
         fetchTrailHead()
         fetchPlacemarks()
-        fetchReviewFromFirebase()
         
 
         
@@ -88,6 +87,9 @@ class mainViewController: UITableViewController, UISearchResultsUpdating, UISear
     
     override func viewWillAppear(_ animated: Bool){
         super.viewWillAppear(animated)
+        if Auth.auth().currentUser != nil{
+        fetchReviewFromFirebase()
+        }
         checkIfUserIsLoggedIn()
         setupSearchView()
         setupNavBarItem()

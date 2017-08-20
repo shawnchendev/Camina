@@ -13,7 +13,7 @@ import FBSDKLoginKit
 class loginViewController: UIViewController {
     let userProfileController = userProfileViewController()
     
-        lazy var faecbookSignupButton: UIButton = {
+        lazy var facebookSignupButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = UIColor(hex: "557BE2")
 
@@ -80,11 +80,30 @@ class loginViewController: UIViewController {
         let button = UIButton(type: .system)
         button.setTitle("Forget your password? ", for: UIControlState())
         button.translatesAutoresizingMaskIntoConstraints = false
-
-        button.setTitleColor(UIColor(hex: "00B16A"), for: UIControlState())
+        button.setTitleColor(UIColor.black, for: UIControlState())
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         button.addTarget(self, action: #selector(handleForgetpassword), for: .touchUpInside)
         return button
+    }()
+    
+    let orLabel:  UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("or", for: UIControlState())
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitleColor(UIColor.black, for: UIControlState())
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.isEnabled = false
+       return button
+    }()
+    
+    let warningText: UITextView = {
+        let textView = UITextView()
+        textView.text = ""
+        textView.textColor = .red
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.isEditable = false
+        textView.backgroundColor = UIColor(hex:"ECF0F1")
+        return textView
     }()
     
     override func viewDidLoad() {
@@ -95,15 +114,17 @@ class loginViewController: UIViewController {
         view.backgroundColor = UIColor(hex:"ECF0F1")
         view.addSubview(inputsContainerView)
         view.addSubview(loginButton)
-        view.addSubview(faecbookSignupButton)
+        view.addSubview(orLabel)
+        view.addSubview(facebookSignupButton)
         view.addSubview(forgetpasswordsButton)
+        view.addSubview(warningText)
         setupInputview()
         setupLoginButton()
         setupforgetpasswordButton()
     }
 
     func setupInputview(){
-        inputsContainerView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        inputsContainerView.topAnchor.constraint(equalTo: view.topAnchor, constant: 108).isActive = true
         inputsContainerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         inputsContainerView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
         inputsContainerView.heightAnchor.constraint(equalToConstant:80).isActive = true
@@ -137,10 +158,22 @@ class loginViewController: UIViewController {
         loginButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
 
         
-        faecbookSignupButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        faecbookSignupButton.bottomAnchor.constraint(equalTo: inputsContainerView.topAnchor, constant: -8).isActive = true
-        faecbookSignupButton.widthAnchor.constraint(equalTo: inputsContainerView.widthAnchor).isActive = true
-        faecbookSignupButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        
+        
+        orLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        orLabel.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 8).isActive = true
+        orLabel.widthAnchor.constraint(equalToConstant: 40).isActive = true
+
+        
+        facebookSignupButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        facebookSignupButton.topAnchor.constraint(equalTo: orLabel.bottomAnchor, constant: 8).isActive = true
+        facebookSignupButton.widthAnchor.constraint(equalTo: inputsContainerView.widthAnchor).isActive = true
+        facebookSignupButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
+        
+        warningText.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        warningText.bottomAnchor.constraint(equalTo: forgetpasswordsButton.bottomAnchor, constant: -64).isActive = true
+        warningText.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
+        warningText.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
     func setupforgetpasswordButton(){
@@ -157,7 +190,7 @@ class loginViewController: UIViewController {
         }
         Auth.auth().signIn(withEmail: email, password: password, completion: { (user:User?, error) in
             if let error = error{
-                print(error.localizedDescription)
+                self.warningText.text = "Failed to login: \(error.localizedDescription)"
                 return
             }
 
@@ -173,7 +206,9 @@ class loginViewController: UIViewController {
         }
         facebookLoginManager.logIn(withReadPermissions: ["email", "public_profile"], from: self) { (result, error) in
             if let error = error {
-                print("Failed to login: \(error.localizedDescription)")
+                self.warningText.text = "Failed to login: \(error.localizedDescription)"
+
+                print()
                 return
             }
             self.getProfile()
@@ -203,7 +238,7 @@ class loginViewController: UIViewController {
             let url = picture["data"]?["url"] as! String
             Auth.auth().fetchProviders(forEmail: email, completion: { (providers, error) in
                 if let error = error {
-                    print(error.localizedDescription)
+                    self.warningText.text = "Failed to login: \(error.localizedDescription)"
                     return
                 }
                 authProviders = providers!

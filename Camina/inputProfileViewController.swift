@@ -103,13 +103,7 @@ class inputProfileViewController: UIViewController, UIPickerViewDelegate, UIPick
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print(email)
-        print(name)
-        print(profileUrl)
-        print(userUuid)
         if profileUrl != "" {
-            print("eqweqe")
             profileImageView.loadImageUsingCacheWithUrlString(profileUrl!)
         }
         nameTextField.text = name

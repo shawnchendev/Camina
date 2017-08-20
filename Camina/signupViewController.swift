@@ -75,12 +75,15 @@ class signupViewController: UIViewController {
         button.isEnabled = false
         return button
     }()
-    let warningTextLabel : UILabel = {
-        let lbl = UILabel(frame: CGRect(x: 0, y: 300, width: 300, height: 30))
-
-        lbl.text = ""
-        lbl.textColor = .red
-        return lbl
+    
+    let warningText: UITextView = {
+        let textView = UITextView()
+        textView.text = ""
+        textView.textColor = .red
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.isEditable = false
+        textView.backgroundColor = UIColor(hex:"ECF0F1")
+        return textView
     }()
 
     
@@ -99,7 +102,7 @@ class signupViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(r: 220, g: 220, b: 220)
+        view.backgroundColor = UIColor(hex:"ECF0F1")
         view.addSubview(inputsContainerView)
             setupInputsContainerView()
         setNavigationItem()
@@ -109,7 +112,8 @@ class signupViewController: UIViewController {
         view.addSubview(facebooksignupButton)
         setupFacebookButton()
         
-        view.addSubview(warningTextLabel)
+        view.addSubview(warningText)
+        setupWarningText()
 
     }
     
@@ -161,7 +165,7 @@ class signupViewController: UIViewController {
 
             Auth.auth().fetchProviders(forEmail: email, completion: { (providers, error) in
                 if let error = error {
-                    print(error.localizedDescription)
+                    self.warningText.text = error.localizedDescription
                     return
                 }
         
@@ -174,7 +178,7 @@ class signupViewController: UIViewController {
             
             Auth.auth().signIn(with: credential) { (user, error) in
                 if let error = error {
-                    print(error.localizedDescription)
+                    self.warningText.text = error.localizedDescription
                     return
                 }
                 guard let uid = user?.uid else{ return }
@@ -196,12 +200,12 @@ class signupViewController: UIViewController {
         guard let password = passwordTextField.text, let cpassword = cpasswordTextField.text else{ return }
         
         if (password != cpassword) {
-            warningTextLabel.text = "password must be match"
+            self.warningText.text = "password must be match"
             return
         }
         Auth.auth().createUser(withEmail: email, password: password, completion: { (user: User?, error) in
             if let error = error {
-                self.warningTextLabel.text = error.localizedDescription
+                self.warningText.text = error.localizedDescription
                 return
             }
             guard let uid = user?.uid else{ return }
@@ -312,13 +316,20 @@ class signupViewController: UIViewController {
         orButton.topAnchor.constraint(equalTo: inputsContainerView.bottomAnchor, constant: 12).isActive = true
         orButton.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
         orButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
-
     }
+    
     func setupFacebookButton(){
         facebooksignupButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         facebooksignupButton.topAnchor.constraint(equalTo: orButton.bottomAnchor, constant: 12).isActive = true
         facebooksignupButton.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
         facebooksignupButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+    }
+    
+    func setupWarningText(){
+        warningText.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        warningText.topAnchor.constraint(equalTo: facebooksignupButton.bottomAnchor, constant: 24).isActive = true
+        warningText.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
+        warningText.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
 
 }

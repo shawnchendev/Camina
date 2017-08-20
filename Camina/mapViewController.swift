@@ -417,9 +417,7 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
         regionChanged = true
 
     }
-    func mapView(_ mapView: MGLMapView, regionDidChangeAnimated animated: Bool) {
-
-    }
+ 
     
     
     func handleTap(_ tap: UITapGestureRecognizer) {
