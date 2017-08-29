@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0830"
+   LastUpgradeVersion = "0700"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "531926920EEFAC11EB43553CE3DE9B16"
+               BlueprintIdentifier = "7668B16EE2FF0E1EC9A122522BE42A38"
                BuildableName = "Pods_Camina.framework"
                BlueprintName = "Pods-Camina"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "531926920EEFAC11EB43553CE3DE9B16"
+            BlueprintIdentifier = "7668B16EE2FF0E1EC9A122522BE42A38"
             BuildableName = "Pods_Camina.framework"
             BlueprintName = "Pods-Camina"
             ReferencedContainer = "container:Pods.xcodeproj">
@@ -60,15 +60,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "531926920EEFAC11EB43553CE3DE9B16"
-            BuildableName = "Pods_Camina.framework"
-            BlueprintName = "Pods-Camina"
-            ReferencedContainer = "container:Pods.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
