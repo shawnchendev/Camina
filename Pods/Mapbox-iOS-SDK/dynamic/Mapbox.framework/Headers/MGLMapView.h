@@ -4,6 +4,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 
+#import "MGLFoundation.h"
 #import "MGLTypes.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -23,13 +24,13 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol MGLFeature;
 
 /** The default deceleration rate for a map view. */
-extern const CGFloat MGLMapViewDecelerationRateNormal;
+extern MGL_EXPORT const CGFloat MGLMapViewDecelerationRateNormal;
 
 /** A fast deceleration rate for a map view. */
-extern const CGFloat MGLMapViewDecelerationRateFast;
+extern MGL_EXPORT const CGFloat MGLMapViewDecelerationRateFast;
 
 /** Disables deceleration in a map view. */
-extern const CGFloat MGLMapViewDecelerationRateImmediate;
+extern MGL_EXPORT const CGFloat MGLMapViewDecelerationRateImmediate;
 
 /**
  The vertical alignment of an annotation within a map view. Used with
@@ -125,7 +126,7 @@ typedef NS_ENUM(NSUInteger, MGLUserTrackingMode) {
  ensuring that your use adheres to the relevant terms of use.
 
  */
-IB_DESIGNABLE
+MGL_EXPORT IB_DESIGNABLE
 @interface MGLMapView : UIView
 
 #pragma mark Creating Instances
@@ -762,6 +763,23 @@ IB_DESIGNABLE
  @param completion The block to execute after the animation finishes.
  */
 - (void)setCamera:(MGLMapCamera *)camera withDuration:(NSTimeInterval)duration animationTimingFunction:(nullable CAMediaTimingFunction *)function completionHandler:(nullable void (^)(void))completion;
+
+/**
+ Moves the viewpoint to a different location with respect to the map with an
+ optional transition duration and timing function.
+ 
+ @param camera The new viewpoint.
+ @param duration The amount of time, measured in seconds, that the transition
+ animation should take. Specify `0` to jump to the new viewpoint
+ instantaneously.
+ @param function A timing function used for the animation. Set this parameter to
+ `nil` for a transition that matches most system animations. If the duration
+ is `0`, this parameter is ignored.
+ @param edgePadding The minimum padding (in screen points) that would be visible
+ around the returned camera object if it were set as the receiver’s camera.
+ @param completion The block to execute after the animation finishes.
+ */
+- (void)setCamera:(MGLMapCamera *)camera withDuration:(NSTimeInterval)duration animationTimingFunction:(nullable CAMediaTimingFunction *)function edgePadding:(UIEdgeInsets)edgePadding completionHandler:(nullable void (^)(void))completion;
 
 /**
  Moves the viewpoint to a different location using a transition animation that

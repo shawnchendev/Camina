@@ -23,7 +23,7 @@ class trailDetailViewController: UITableViewController {
         super.viewDidLoad()
         self.navigationItem.title = "Trail Detail"
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Go", style: .plain, target: self, action: #selector(goToSession))
+//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Go", style: .plain, target: self, action: #selector(goToSession))
 
         tableView.tableFooterView = UIView()  // it's just 1 line, awesome!
         self.tableView.register(trailHeadsCell.self, forCellReuseIdentifier: headCellId)

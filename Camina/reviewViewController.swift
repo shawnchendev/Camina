@@ -17,9 +17,7 @@ class reviewViewController : UITableViewController {
     var cellid = "cellid"
     
     var reviews = [Review]()
-    
-    var ref : DatabaseReference!
-    
+        
   
     
     override func viewDidLoad() {
@@ -75,7 +73,7 @@ class reviewViewController : UITableViewController {
     }
     
     func fetchFirebase() {
-        let ref = Database.database().reference()
+        let ref = FIRDatabase.database().reference()
         
         ref.child("Review").observe(.value, with: { snapshot in
             self.reviews = []
@@ -100,7 +98,7 @@ class reviewViewController : UITableViewController {
     }
     
     func addReview(){
-        let review = reviewAlertView(userID: (Auth.auth().currentUser?.uid)!, trailID: trailId)
+        let review = reviewAlertView(userID: (FIRAuth.auth()?.currentUser?.uid)!, trailID: trailId)
 
         review.show(animated: false)
         self.tableView.reloadData()

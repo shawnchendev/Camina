@@ -142,8 +142,7 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
     
 
     //firebase vars
-    var ref: DatabaseReference?
-
+    
     
     var mapView: MGLMapView!
     var icon: UIImage!

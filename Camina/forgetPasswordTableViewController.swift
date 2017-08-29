@@ -102,7 +102,7 @@ class forgetPasswordViewController: UIViewController {
             //error detection
             return
         }
-        Auth.auth().sendPasswordReset(withEmail: email) { (error) in
+        FIRAuth.auth()?.sendPasswordReset(withEmail: email) { (error) in
             self.sendLinkButton.isEnabled = false
             Timer.scheduledTimer(timeInterval: 30, target: self, selector: #selector(self.enableButton), userInfo: nil, repeats: false)
             if let error = error{

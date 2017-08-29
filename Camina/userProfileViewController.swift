@@ -393,7 +393,7 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     func handleLogOut() {
         do {
-            try Auth.auth().signOut()
+            try FIRAuth.auth()?.signOut()
         } catch let logoutError{
             print(logoutError)
         }
@@ -406,8 +406,8 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
     func fetchUserSessionID(_ completion: @escaping  () -> Void ){
         var userSessionID = [String]()
         
-        let uid = Auth.auth().currentUser?.uid
-        Database.database().reference().child("userSession").child(uid!).observeSingleEvent(of: .value, with: { (snapshot) in
+        let uid = FIRAuth.auth()?.currentUser?.uid
+        FIRDatabase.database().reference().child("userSession").child(uid!).observeSingleEvent(of: .value, with: { (snapshot) in
             
             if let dictionary = snapshot.value as? [String: AnyObject] {
                 for i in dictionary{
@@ -421,7 +421,7 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
             self.totalDistance = 0
             self.totalSteps = 0
             for i in userSessionID{
-                Database.database().reference().child("Session").child(i).observeSingleEvent(of: .value, with: { (snapshot) in
+                FIRDatabase.database().reference().child("Session").child(i).observeSingleEvent(of: .value, with: { (snapshot) in
                     if let dictionary = snapshot.value as? [String: AnyObject] {
                         let session = userSession(dictionary: dictionary)
                         self.userSessions.append(session)
@@ -480,8 +480,8 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
     }
     
     func fetchUserData(){
-        let uid = Auth.auth().currentUser?.uid
-        Database.database().reference().child("users").child(uid!).observe(.value, with: { (snapshot) in
+        let uid = FIRAuth.auth()?.currentUser?.uid
+        FIRDatabase.database().reference().child("users").child(uid!).observe(.value, with: { (snapshot) in
             if let dictionary = snapshot.value as? [String: AnyObject] {
                 let user = defaultUser(dictionary: dictionary)
                 if user.profileImageURL != nil{

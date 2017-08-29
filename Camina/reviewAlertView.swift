@@ -22,9 +22,6 @@ class reviewAlertView: UIView, Modal, UITextViewDelegate{
     var titleInput : UITextField!
     var reviewInput : UITextView!
     
-    //firebase vars
-    var ref: DatabaseReference?
-    
     convenience init(userID:String, trailID:String) {
         self.init(frame: UIScreen.main.bounds)
         observeKeyboardNotifications()
@@ -158,9 +155,9 @@ class reviewAlertView: UIView, Modal, UITextViewDelegate{
         }
         let post : [String: AnyObject] = [ "UserID": userId as AnyObject, "rating" : starRating.rating as AnyObject, "title" : titleInput.text as AnyObject, "review" : reviewText as AnyObject, "trailID" : trailId as AnyObject, "date" : myInt as AnyObject]
         //firebase code
-        ref = Database.database().reference()
+        let ref = FIRDatabase.database().reference()
         
-        ref?.child("Review").childByAutoId().setValue(post)
+        ref.child("Review").childByAutoId().setValue(post)
         
         dismiss(animated: true)
     }
