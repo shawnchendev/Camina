@@ -7,10 +7,6 @@
 //
 
 import Foundation
-
-//  Created by Shawn Chen on 2017-07-14.
-//  Copyright © 2017 Shawn Chen. All rights reserved.
-//
 import UIKit
 
 class trailHeadsCell: UITableViewCell {

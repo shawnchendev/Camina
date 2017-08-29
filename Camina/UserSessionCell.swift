@@ -31,7 +31,7 @@ class userSessionCell: BaseCell{
     override func setupViews() {
         super.setupViews()
     
-        
+      
     
 
         addSubview(mapSnapShot)

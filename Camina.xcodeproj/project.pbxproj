@@ -31,11 +31,9 @@
 		C11E868D1F2668F700C3A3C0 /* mapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E866E1F2668F700C3A3C0 /* mapViewController.swift */; };
 		C11E868F1F2668F700C3A3C0 /* notificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E86701F2668F700C3A3C0 /* notificationController.swift */; };
 		C11E86901F2668F700C3A3C0 /* Placemark.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E86711F2668F700C3A3C0 /* Placemark.swift */; };
-		C11E86911F2668F700C3A3C0 /* rootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E86721F2668F700C3A3C0 /* rootViewController.swift */; };
 		C11E86921F2668F700C3A3C0 /* SafeJsonObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E86731F2668F700C3A3C0 /* SafeJsonObject.swift */; };
 		C11E86931F2668F700C3A3C0 /* searchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E86741F2668F700C3A3C0 /* searchBar.swift */; };
 		C11E86961F2668F700C3A3C0 /* sessionManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E86771F2668F700C3A3C0 /* sessionManagement.swift */; };
-		C11E86971F2668F700C3A3C0 /* sessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E86781F2668F700C3A3C0 /* sessionViewController.swift */; };
 		C11E86981F2668F700C3A3C0 /* signupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E86791F2668F700C3A3C0 /* signupViewController.swift */; };
 		C11E869A1F2668F700C3A3C0 /* TrailCoords.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E867B1F2668F700C3A3C0 /* TrailCoords.swift */; };
 		C11E869B1F2668F700C3A3C0 /* trailHeadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11E867C1F2668F700C3A3C0 /* trailHeadCell.swift */; };
@@ -97,11 +95,9 @@
 		C11E866E1F2668F700C3A3C0 /* mapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mapViewController.swift; sourceTree = "<group>"; };
 		C11E86701F2668F700C3A3C0 /* notificationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = notificationController.swift; sourceTree = "<group>"; };
 		C11E86711F2668F700C3A3C0 /* Placemark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Placemark.swift; sourceTree = "<group>"; };
-		C11E86721F2668F700C3A3C0 /* rootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = rootViewController.swift; sourceTree = "<group>"; };
 		C11E86731F2668F700C3A3C0 /* SafeJsonObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafeJsonObject.swift; sourceTree = "<group>"; };
 		C11E86741F2668F700C3A3C0 /* searchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = searchBar.swift; sourceTree = "<group>"; };
 		C11E86771F2668F700C3A3C0 /* sessionManagement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sessionManagement.swift; sourceTree = "<group>"; };
-		C11E86781F2668F700C3A3C0 /* sessionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sessionViewController.swift; sourceTree = "<group>"; };
 		C11E86791F2668F700C3A3C0 /* signupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = signupViewController.swift; sourceTree = "<group>"; };
 		C11E867B1F2668F700C3A3C0 /* TrailCoords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrailCoords.swift; sourceTree = "<group>"; };
 		C11E867C1F2668F700C3A3C0 /* trailHeadCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = trailHeadCell.swift; sourceTree = "<group>"; };
@@ -265,8 +261,6 @@
 				92F4FB451F38999D00B6D72B /* placemarkAlertView.swift */,
 				9249E2521F2F67DF0061B7ED /* starRating.swift */,
 				92F4FB3D1F30B6E800B6D72B /* starView.swift */,
-				C11E86721F2668F700C3A3C0 /* rootViewController.swift */,
-				C11E86781F2668F700C3A3C0 /* sessionViewController.swift */,
 				C11E86791F2668F700C3A3C0 /* signupViewController.swift */,
 				C11E867F1F2668F700C3A3C0 /* userProfileViewController.swift */,
 				C1F8DB0F1F2A041E005EA542 /* trailDetailViewController.swift */,
@@ -449,10 +443,8 @@
 				C16399F81F34A096004DA262 /* Session+CoreDataClass.swift in Sources */,
 				C11E869E1F2668F700C3A3C0 /* userProfileViewController.swift in Sources */,
 				9249E2451F28F6460061B7ED /* fetchingController.swift in Sources */,
-				C11E86911F2668F700C3A3C0 /* rootViewController.swift in Sources */,
 				92F4FB3E1F30B6E800B6D72B /* starView.swift in Sources */,
 				C16399F11F349F09004DA262 /* Page.swift in Sources */,
-				C11E86971F2668F700C3A3C0 /* sessionViewController.swift in Sources */,
 				C11E86521F26677300C3A3C0 /* AppDelegate.swift in Sources */,
 				C11E869A1F2668F700C3A3C0 /* TrailCoords.swift in Sources */,
 				C11E869B1F2668F700C3A3C0 /* trailHeadCell.swift in Sources */,

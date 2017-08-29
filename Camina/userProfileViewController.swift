@@ -36,7 +36,6 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 40
-        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSelectProfileImageView)))
         imageView.isUserInteractionEnabled = true
         imageView.clipsToBounds = true
         return imageView
@@ -116,7 +115,7 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     let travelDistance : UILabel = {
         let label = UILabel()
-        label.text = "0 m"
+        label.text = "0 M"
         label.textColor = UIColor.darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 14)
@@ -125,7 +124,7 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     let travelTime : UILabel = {
         let label = UILabel()
-        label.text = "0 mins"
+        label.text = "0 Mins"
         label.textColor = UIColor.darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 14)
@@ -134,7 +133,7 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     let nSteps : UILabel = {
         let label = UILabel()
-        label.text = "0 steps"
+        label.text = "0 Steps"
         label.textColor = UIColor.darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 14)
@@ -178,7 +177,7 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
     var scrollView: UIScrollView!
 
     
-     let sessionCellId = "cellId"
+     let sessionCellId = "sessionCellId"
      let cellId = "cellId"
 
 
@@ -197,7 +196,7 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if userSessions.count == 0  {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
-            
+        
             return cell
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: sessionCellId, for: indexPath) as! userSessionCell
@@ -241,7 +240,7 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
         
         self.scrollView = UIScrollView()
         self.scrollView.delegate = self
-        self.scrollView.contentSize.height = 1000
+//        self.scrollView.contentSize = CGSize(view.frame.width, 1000)
         view.backgroundColor = UIColor(hex:"ECF0F1")
         setupNavigationController()
         
@@ -268,8 +267,8 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
         self.navigationController?.navigationBar.barStyle = UIBarStyle.black
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Log out", style: .plain, target: self, action: #selector(handleLogOut))
-        self.navigationItem.leftBarButtonItem?.tintColor = UIColor(hex: "00B16A")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Setting"), style: .plain, target: self, action: #selector(signOutAlert))
+        self.navigationItem.rightBarButtonItem?.tintColor = .white
 
     }
     
@@ -492,6 +491,27 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
             }
             
         }, withCancel: nil)
+    }
+    
+    func signOutAlert(){
+        
+        let refreshAlert = UIAlertController(title:nil, message: nil, preferredStyle: .actionSheet)
+//        
+//        refreshAlert.addAction(UIAlertAction(title: "Edit Profile", style: .default, handler: { (action: UIAlertAction!) in
+//            
+//        }))
+//    
+//        refreshAlert.addAction(UIAlertAction(title: "Setting", style: .default, handler: { (action: UIAlertAction!) in
+//            
+//        }))
+        refreshAlert.addAction(UIAlertAction(title: "Log Out", style: .default, handler: { (action: UIAlertAction!) in
+                self.handleLogOut()
+        }))
+        
+        refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+        }))
+        
+        present(refreshAlert, animated: true, completion: nil)
     }
     
    }

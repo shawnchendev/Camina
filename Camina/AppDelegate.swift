@@ -27,9 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         //firebase database configure
         FirebaseApp.configure()
         Database.database().isPersistenceEnabled = true
-
-//        Database.database().reference().child("Session").removeValue()
-//        Database.database().reference().child("userSession").removeValue()
         setupFirstView()
         setNotification()
         

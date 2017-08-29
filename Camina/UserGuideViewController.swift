@@ -26,14 +26,14 @@ class UserGuideViewController: UIViewController, UICollectionViewDataSource, UIC
     let rootCellId = "rootCellId"
     
     let pages: [Page] = {
-        let firstPage = Page(title: "Automated Hiking Session", message: "Just walk on any trail you like, Camina will records your progress automatically. Dont need to press any Button", imageName: "page1")
-//        
-//        let secondPage = Page(title: "Hiking log", message: "Keep track of your hiking with a friendly User Interface", imageName: "page2")
         
-//        let thirdPage = Page(title: "Share your Adventure", message: "Tap the More menu in the upper corner. Choose \"Send this Book\"", imageName: "page1")
+        let firstPage = Page(title: "Take Hiking to New Heights", message: "Use Camina to explore new trails and reconnect with trails you thought you knew.", imageName: "page1")
         
-        return [firstPage]
-//        return [firstPage, secondPage]
+        let  secondPage = Page(title: "Automated Hiking Session", message: "Walk on any trail and have Camina record your progress automatically. No need to take out your phone or press any buttons", imageName: "page2")
+        
+        let  thirdPage = Page(title: "Trail Planning", message: "From parking spots to unforgettable views, preview trails before you go so you know what to expect when you get there", imageName: "page3")
+        
+        return [firstPage, secondPage, thirdPage]
     }()
   
     lazy var pageControl: UIPageControl = {
@@ -154,8 +154,6 @@ class UserGuideViewController: UIViewController, UICollectionViewDataSource, UIC
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        print(targetContentOffset.pointee.x)
-
         let pageNumber = Int(targetContentOffset.pointee.x / view.frame.width)
         pageControl.currentPage = pageNumber
         
@@ -196,7 +194,6 @@ class UserGuideViewController: UIViewController, UICollectionViewDataSource, UIC
             root.navView = self.navigationController
             return root
         }
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! PageCell
         
         let page = pages[indexPath.item]
@@ -206,8 +203,6 @@ class UserGuideViewController: UIViewController, UICollectionViewDataSource, UIC
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        print(view.frame.width)
-        print(view.frame.height)
         return CGSize(width: view.frame.width, height: view.frame.height)
     }
     

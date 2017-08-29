@@ -137,6 +137,8 @@ extension mapViewController: CLLocationManagerDelegate {
             pastCheckPoint = region.identifier
             let state = UIApplication.shared.applicationState
             if state == .background{
+                let place = placemarkAlertView(placemarkName: (placemark.properties?.NAME)!, description: (placemark.properties?.caption)!)
+                place.show(animated: true)
                 setupPlacemarkNotification(placemark: placemark)
             } else if state == .active{
            

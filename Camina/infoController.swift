@@ -26,7 +26,7 @@ class infoController: UICollectionViewController, UICollectionViewDelegateFlowLa
         view.backgroundColor = UIColor(hex:"ECF0F1")
         self.navigationItem.title = "Trail Details"
         
-        //self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Go", style: .plain, target: self, action: #selector(goToSession))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Go", style: .plain, target: self, action: #selector(goToSession))
         collectionView?.alwaysBounceVertical = true
         
         collectionView?.backgroundColor = UIColor(hex:"ECF0F1")
@@ -113,9 +113,9 @@ class infoController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     func goToSession(){
-        let sv = sessionView()
-        sv.trailProperties = trailProperties
-        self.present(sv, animated: true, completion: nil)
+        let mapview = mapViewController()
+        self.tabBarController?.selectedIndex = 1
+
     }
     
     

@@ -7,16 +7,10 @@
 //
 
 import UIKit
-import FloatRatingView
 
+import CoreLocation
 class trailDetailViewController: UITableViewController {
-    /**
-     Returns the rating value when touch events end
-     */
-    func floatRatingView(_ ratingView: FloatRatingView, didUpdate rating: Float) {
-        print(123123)
-    }
-
+   
     var trailHead: Head?
     var trailPlacemark = [Placemark]()
     let headCellId = "headID"
@@ -28,6 +22,9 @@ class trailDetailViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Trail Detail"
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Go", style: .plain, target: self, action: #selector(goToSession))
+
         tableView.tableFooterView = UIView()  // it's just 1 line, awesome!
         self.tableView.register(trailHeadsCell.self, forCellReuseIdentifier: headCellId)
         self.tableView.register(trailDetailCell.self, forCellReuseIdentifier: detailCellId)
@@ -134,6 +131,17 @@ class trailDetailViewController: UITableViewController {
         
         return attributedText
     }
+    
+    func goToSession(){
+//        let mapView = mapViewController()
+//        let center = CLLocationCoordinate2D(latitude: self.trailHead?.geometry?.coordinates![1] as! CLLocationDegrees, longitude: self.trailHead?.geometry?.coordinates![0] as! CLLocationDegrees)
+//        mapView.mapView.setCenter(center, animated: true)
+//        self.tabBarController?.selectedIndex = 1
+//
+        
+    }
+    
+    
     
 
 
