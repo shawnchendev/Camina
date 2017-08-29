@@ -87,7 +87,7 @@ class mainViewController: UITableViewController, UISearchResultsUpdating, UISear
     
     override func viewWillAppear(_ animated: Bool){
         super.viewWillAppear(animated)
-        if Auth.auth().currentUser != nil{
+        if FIRAuth.auth()?.currentUser != nil{
         fetchReviewFromFirebase()
         }
         checkIfUserIsLoggedIn()
@@ -152,7 +152,7 @@ class mainViewController: UITableViewController, UISearchResultsUpdating, UISear
         for thead in trailHeads {
             var trating = 0
             var rateCount = 0
-            let ref = Database.database().reference()
+            let ref = FIRDatabase.database().reference()
             ref.child("Review").observe(.value, with: { snapshot in
                 if let dictionary = snapshot.value as? [String: AnyObject] {
                     for review in dictionary {
@@ -265,7 +265,7 @@ class mainViewController: UITableViewController, UISearchResultsUpdating, UISear
     
     func handleLogOut(_ sender: Any) {
         do {
-            try Auth.auth().signOut()
+            try FIRAuth.auth()?.signOut()
         } catch let logoutError{
             print(logoutError)
         }
@@ -275,7 +275,7 @@ class mainViewController: UITableViewController, UISearchResultsUpdating, UISear
     
     
     func checkIfUserIsLoggedIn() {
-        if Auth.auth().currentUser?.uid == nil {
+        if FIRAuth.auth()?.currentUser?.uid == nil {
             perform(#selector(handleLogOut), with: nil, afterDelay: 0)
         }
     }

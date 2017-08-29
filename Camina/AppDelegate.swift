@@ -25,11 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         //facebook sign-in configure
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         //firebase database configure
-        FirebaseApp.configure()
-        Database.database().isPersistenceEnabled = true
-
-//        Database.database().reference().child("Session").removeValue()
-//        Database.database().reference().child("userSession").removeValue()
+        FIRApp.configure()
+        FIRDatabase.database().persistenceEnabled = true
         setupFirstView()
         setNotification()
         

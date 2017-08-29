@@ -116,15 +116,28 @@ class loginViewController: UIViewController {
         view.addSubview(loginButton)
         view.addSubview(orLabel)
         view.addSubview(facebookSignupButton)
-        view.addSubview(forgetpasswordsButton)
         view.addSubview(warningText)
+        if UIDevice.current.orientation.isPortrait{
+            view.addSubview(forgetpasswordsButton)
+            setupforgetpasswordButton()
+        }else{
+           navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Forget Password", style: .plain, target: self, action: #selector(handleForgetpassword))
+        }
         setupInputview()
-        setupLoginButton()
-        setupforgetpasswordButton()
+        setupButton()
+      
     }
+    var inputContainerViewTopConstaint: NSLayoutConstraint?
+    var buttonHeigh = 35
 
     func setupInputview(){
-        inputsContainerView.topAnchor.constraint(equalTo: view.topAnchor, constant: 108).isActive = true
+        inputContainerViewTopConstaint =  inputsContainerView.topAnchor.constraint(equalTo: view.topAnchor)
+        if UIDevice.current.orientation.isLandscape {
+            inputContainerViewTopConstaint?.constant = 64
+        }else{
+            inputContainerViewTopConstaint?.constant = 108
+        }
+        inputContainerViewTopConstaint?.isActive = true
         inputsContainerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         inputsContainerView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
         inputsContainerView.heightAnchor.constraint(equalToConstant:80).isActive = true
@@ -150,45 +163,51 @@ class loginViewController: UIViewController {
         passwordTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: 1/2).isActive = true
     }
     
-    func setupLoginButton() {
+    func setupButton() {
         //need x, y, width, height constraints
         loginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         loginButton.topAnchor.constraint(equalTo: inputsContainerView.bottomAnchor, constant: 20).isActive = true
         loginButton.widthAnchor.constraint(equalTo: inputsContainerView.widthAnchor).isActive = true
-        loginButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
+        loginButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
 
         
         
         
         orLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         orLabel.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 8).isActive = true
-        orLabel.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        orLabel.widthAnchor.constraint(equalToConstant: 30).isActive = true
 
         
         facebookSignupButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         facebookSignupButton.topAnchor.constraint(equalTo: orLabel.bottomAnchor, constant: 8).isActive = true
         facebookSignupButton.widthAnchor.constraint(equalTo: inputsContainerView.widthAnchor).isActive = true
-        facebookSignupButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
+        facebookSignupButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
         warningText.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        warningText.bottomAnchor.constraint(equalTo: forgetpasswordsButton.bottomAnchor, constant: -64).isActive = true
+        warningText.topAnchor.constraint(equalTo: facebookSignupButton.bottomAnchor, constant: 6).isActive = true
         warningText.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
-        warningText.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        if UIDevice.current.orientation.isLandscape{
+
+            warningText.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        }else{
+            warningText.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        }
     }
     
     func setupforgetpasswordButton(){
         //need x, y, width, height constraints
         forgetpasswordsButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        forgetpasswordsButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30).isActive = true
+        forgetpasswordsButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16).isActive = true
         forgetpasswordsButton.widthAnchor.constraint(equalTo: inputsContainerView.widthAnchor).isActive = true
-        forgetpasswordsButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
+        forgetpasswordsButton.heightAnchor.constraint(equalToConstant: 25).isActive = true
     }
+    
     func handleLogin() {
         guard let email = emailTextField.text, let password = passwordTextField.text else{
             //error detection
             return
         }
-        Auth.auth().signIn(withEmail: email, password: password, completion: { (user:User?, error) in
+        FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user,  error) in
             if let error = error{
                 self.warningText.text = "Failed to login: \(error.localizedDescription)"
                 return
@@ -221,7 +240,7 @@ class loginViewController: UIViewController {
             print("Failed to get access token")
             return
         }
-        let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
+        let credential = FIRFacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
         
         let parameter = ["fields": "email, name, picture.type(large)"]
         FBSDKGraphRequest(graphPath: "me", parameters: parameter).start { (connection,result, error) in
@@ -236,14 +255,14 @@ class loginViewController: UIViewController {
             let email = values["email"] as! String
             let picture = values["picture"] as! [String : AnyObject]
             let url = picture["data"]?["url"] as! String
-            Auth.auth().fetchProviders(forEmail: email, completion: { (providers, error) in
+            FIRAuth.auth()?.fetchProviders(forEmail: email, completion: { (providers, error) in
                 if let error = error {
                     self.warningText.text = "Failed to login: \(error.localizedDescription)"
                     return
                 }
                 authProviders = providers!
             })
-            Auth.auth().signIn(with: credential) { (user, error) in
+            FIRAuth.auth()?.signIn(with: credential) { (user, error) in
                 if let error = error {
                     print(error.localizedDescription)
                     return
@@ -287,13 +306,53 @@ class loginViewController: UIViewController {
             
         }, completion: nil)
     }
-    
+
     func keyboardShow() {
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            
             self.view.frame = CGRect(x: 0, y: -50, width: self.view.frame.width, height: self.view.frame.height)
             
         }, completion: nil)
+    }
+    
+    
+    override func willRotate(to toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
+        handleViewRotaion(orientation: toInterfaceOrientation)
+    }
+    
+    //MARK: - Rotation controls
+    func handleViewRotaion(orientation:UIInterfaceOrientation) -> Void {
+        switch orientation {
+        case .portrait :
+            inputContainerViewTopConstaint?.constant = 108
+            inputContainerViewTopConstaint?.isActive = true
+            
+            warningText.heightAnchor.constraint(equalToConstant: 40).isActive = true
+            view.addSubview(forgetpasswordsButton)
+            setupforgetpasswordButton()
+            navigationItem.rightBarButtonItem?.title = ""
+            navigationItem.rightBarButtonItem?.isEnabled = false
+            break
+        case .landscapeLeft :
+            changeConstrainWhileOnLandscape()
+            break
+        case .landscapeRight :
+            changeConstrainWhileOnLandscape()
+            break
+     
+        default :
+            break
+        }
+        
+    }
+    
+    func changeConstrainWhileOnLandscape(){
+        inputContainerViewTopConstaint?.constant = 64
+        inputContainerViewTopConstaint?.isActive = true
+        
+        warningText.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        
+        forgetpasswordsButton.removeFromSuperview()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Forget Password", style: .plain, target: self, action: #selector(handleForgetpassword))
     }
 
 }

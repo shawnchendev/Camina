@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'E4DD95323C54A78F879DAB0F1508B8E7'
-               BlueprintName = 'nanopb'
+               BlueprintIdentifier = 'B1C4AAFAF49036C7007633DAA3C806AD'
+               BlueprintName = 'GTMOAuth2'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'nanopb.framework'>
+               BuildableName = 'GTMOAuth2.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

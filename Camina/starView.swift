@@ -34,21 +34,13 @@ class starView : UIStackView {
     
     //MARK: Private Methods
     private func setupButtons(){
-        
-//        // Load Button Images
-//        let bundle = Bundle(for: type(of: self))
-//        let filledStar = UIImage(named: "filledStar", in: bundle, compatibleWith: self.traitCollection)
-//        let emptyStar = UIImage(named:"emptyStar", in: bundle, compatibleWith: self.traitCollection)
-//        
         for _ in 0..<5 {
-            
             // Create the button
             let button = UIImageView()
             
             
             // Add constraints
             button.translatesAutoresizingMaskIntoConstraints = false
-            //button.heightAnchor.constraint(equalToConstant: 40.0).isActive = true
             button.widthAnchor.constraint(equalToConstant: frame.width / 5).isActive = true
             
             // Add the button to the stack

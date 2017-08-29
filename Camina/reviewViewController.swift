@@ -17,13 +17,12 @@ class reviewViewController : UITableViewController {
     var cellid = "cellid"
     
     var reviews = [Review]()
-    
-    var ref : DatabaseReference!
-    
+        
   
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround() 
         tableView.tableFooterView = UIView()  // it's just 1 line, awesome!
 
         let addReviewButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.compose , target: self, action: #selector(addReview))
@@ -32,11 +31,6 @@ class reviewViewController : UITableViewController {
         fetchFirebase()
         self.navigationItem.title = "Reviews"
         tableView.register(reviewCell.self, forCellReuseIdentifier: cellid)
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
     
@@ -79,7 +73,7 @@ class reviewViewController : UITableViewController {
     }
     
     func fetchFirebase() {
-        let ref = Database.database().reference()
+        let ref = FIRDatabase.database().reference()
         
         ref.child("Review").observe(.value, with: { snapshot in
             self.reviews = []
@@ -97,8 +91,6 @@ class reviewViewController : UITableViewController {
                     }
                 }
             }
-//            print(self.reviews)
-//            self.tableView.reloadData()
             
         })
         
@@ -106,8 +98,7 @@ class reviewViewController : UITableViewController {
     }
     
     func addReview(){
-        print(23123123)
-        let review = reviewAlertView(userID: (Auth.auth().currentUser?.uid)!, trailID: trailId)
+        let review = reviewAlertView(userID: (FIRAuth.auth()?.currentUser?.uid)!, trailID: trailId)
 
         review.show(animated: false)
         self.tableView.reloadData()
@@ -156,24 +147,7 @@ class reviewCell : UITableViewCell {
         
         addConstraintsWithFormat("V:|-30-[v0]|", views: textView)
     }
-    
-//    
-//    func setupView(){
-//        backgroundColor = .white
-//        addSubview(starViews)
-//        addSubview(trailNameLabel)
-//        addSubview(trailTypeLabel)
-//        
-//     
-//        trailNameLabel.leftAnchor.constraint(equalTo: starViews.leftAnchor, constant: 8).isActive = true
-//        trailNameLabel.topAnchor.constraint(equalTo: starViews.bottomAnchor, constant:2).isActive = true
-//        trailNameLabel.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
-//        
-//        trailTypeLabel.leftAnchor.constraint(equalTo: starViews.leftAnchor, constant: 8).isActive = true
-//        trailTypeLabel.topAnchor.constraint(equalTo: trailNameLabel.bottomAnchor, constant:4).isActive = true
-//        trailTypeLabel.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
-//        
-//    }
+
     
 
 

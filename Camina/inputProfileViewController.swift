@@ -289,11 +289,11 @@ extension inputProfileViewController: UIImagePickerControllerDelegate, UINavigat
     
         //successfully authenticated user
         let imageName = UUID().uuidString
-        let storageRef = Storage.storage().reference().child("profile_images").child("\(imageName).png")
+        let storageRef = FIRStorage.storage().reference().child("profile_images").child("\(imageName).png")
         
         if let uploadData = UIImagePNGRepresentation(self.profileImageView.image!) {
             
-            storageRef.putData(uploadData, metadata: nil, completion: { (metadata, error) in
+            storageRef.put(uploadData, metadata: nil, completion: { (metadata, error) in
                 
                 if let error = error {
                     print(error)
@@ -311,7 +311,7 @@ extension inputProfileViewController: UIImagePickerControllerDelegate, UINavigat
     }
     
     fileprivate func registerUserIntoDatabaseWithUID(_ uid: String, values: [String: AnyObject]) {
-        let ref = Database.database().reference(fromURL: DATABASE_URL)
+        let ref = FIRDatabase.database().reference(fromURL: DATABASE_URL)
         let usersReference = ref.child("users").child(uid)
         usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
             

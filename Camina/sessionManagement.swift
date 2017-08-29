@@ -35,7 +35,7 @@ extension mapViewController {
         activeSession = false
         //save the data
         save()
-        let review = reviewAlertView(userID: (Auth.auth().currentUser?.uid)!, trailID: trailID!)
+        let review = reviewAlertView(userID: (FIRAuth.auth()?.currentUser?.uid)!, trailID: trailID!)
         review.show(animated: true)
         reset()
     }
@@ -174,17 +174,17 @@ extension mapViewController {
         dateFormatter.dateFormat = "EEE, dd MMM yyyy"
         let dateObj = dateFormatter.string(from: date!)
         var userUID : String?
-        if Auth.auth().currentUser != nil{
-            userUID = Auth.auth().currentUser?.uid
+        if FIRAuth.auth()?.currentUser != nil{
+            userUID = FIRAuth.auth()?.currentUser?.uid
             let sessionUuid = UUID().uuidString
 
             let post : [String: AnyObject] = [ "UserID": userUID as AnyObject, "date" : dateObj as String as AnyObject, "distance" : distance as AnyObject, "pastCheckpoint" : pastCheckPoint as AnyObject, "steps" : steps as AnyObject, "time" : timeElapsed as AnyObject, "trailID" : trailID as AnyObject, "path" : tempCoordArray as AnyObject]
             //firebase code
-            ref = Database.database().reference()
+            let ref = FIRDatabase.database().reference()
             
-            ref?.child("Session").child(sessionUuid).setValue(post)
+            ref.child("Session").child(sessionUuid).setValue(post)
             
-            let userSessionRef = Database.database().reference()
+            let userSessionRef = FIRDatabase.database().reference()
             let session : [String:AnyObject] = ["SessionID": sessionUuid as AnyObject]
             userSessionRef.child("userSession").child(userUID!).childByAutoId().setValue(session)
          

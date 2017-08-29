@@ -146,7 +146,7 @@ class signupViewController: UIViewController {
             print("Failed to get access token")
             return
         }
-        let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
+        let credential = FIRFacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
         
         let parameter = ["fields": "email, name, picture.type(large)"]
         FBSDKGraphRequest(graphPath: "me", parameters: parameter).start { (connection,result, error) in
@@ -163,7 +163,7 @@ class signupViewController: UIViewController {
             let picture = values["picture"] as! [String : AnyObject]
             let url = picture["data"]?["url"] as! String
 
-            Auth.auth().fetchProviders(forEmail: email, completion: { (providers, error) in
+            FIRAuth.auth()?.fetchProviders(forEmail: email, completion: { (providers, error) in
                 if let error = error {
                     self.warningText.text = error.localizedDescription
                     return
@@ -176,7 +176,7 @@ class signupViewController: UIViewController {
                 }
             })
             
-            Auth.auth().signIn(with: credential) { (user, error) in
+            FIRAuth.auth()?.signIn(with: credential) { (user, error) in
                 if let error = error {
                     self.warningText.text = error.localizedDescription
                     return
@@ -203,7 +203,7 @@ class signupViewController: UIViewController {
             self.warningText.text = "password must be match"
             return
         }
-        Auth.auth().createUser(withEmail: email, password: password, completion: { (user: User?, error) in
+        FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user, error) in
             if let error = error {
                 self.warningText.text = error.localizedDescription
                 return

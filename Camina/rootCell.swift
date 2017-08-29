@@ -19,19 +19,24 @@ class rootCell: UICollectionViewCell {
         imageView.image = UIImage(named: "cabotTower")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+
         return imageView
     }()
-
-//    let backgroundImage:UIImage = {
-//        let image = UIImage(named: "cabotTower")
-//        return image!
-//    }()
     var logoImage : UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "logo_white")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
         return imageView
+    }()
+    
+    lazy var sloganLabel : UILabel = {
+        let lbl  = UILabel()
+        lbl.text = "Your Personal Trail Guide"
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        lbl.textColor = .white
+        return lbl
     }()
     
     lazy var loginButton: UIButton = {
@@ -62,18 +67,14 @@ class rootCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
-        backgroundImage.image = UIImage(named: "cabotTower")
-        backgroundImage.contentMode =  UIViewContentMode.scaleAspectFill
-        insertSubview(backgroundImage, at: 0)
-//        backgroundColor = UIColor.green
-//        backgroundColor = UIColor(patternImage: UIImage(named: "bg-pattern")!)
-//        backgroundColor = UIColor.green
-//        addSubview(backgroundImage)
+        DispatchQueue.main.async(execute: {
+            self.insertSubview(self.backgroundImage, at: 0)
+            self.setupBackgroudImage()
+
+        })
         addSubview(logoImage)
         addSubview(signupButton)
         addSubview(loginButton)
-//        setupBackgroudImage()
         setupLogoImage()
         setupButton()
     }
@@ -88,21 +89,22 @@ class rootCell: UICollectionViewCell {
     
 
     
-//
-//    func setupBackgroudImage(){
-//        backgroundImage.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-//        backgroundImage.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-//        backgroundImage.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
-//        backgroundImage.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-//    }
-//    
+
+    func setupBackgroudImage(){
+        backgroundImage.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        backgroundImage.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        backgroundImage.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
+        backgroundImage.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+    }
+    
     
     func setupLogoImage(){
         logoImage.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        logoImage.topAnchor.constraint(equalTo: topAnchor, constant: 108).isActive = true
+        logoImage.topAnchor.constraint(equalTo: topAnchor, constant: 72).isActive = true
         logoImage.heightAnchor.constraint(equalToConstant: 100).isActive = true
         logoImage.widthAnchor.constraint(equalToConstant:170).isActive = true
-    }
+        
+           }
     //signup  with their email
     func handlesignup(){
         let svc = signupViewController()
