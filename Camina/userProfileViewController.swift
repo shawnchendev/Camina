@@ -54,130 +54,29 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     let userNameLabel: UILabel = {
         let lbl = UILabel()
-        lbl.font = UIFont.systemFont(ofSize: 14)
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.textColor = .white
+        lbl.minimumScaleFactor = 10/UIFont.labelFontSize
+        lbl.adjustsFontSizeToFitWidth = true
         return lbl
     }()
     
-    let statView : UIView = {
-       let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .white
-        return view
-    }()
-    
-    let overviewLabel : UILabel = {
-        let label = UILabel()
-        label.text = "Overview"
-        label.textColor = UIColor(hex: "00B16A")
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 14)
-        return label
-    }()
-    
-    let distanceLabel : UILabel = {
-        let label = UILabel()
-        label.text = "Total Distance: "
-        label.textColor = UIColor.darkGray
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 14)
-        return label
-    }()
-    
-    let sessionLabel : UILabel = {
-        let label = UILabel()
-        label.text = "Completed Session: "
-        label.textColor = UIColor.darkGray
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 14)
-        return label
-    }()
-    
-    let timeLabel : UILabel = {
-        let label = UILabel()
-        label.text = "Total Time: "
-        label.textColor = UIColor.darkGray
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 14)
-        return label
-    }()
-    
-    let stepsLabel : UILabel = {
-        let label = UILabel()
-        label.text = "Total Steps: "
-        label.textColor = UIColor.darkGray
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 14)
-        return label
-    }()
     
     
-    let travelDistance : UILabel = {
-        let label = UILabel()
-        label.text = "0 M"
-        label.textColor = UIColor.darkGray
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 14)
-        return label
-    }()
-    
-    let travelTime : UILabel = {
-        let label = UILabel()
-        label.text = "0 Mins"
-        label.textColor = UIColor.darkGray
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 14)
-        return label
-    }()
-    
-    let nSteps : UILabel = {
-        let label = UILabel()
-        label.text = "0 Steps"
-        label.textColor = UIColor.darkGray
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 14)
-        return label
-    }()
-    
-    let nSession : UILabel = {
-        let label = UILabel()
-        label.text = "0 "
-        label.textColor = UIColor.darkGray
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 14)
-        return label
-    }()
-    
-    let separateView : UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(hex: "00B16A")
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    let completedLogLabel : UILabel = {
-        let label = UILabel()
-        label.text = "Completed Log"
-        label.textColor = UIColor(hex: "00B16A")
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 14)
-        return label
-    }()
     
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.backgroundColor = UIColor.white
         cv.translatesAutoresizingMaskIntoConstraints = false
         return cv
     }()
     
-    var scrollView: UIScrollView!
-
+    let titleString = ["Sessions:", "Distance:", "Time:", "Steps:"]
+    let subtitleString = ["Completed", "Meter", "Minues", "Total"]
+    let iconImage = [UIImage(named: "approval"), UIImage(named: "distance"), UIImage(named: "time"), UIImage(named: "step")]
     
-     let sessionCellId = "sessionCellId"
+    
      let cellId = "cellId"
 
 
@@ -186,51 +85,54 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
 
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if userSessions.count == 0{
-            return 1
-        }
-        return userSessions.count
+       return 4
         
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if userSessions.count == 0  {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+   
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! overviewCell
         
-            return cell
-        }
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: sessionCellId, for: indexPath) as! userSessionCell
-        if let name = userSessions[indexPath.item].lastCheckPoint {
-            cell.nameLabel.text = name
-        }
-        let path = getPathFromSession(session: userSessions[indexPath.item])
-        cell.mapSnapShot.image = fetchMapSanpshot(path: path)
+        cell.titleLabel.text = titleString[indexPath.item]
+        cell.subtitleLabel.text = subtitleString[indexPath.item]
+        cell.iconImageView.image = iconImage[indexPath.item]
+        cell.numberLabel.text = numberString[indexPath.item]
         return cell
         }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
+        return CGSize(width: collectionView.frame.width, height: collectionView.frame.height / 4 )
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsetsMake(0, 0, 0, 14)
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0.0
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0.0
+    }
+    
+   
     
  
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
+    var numberString = ["0","0","0","0"]
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchUserData()
         fetchUserSessionID {
-          
-            self.nSession.text = String(self.totalSession)
-            self.travelDistance.text = String(self.totalDistance ) + " meters"
-            self.travelTime.text = String(self.totalTime / 60 ) + " mins"
-            self.nSteps.text = String(self.totalSteps) + " steps"
-          
+            
+            self.numberString = [String(self.totalSession),String(self.totalDistance ), String(self.totalTime / 60 ), String(self.totalSteps)]
+            
+            DispatchQueue.main.async(execute: {
+                self.collectionView.reloadData()
+                
+            })
         }
         
     }
@@ -238,28 +140,22 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.scrollView = UIScrollView()
-        self.scrollView.delegate = self
-//        self.scrollView.contentSize = CGSize(view.frame.width, 1000)
         view.backgroundColor = UIColor(hex:"ECF0F1")
         setupNavigationController()
         
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.register(userSessionCell.self, forCellWithReuseIdentifier: sessionCellId)
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
-        view.addSubview(scrollView)
+
+        collectionView.register(overviewCell.self, forCellWithReuseIdentifier: cellId)
         view.addSubview(profileCoverImageView)
+        view.addSubview(collectionView)
+
         view.addSubview(profileImageView)
         view.addSubview(userNameLabel)
-        view.addSubview(statView)
-        view.addSubview(overviewLabel)
-//        view.addSubview(completedLogLabel)
-//        view.addSubview(collectionView)
         setupProfileImageView()
         setupProfileCoverImageView()
-        setupStatView()
-//        setupCollectionView()
+
+        setupCollectionView()
         
     }
     
@@ -274,69 +170,15 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     
     
-    func setupStatView(){
-        overviewLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
-        overviewLabel.bottomAnchor.constraint(equalTo: statView.topAnchor, constant: -4).isActive = true
-        overviewLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        
-        statView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        statView.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 8).isActive = true
-        statView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -8).isActive = true
-        statView.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        
-        statView.addSubview(sessionLabel)
-        statView.addSubview(nSession)
-        statView.addSubview(distanceLabel)
-        statView.addSubview(travelDistance)
-        statView.addSubview(timeLabel)
-        statView.addSubview(travelTime)
-        statView.addSubview(stepsLabel)
-        statView.addSubview(nSteps)
-        
-        sessionLabel.topAnchor.constraint(equalTo: statView.topAnchor, constant: 4).isActive = true
-        sessionLabel.leftAnchor.constraint(equalTo: statView.leftAnchor, constant: 16).isActive = true
-        sessionLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        
-        nSession.leftAnchor.constraint(equalTo: sessionLabel.rightAnchor, constant: 20).isActive = true
-        nSession.topAnchor.constraint(equalTo: statView.topAnchor, constant: 4).isActive = true
-        nSession.heightAnchor.constraint(equalToConstant: 20).isActive = true
-
-        
-        distanceLabel.topAnchor.constraint(equalTo: sessionLabel.bottomAnchor, constant: 4).isActive = true
-        distanceLabel.leftAnchor.constraint(equalTo: statView.leftAnchor, constant: 16).isActive = true
-        distanceLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        
-        timeLabel.topAnchor.constraint(equalTo: distanceLabel.bottomAnchor, constant: 4).isActive = true
-        timeLabel.leftAnchor.constraint(equalTo: statView.leftAnchor, constant: 16).isActive = true
-        timeLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        
-        stepsLabel.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: 4).isActive = true
-        stepsLabel.leftAnchor.constraint(equalTo: statView.leftAnchor, constant: 16).isActive = true
-        stepsLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        
-        travelDistance.leftAnchor.constraint(equalTo: sessionLabel.rightAnchor, constant: 20).isActive = true
-        travelDistance.topAnchor.constraint(equalTo: sessionLabel.bottomAnchor, constant: 4).isActive = true
-        travelDistance.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        
-        
-        travelTime.leftAnchor.constraint(equalTo: sessionLabel.rightAnchor, constant: 20).isActive = true
-        travelTime.topAnchor.constraint(equalTo: travelDistance.bottomAnchor, constant: 4).isActive = true
-        travelTime.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        
-        nSteps.leftAnchor.constraint(equalTo: sessionLabel.rightAnchor, constant: 20).isActive = true
-        nSteps.topAnchor.constraint(equalTo: travelTime.bottomAnchor, constant: 4).isActive = true
-        nSteps.heightAnchor.constraint(equalToConstant: 20).isActive = true
-
-    }
     
     func setupProfileImageView() {
         //need x, y, width, height constraints
-        profileImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        profileImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
+        profileImageView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
+        profileImageView.bottomAnchor.constraint(equalTo: profileCoverImageView.bottomAnchor, constant: 20).isActive = true
         profileImageView.widthAnchor.constraint(equalToConstant: 80).isActive = true
         profileImageView.heightAnchor.constraint(equalToConstant: 80).isActive = true
-        userNameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        userNameLabel.bottomAnchor.constraint(equalTo: profileImageView.topAnchor, constant: -4).isActive = true
+        userNameLabel.leftAnchor.constraint(equalTo: profileImageView.rightAnchor, constant: 8).isActive = true
+        userNameLabel.bottomAnchor.constraint(equalTo: profileCoverImageView.bottomAnchor, constant: -4).isActive = true
     }
     
     func setupProfileCoverImageView() {
@@ -344,19 +186,16 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
         profileCoverImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         profileCoverImageView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         profileCoverImageView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-        profileCoverImageView.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        profileCoverImageView.heightAnchor.constraint(equalTo:view.heightAnchor, multiplier: 0.4).isActive = true
     }
     
     func setupCollectionView(){
-        
-        completedLogLabel.topAnchor.constraint(equalTo: statView.bottomAnchor, constant: 8).isActive = true
-        completedLogLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8).isActive = true
-        completedLogLabel.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+      
         
         collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        collectionView.topAnchor.constraint(equalTo: completedLogLabel.bottomAnchor, constant: 8).isActive = true
-        collectionView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -8).isActive = true
-        collectionView.heightAnchor.constraint(equalToConstant: 250).isActive = true
+        collectionView.topAnchor.constraint(equalTo: profileCoverImageView.bottomAnchor).isActive = true
+        collectionView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        collectionView.heightAnchor.constraint(equalTo:view.heightAnchor, multiplier: 0.6).isActive = true
     }
     
     
@@ -515,5 +354,91 @@ class userProfileViewController: UIViewController, UIImagePickerControllerDelega
     }
     
    }
+
+
+class overviewCell: BaseCell{
+    
+    var titleLabel : UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor.darkGray
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.minimumScaleFactor = 10/UIFont.labelFontSize
+        label.adjustsFontSizeToFitWidth = true
+        return label
+    }()
+    
+    var subtitleLabel : UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor.darkGray
+        
+        label.minimumScaleFactor = 0.1
+        label.font = UIFont.systemFont(ofSize: 12.0)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.adjustsFontSizeToFitWidth = true
+        return label
+    }()
+    
+    var numberLabel : UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor.darkGray
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.minimumScaleFactor = 10/UIFont.labelFontSize
+        label.adjustsFontSizeToFitWidth = true
+        return label
+    }()
+    
+    let separateView : UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(hex: "00B16A")
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    var iconImageView : UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.image = UIImage(named: "approval")
+        return imageView
+    }()
+    
+    override func setupViews() {
+        super.setupViews()
+        
+        addSubview(iconImageView)
+        addSubview(titleLabel)
+        addSubview(subtitleLabel)
+        addSubview(numberLabel)
+        addSubview(separateView)
+        
+        
+        iconImageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 10).isActive = true
+        iconImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        
+        iconImageView.widthAnchor.constraint(equalToConstant: 25).isActive = true
+        
+        iconImageView.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        
+        
+        titleLabel.leftAnchor.constraint(equalTo: iconImageView.rightAnchor, constant: 8).isActive = true
+        
+        titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -5).isActive = true
+        
+        subtitleLabel.leftAnchor.constraint(equalTo: iconImageView.rightAnchor, constant: 14).isActive = true
+        subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 2).isActive = true
+        
+        numberLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -10).isActive = true
+        numberLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        
+        
+        separateView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        separateView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        separateView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        separateView.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        
+
+}
+
+
+}
 
 
