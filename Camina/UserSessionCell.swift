@@ -13,6 +13,7 @@ import Mapbox
 
 
 class userSessionCell: BaseCell{
+    
     let nameLabel: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
