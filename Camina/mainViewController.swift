@@ -127,25 +127,57 @@ class mainViewController: UITableViewController, UISearchResultsUpdating, UISear
 
 
     func fetchTrailHead(){
-        if let path = Bundle.main.path(forResource: "head", ofType: "geojson") {
-            do {
-                let data = try(Data(contentsOf: URL(fileURLWithPath: path), options: NSData.ReadingOptions.mappedIfSafe))
-                let jsonDictionary = try(JSONSerialization.jsonObject(with: data, options: .mutableContainers)) as? [String: Any]
-                if let trailHeadArray = jsonDictionary?["features"] as? [[String: AnyObject]] {
-                    for trailheadDictionary in trailHeadArray {
-                        let trailhead = Head()
-                        trailhead.setValuesForKeys(trailheadDictionary)
-                        trailHeads.append(trailhead)
-                    }
-                    DispatchQueue.main.async {
+        let refh = FIRDatabase.database().reference()
+        let trailRef = refh.child("Trails")
+        trailRef.observeSingleEvent(of: .value, with: { snapshot in
+            if let dictionary = snapshot.value as? [String: AnyObject] {
+                for trailPath in dictionary {
+                    //let path = trailPath.value["value"]
+                    let head = trailPath.value["Head"] as! [String : Any]
+                    let trailhead = Head()
+                    trailhead.setValuesForKeys(head)
+                    self.trailHeads.append(trailhead)
+                    //print(path)
+                    
+                    DispatchQueue.main.async(execute: {
                         self.tableView.reloadData()
-                    }
+                        
+                    })
+
                 }
-             
-            } catch let err {
-                print(err)
             }
-        }
+            
+        })
+//        if let path = Bundle.main.path(forResource: "head", ofType: "geojson") {
+//            do {
+//                let data = try(Data(contentsOf: URL(fileURLWithPath: path), options: NSData.ReadingOptions.mappedIfSafe))
+//                let jsonDictionary = try(JSONSerialization.jsonObject(with: data, options: .mutableContainers)) as? [String: Any]
+//                if let trailHeadArray = jsonDictionary?["features"] as? [[String: AnyObject]] {
+//                    for trailheadDictionary in trailHeadArray {
+//                        let trailhead = Head()
+//                        trailhead.setValuesForKeys(trailheadDictionary)
+//                        trailHeads.append(trailhead)
+//                        
+//                        if FIRAuth.auth()?.currentUser != nil{
+//                            let post : [String: AnyObject] = [ "Head": trailheadDictionary as NSDictionary]
+//                            //firebase code
+//                            let ref = FIRDatabase.database().reference()
+//                            
+//                            ref.child("Trails").child((trailhead.properties?.ParkID)!).setValue(post)
+//                            
+//                            
+//                        }
+//
+//                    }
+//                    DispatchQueue.main.async {
+//                        self.tableView.reloadData()
+//                    }
+//                }
+//             
+//            } catch let err {
+//                print(err)
+//            }
+//        }
     }
     
     func fetchReviewFromFirebase() {
@@ -186,23 +218,62 @@ class mainViewController: UITableViewController, UISearchResultsUpdating, UISear
  
     
     func fetchPlacemarks() {
-        if let path = Bundle.main.path(forResource: "point", ofType: "geojson") {
-            do {
-                let data = try(Data(contentsOf: URL(fileURLWithPath: path), options: NSData.ReadingOptions.mappedIfSafe))
-                let jsonDictionary = try(JSONSerialization.jsonObject(with: data, options: .mutableContainers)) as? [String: Any]
-                if let placemarkArray = jsonDictionary?["features"] as? [[String: AnyObject]] {
-                    for placemarkDictionary in placemarkArray {
-
-                        let placemark = Placemark()
-                        placemark.setValuesForKeys(placemarkDictionary)
-                        self.placemarks.append(placemark)
-                     
+        let refh = FIRDatabase.database().reference()
+        let trailRef = refh.child("Trails")
+        trailRef.observeSingleEvent(of: .value, with: { snapshot in
+            if let dictionary = snapshot.value as? [String: AnyObject] {
+                for trailPath in dictionary {
+                    //let path = trailPath.value["value"]
+                    if let points = trailPath.value["Placemarks"] as? [String: AnyObject] {
+                        for plat in points {
+                            let plata = plat.value["Information"] as? [String: AnyObject]
+                            let placemark = Placemark()
+                            placemark.setValuesForKeys(plata!)
+                            self.placemarks.append(placemark)
+                        }
                     }
+                    
+//                    for point in points! {
+//                        print(point)
+//                    }
+//                    let placemark = Placemark()
+//                    placemark.setValuesForKeys(point)
+//                    self.placemarks.append(placemark)
+                   
+                    
+                    
                 }
-            } catch let err {
-                print(err.localizedDescription)
             }
-        }
+            
+        })
+//        if let path = Bundle.main.path(forResource: "point", ofType: "geojson") {
+//            do {
+//                let data = try(Data(contentsOf: URL(fileURLWithPath: path), options: NSData.ReadingOptions.mappedIfSafe))
+//                let jsonDictionary = try(JSONSerialization.jsonObject(with: data, options: .mutableContainers)) as? [String: Any]
+//                if let placemarkArray = jsonDictionary?["features"] as? [[String: AnyObject]] {
+//                    for placemarkDictionary in placemarkArray {
+//                        let placemark = Placemark()
+//                        placemark.setValuesForKeys(placemarkDictionary)
+//                        self.placemarks.append(placemark)
+//                        
+//                        if FIRAuth.auth()?.currentUser != nil{
+//                            let post : [String: AnyObject] = [ "Information": placemarkDictionary as NSDictionary]
+//                            //firebase code
+//                            let ref = FIRDatabase.database().reference()
+//                            
+//                            ref.child("Trails").child((placemark.properties?.ParkID)!).child("Placemarks").childByAutoId().setValue(post)
+//                        
+//                            
+//                        }
+//                    
+//
+//                     
+//                    }
+//                }
+//            } catch let err {
+//                print(err.localizedDescription)
+//            }
+//        }
     }
     
 

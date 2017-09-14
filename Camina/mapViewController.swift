@@ -303,26 +303,97 @@ class mapViewController: UIViewController, MGLMapViewDelegate {
     
     func drawTrailHeadPoint(){
         DispatchQueue.global(qos: .background).async(execute: {
-            let jsonPath = Bundle.main.path(forResource: "head", ofType: "geojson")
-            let url = URL(fileURLWithPath: jsonPath!)
-            do{
-                let data = try Data(contentsOf: url)
-                let pointCollectionFeature = try MGLShape(data: data, encoding: String.Encoding.utf8.rawValue) as! MGLShapeCollectionFeature
-                for i in 0...(pointCollectionFeature.shapes.count) - 1{
-                    if let point = pointCollectionFeature.shapes[i]as? MGLPointFeature{
-                        point.title = point.attribute(forKey: "Name" ) as? String
-                        DispatchQueue.main.async(execute: {
+            
+            //new code
+            let refh = FIRDatabase.database().reference()
+            let trailRef = refh.child("Trails")
+//            trailRef.observeSingleEvent(of: .value, with: { snapshot in
+//                if let dictionary = snapshot.value as? [String: AnyObject] {
+//                    for trailPath in dictionary {
+//                        //let path = trailPath.value["value"]
+//                        if let points = trailPath.value["Path"] as? [String: AnyObject] {
+//                            for plat in points {
+//                                let plata = plat.value["geometry"] as? [String: AnyObject]
+////                                let placemark = Placemark()
+////                                placemark.setValuesForKeys(plata!)
+////                                self.placemarks.append(placemark)
+//                                print(plat)
+//                            }
+//                        }
+//                        
+//                        //                    for point in points! {
+//                        //                        print(point)
+//                        //                    }
+//                        //                    let placemark = Placemark()
+//                        //                    placemark.setValuesForKeys(point)
+//                        //                    self.placemarks.append(placemark)
+//                        
+//                        
+//                        
+//                    }
+//                }
+//                
+//            })
+            
+            // end new code
+            
+            //new code 2
+            trailRef.observeSingleEvent(of: .value, with: { snapshot in
+                if let dictionary = snapshot.value as? [String: AnyObject] {
+                    for trailPath in dictionary {
+                        //let path = trailPath.value["value"]
+                        let head = trailPath.value["Head"] as! [String : Any]
+                        let trailhead = Head()
+                        trailhead.setValuesForKeys(head)
+                        self.trailHeads.append(trailhead)
+//                        print(head)
+                       print( trailhead.properties?.Lat)
+                        do{
+                            let data = NSKeyedArchiver.archivedData(withRootObject: head)
+                            //let data = head as! Data
+                            let pointCollectionFeature = try MGLShape(data: data, encoding: String.Encoding.utf8.rawValue) as! MGLShapeCollectionFeature
+                            for i in 0...(pointCollectionFeature.shapes.count) - 1{
+                                if let point = pointCollectionFeature.shapes[i]as? MGLPointFeature{
+                                    point.title = point.attribute(forKey: "Name" ) as? String
+                                    DispatchQueue.main.async(execute: {
+                                        
+                                        [unowned self] in
+                                        self.mapView.addAnnotation(point)
+                                    })
+                                }
+                                
+                            }
+                        }catch{
+                            print("GeoJSON parsing failed")
+                            
+                        }
 
-                            [unowned self] in
-                            self.mapView.addAnnotation(point)
-                        })
                     }
-
-            }
-            }catch{
-                print("GeoJSON parsing failed")
+                }
                 
-            }
+            })
+            //new code 2
+            
+//            let jsonPath = Bundle.main.path(forResource: "head", ofType: "geojson")
+//            let url = URL(fileURLWithPath: jsonPath!)
+//            do{
+//                let data = try Data(contentsOf: url)
+//                let pointCollectionFeature = try MGLShape(data: data, encoding: String.Encoding.utf8.rawValue) as! MGLShapeCollectionFeature
+//                for i in 0...(pointCollectionFeature.shapes.count) - 1{
+//                    if let point = pointCollectionFeature.shapes[i]as? MGLPointFeature{
+//                        point.title = point.attribute(forKey: "Name" ) as? String
+//                        DispatchQueue.main.async(execute: {
+//
+//                            [unowned self] in
+//                            self.mapView.addAnnotation(point)
+//                        })
+//                    }
+//
+//            }
+//            }catch{
+//                print("GeoJSON parsing failed")
+//                
+//            }
         })
     }
     

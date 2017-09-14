@@ -10,6 +10,8 @@ import CoreLocation
 import UserNotifications
 import CoreMotion
 import UIKit
+import Firebase
+
 extension mapViewController: CLLocationManagerDelegate {
 
 
@@ -24,6 +26,28 @@ extension mapViewController: CLLocationManagerDelegate {
 
     //starts monitoring for the trail heads
     func setupGeofencing(){
+
+//        let myRootRef = Firebase(url:"https://jaytest.firebaseio.com")
+//        let postsRef = myRootRef.childByAppendingPath("posts"
+//            
+//            postsRef.observeSingleEventOfType(.Value, withBlock { snapshot in
+//                
+//                for child in snapshot.children {
+//                    
+//                    if let title = child.value["title"] as? String {
+//                        print(title)
+//                    }
+//                    
+//                    if let text = child.value["text"] as? String {
+//                        print(text)
+//                    }
+//                    
+//                    if let title = child.value["vote"] as? String {
+//                        print(vote)
+//                    }
+//                    
+//                }
+//            }
         if let path = Bundle.main.path(forResource: "trails", ofType: "geojson") {
             do {
                 let data = try(Data(contentsOf: URL(fileURLWithPath: path), options: NSData.ReadingOptions.mappedIfSafe))
@@ -33,6 +57,15 @@ extension mapViewController: CLLocationManagerDelegate {
                         let trailhead = TrailCoords()
                         trailhead.setValuesForKeys(trailheadDictionary)
                         setupRegions(trail: (trailhead.geometry?.coordinates)!, name: (trailhead.properties?.ParkID)!)
+                        
+                        if FIRAuth.auth()?.currentUser != nil{
+                            let post : [String: AnyObject] = [ "Information": trailheadDictionary as NSDictionary]
+                            //firebase code
+                            let ref = FIRDatabase.database().reference()
+                            ref.child("Trails").child((trailhead.properties?.ParkID)!).child("Path").setValue(post)
+                            
+                            
+                        }
                     }
                 }
             } catch let err {
