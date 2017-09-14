@@ -26,53 +26,34 @@ extension mapViewController: CLLocationManagerDelegate {
 
     //starts monitoring for the trail heads
     func setupGeofencing(){
+        //DispatchQueue.global(qos: .background).async(execute: {
+            
+            let refh = FIRDatabase.database().reference()
+            let trailRef = refh.child("Trails")
+            
+            trailRef.observeSingleEvent(of: .value, with: { snapshot in
+                if let dictionary = snapshot.value as? [String: AnyObject] {
+                    for trailPath in dictionary {
+                        //let path = trailPath.value["value"]
+                        do {
+                            let head = trailPath.value["Path"] as! [String : Any]
+                            let path = head["Information"] as! [String: Any]
+                            let trailhead = TrailCoords()
+                            trailhead.setValuesForKeys(path)
+                            self.setupRegions(trail: (trailhead.geometry?.coordinates)!, name: (trailhead.properties?.ParkID)!)
 
-//        let myRootRef = Firebase(url:"https://jaytest.firebaseio.com")
-//        let postsRef = myRootRef.childByAppendingPath("posts"
-//            
-//            postsRef.observeSingleEventOfType(.Value, withBlock { snapshot in
-//                
-//                for child in snapshot.children {
-//                    
-//                    if let title = child.value["title"] as? String {
-//                        print(title)
-//                    }
-//                    
-//                    if let text = child.value["text"] as? String {
-//                        print(text)
-//                    }
-//                    
-//                    if let title = child.value["vote"] as? String {
-//                        print(vote)
-//                    }
-//                    
-//                }
-//            }
-        if let path = Bundle.main.path(forResource: "trails", ofType: "geojson") {
-            do {
-                let data = try(Data(contentsOf: URL(fileURLWithPath: path), options: NSData.ReadingOptions.mappedIfSafe))
-                let jsonDictionary = try(JSONSerialization.jsonObject(with: data, options: .mutableContainers)) as? [String: Any]
-                if let trailHeadArray = jsonDictionary?["features"] as? [[String: AnyObject]] {
-                    for trailheadDictionary in trailHeadArray {
-                        let trailhead = TrailCoords()
-                        trailhead.setValuesForKeys(trailheadDictionary)
-                        setupRegions(trail: (trailhead.geometry?.coordinates)!, name: (trailhead.properties?.ParkID)!)
-                        
-                        if FIRAuth.auth()?.currentUser != nil{
-                            let post : [String: AnyObject] = [ "Information": trailheadDictionary as NSDictionary]
-                            //firebase code
-                            let ref = FIRDatabase.database().reference()
-                            ref.child("Trails").child((trailhead.properties?.ParkID)!).child("Path").setValue(post)
                             
-                            
+
+                        }catch let err{
+                            print("Trail head parsing failed")
+                            print(err)
                         }
+                        
                     }
                 }
-            } catch let err {
                 
-                print(err)
-            }
-        }
+            })
+        //})
     }
 
     //sets all the points in the trail paths for proximity check
