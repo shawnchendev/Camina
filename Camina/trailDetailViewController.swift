@@ -29,7 +29,6 @@ class trailDetailViewController: UITableViewController {
         self.tableView.register(trailHeadsCell.self, forCellReuseIdentifier: headCellId)
         self.tableView.register(trailDetailCell.self, forCellReuseIdentifier: detailCellId)
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
-        // Do any additional setup after loading the view.
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -92,6 +91,7 @@ class trailDetailViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.item == 2 {
             let landmarkView = landMarkTableViewController()
+            
             landmarkView.tarilPlacemark = trailPlacemark
             self.navigationController?.pushViewController(landmarkView, animated: true)
 

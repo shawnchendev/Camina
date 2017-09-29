@@ -313,7 +313,7 @@
 				TargetAttributes = {
 					C11E864D1F26677300C3A3C0 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = W23C3ZTDZ9;
+						DevelopmentTeam = J34B2LJ3L7;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -579,7 +579,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = W23C3ZTDZ9;
+				DEVELOPMENT_TEAM = J34B2LJ3L7;
 				INFOPLIST_FILE = Camina/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -597,7 +597,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = W23C3ZTDZ9;
+				DEVELOPMENT_TEAM = J34B2LJ3L7;
 				INFOPLIST_FILE = Camina/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

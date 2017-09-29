@@ -87,9 +87,6 @@ class mainViewController: UITableViewController, UISearchResultsUpdating, UISear
     
     override func viewWillAppear(_ animated: Bool){
         super.viewWillAppear(animated)
-        if FIRAuth.auth()?.currentUser != nil{
-        fetchReviewFromFirebase()
-        }
         checkIfUserIsLoggedIn()
         setupSearchView()
         setupNavBarItem()
@@ -129,7 +126,7 @@ class mainViewController: UITableViewController, UISearchResultsUpdating, UISear
     func fetchTrailHead(){
         let refh = FIRDatabase.database().reference()
         let trailRef = refh.child("Trails")
-        trailRef.observeSingleEvent(of: .value, with: { snapshot in
+        trailRef.observe(.value, with: { snapshot in
             do{
                 if let dictionary = snapshot.value as? [String: AnyObject] {
                     for trailPath in dictionary {
@@ -138,7 +135,8 @@ class mainViewController: UITableViewController, UISearchResultsUpdating, UISear
                         let trailhead = Head()
                         trailhead.setValuesForKeys(head)
                         self.trailHeads.append(trailhead)
-
+                        print(trailhead)
+                        self.fetchReviewFromFirebase()
                     
                         DispatchQueue.main.async(execute: {
                             self.tableView.reloadData()
@@ -191,7 +189,7 @@ class mainViewController: UITableViewController, UISearchResultsUpdating, UISear
     func fetchPlacemarks() {
         let refh = FIRDatabase.database().reference()
         let trailRef = refh.child("Trails")
-        trailRef.observeSingleEvent(of: .value, with: { snapshot in
+        trailRef.observe(.value, with: { snapshot in
             if let dictionary = snapshot.value as? [String: AnyObject] {
                 for trailPath in dictionary {
                     //let path = trailPath.value["value"]
@@ -247,8 +245,7 @@ class mainViewController: UITableViewController, UISearchResultsUpdating, UISear
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let layout = UICollectionViewFlowLayout()
-//        let infoView = infoController(collectionViewLayout: layout)
+
         let trailDetailView = trailDetailViewController()
         self.hidesBottomBarWhenPushed = true;
         trailDetailView.trailHead = trailHeads[indexPath.row]
